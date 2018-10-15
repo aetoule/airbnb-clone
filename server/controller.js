@@ -1,25 +1,39 @@
 module.exports = {
 
+    // getAllHomes: (req, res) => {
+    //     dbInstance = req.app.get('db');
+    //     dbInstance.get_all_homes()
+    //         .then(homes => {
+    //             res.status(200).send(homes)
+    //         })
+    //         .catch(err => {
+    //             res.status(200).send(err)
+    //         })
+    // },
+
     getAllHomes: (req, res) => {
-        dbInstance = req.app.get('db');
-        dbInstance.get_all_homes()
-        .then(homes => {
-            res.status(200).send(homes)})
-        .catch(err => {
-            res.status(200).send(err)
-        })
+        const db = req.app.get("db");
+        db.get_all_homes()
+            .then(homes => {
+                res.status(200).send(homes);
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).send("unexpexted error");
+            });
     },
 
     getHomesInCity: (req, res) => {
         dbInstance = req.app.get('db');
-        let {city} = req.body;
-        dbInstance.get_homes_in_one_city(city)
-        .then(homes => {
-            res.status(200).send(homes)})
-        .catch(err => {
-            res.status(200).send(err)
-        })
-    
+        let { city } = req.body;
+        dbInstance.get_homes_in_one_city('Phoenix')
+            .then(homes => {
+                res.status(200).send(homes)
+            })
+            .catch(err => {
+                res.status(200).send(err)
+            })
+
     }
     // createHome: (req, res) => {
     //     const dbInstance = req.app.get('db');
