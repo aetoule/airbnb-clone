@@ -1,23 +1,24 @@
 module.exports = {
 
     getAllHomes: (req, res) => {
+        
         dbInstance = req.app.get('db');
         dbInstance.get_all_homes()
         .then(homes => {
             res.status(200).send(homes)})
         .catch(err => {
-            res.status(200).send(err)
+            res.status(500).send(err)
         })
     },
 
     getHomesInCity: (req, res) => {
         dbInstance = req.app.get('db');
         let {city} = req.body;
-        dbInstance.get_homes_in_one_city(city)
+        dbInstance.get_homes_in_one_city('Phoenix')
         .then(homes => {
             res.status(200).send(homes)})
         .catch(err => {
-            res.status(200).send(err)
+            res.status(500).send(err)
         })
     
     }

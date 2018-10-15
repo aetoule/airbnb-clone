@@ -1,4 +1,3 @@
-import axios from 'axios';
 
 const initialState = {
     homes:[],
@@ -10,19 +9,19 @@ const GET_ALL_HOMES = "GET_ALL_HOMES";
 
 export default function reducer(state= initialState, action) {
     switch(action.type) {
-        case `${GET_ALL_HOMES}_FULFILLED`:
+        case GET_ALL_HOMES:
             return {...state, homes: action.payload}
+        default:
+            return {...state}
         // case `${GET_CITY_HOMES}_FULFILLED`:
         //     return {...state, cityHomes: action.payload}
     }
 }
 
-export function getAllHomes() {
+export function getAllHomes(homes) {
     return {
         type: GET_ALL_HOMES,
-        payload: axios.get('/api/homes').then(res => {
-            return res.data
-        })
+        payload: homes
     }
 }
 

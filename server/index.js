@@ -23,5 +23,5 @@ massive(process.env.CONNECTION_STRING).then(database => {
     console.log('-------------- database issue', error);
   });
 
-const PORT = 4567;
-app.listen(PORT, ()=> console.log(`Server listening on port 4567`));
+const PORT = 4000;
+app.listen(PORT, ()=> console.log(`Server listening on port 4000`));
