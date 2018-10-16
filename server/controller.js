@@ -12,7 +12,6 @@ module.exports = {
     // },
 
     getAllHomes: (req, res) => {
-
         dbInstance = req.app.get('db');
         dbInstance.get_all_homes()
             .then(homes => {
@@ -30,19 +29,6 @@ module.exports = {
         dbInstance.get_home_imgs_by_id(2)
             .then(imgs => {
                 res.status(200).send(imgs)
-            })
-            .catch(err => {
-                res.status(500).send(err)
-            })
-
-    },
-
-    getMainImg: (req, res) => {
-        dbInstance = req.app.get('db');
-        let { img } = req.body;
-        dbInstance.get_main_img_by_id(2)
-            .then(img => {
-                res.status(200).send(img)
             })
             .catch(err => {
                 res.status(500).send(err)
@@ -96,6 +82,7 @@ module.exports = {
                 res.status(500).send(err)
             })
 
+
     },
 
     getOneHome: (req, res) => {
@@ -111,6 +98,7 @@ module.exports = {
             .catch(err => {
                 res.status(500).send(err)
             })
+
     }
     // createHome: (req, res) => {
     //     const dbInstance = req.app.get('db');

@@ -1,3 +1,3 @@
 select * from images
 inner join home on images.home_id = home.homeid
-where home.city = 'Phoenix' 
+where home.city = $1 
