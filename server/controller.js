@@ -88,10 +88,8 @@ module.exports = {
     getOneHome: (req, res) => {
         dbInstance = req.app.get('db');
         let { id } = req.params;
-        console.log(id)
         dbInstance.get_one_home(id)
             .then(home => {
-                console.log(home)
                 res.status(200).send(home)
             })
 

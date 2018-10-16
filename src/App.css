@@ -1,6 +1,22 @@
 .App {
   text-align: center; }
 
+img {
+  max-width: 450px;
+  max-height: 300px;
+}
+
+.Results {
+  padding-top: 30px;
+}
+
+.users-dates {
+  padding-bottom: 30px;
+  background: rgb(248, 248, 248);
+  max-height: 40px;
+  max-width: 150px;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px; }

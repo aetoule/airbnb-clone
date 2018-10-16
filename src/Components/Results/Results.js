@@ -10,22 +10,22 @@ class Results extends Component {
   }
 
   componentDidMount() {
-    this.getHomes()
+    // this.getHomes()
     this.getResults()
-    this.getMainImg()
+
   }
 
-  getHomes() {
-    axios.get('/api/homes').then(res => {
-      this.props.getAllHomes(res.data)
-    })
-      .catch(err => {
-        console.log('err', err)
-      })
-  }
+  // getHomes() {
+  //   axios.get('/api/homes').then(res => {
+  //     this.props.getAllHomes(res.data)
+  //   })
+  //     .catch(err => {
+  //       console.log('err', err)
+  //     })
+  // }
 
   getResults() {
-    axios.get('api/home-results').then(res => {
+    axios.get('/api/home-results').then(res => {
       this.props.getCityHomes(res.data)
     })
       .catch(err => {
@@ -33,28 +33,44 @@ class Results extends Component {
       })
   }
 
-  getMainImg() {
-    axios.get('api/mian-img').then(res => {
-      console.log(res.data);
-
-    })
-  }
-
   render() {
     const { cityHomes } = this.props
-
-    let mappedHomes = cityHomes.map(home => {
+    console.log(cityHomes);
+    const mappedHomes = cityHomes.map(home => {
       return (
-        <div key={home.homeid}>
-          {/* <img src={} alt="pic of home" /> */}
-          <div>{home.address}</div>
-          <div>{home.home_name}</div>
-          <div>{home.price}</div>
+        <div key={home.id}>
+          <div>
+            {home.imgs.map(img => {
+              console.log(img.main);
+              console.log(img.img_url);
+              return img.main ?
+                <img src={img.img_url} alt="homes main image" />
+                : ""
+            })}
+          </div>
+          <div>
+            <h5>
+              {home.max_guests} Guests
+            </h5>
+            <h4>
+              {home.home_name}
+            </h4>
+            <h5>
+              ${home.price} per night
+            </h5>
+          </div>
         </div>
       )
     })
+
+
     return (
       <div className="Results">
+        <div className='users-dates'>
+          <div>
+            start date-end date
+        </div>
+        </div>
         <div>
           200+ Homes...
         </div>
