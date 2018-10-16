@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './one-home.css';
+import {connect} from 'react-redux';
+import {getStartDate, getEndDate} from '../../redux/reducer';
 
 class OneHome extends Component {
     constructor(props) {
@@ -69,6 +71,7 @@ class OneHome extends Component {
                 <img className="home-img" src={img.img_url}/>
             )
         })
+        
         return ( 
             <div>
                 <div className="search-bar-header"></div>
@@ -96,9 +99,19 @@ class OneHome extends Component {
                 <h2>Similar listings</h2>
                 {mappedSimilarListings}
                 {mappedImages}
+                {this.props.startDate}
             </div>
         );
     }
 }
 
-export default OneHome;
+
+const mapStateToProps = state => {
+    const {startDate, endDate} = state;
+    return {
+        startDate,
+        endDate
+    }
+}
+
+export default connect (mapStateToProps, {getStartDate, getEndDate}) (OneHome);
