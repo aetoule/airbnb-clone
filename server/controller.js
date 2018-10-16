@@ -81,8 +81,6 @@ module.exports = {
             .catch(err => {
                 res.status(500).send(err)
             })
-
-
     },
 
     getOneHome: (req, res) => {
@@ -91,6 +89,10 @@ module.exports = {
         dbInstance.get_one_home(id)
             .then(home => {
                 res.status(200).send(home)
+            })
+
+            .catch(err => {
+                res.status(500).send(err)
             })
 
             .catch(err => {

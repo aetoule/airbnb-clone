@@ -8,8 +8,9 @@ class OneHome extends Component {
         // let houseId = this.props.match.params.id;
         this.state = { 
             homeInfo: {},
+            allHomesInCity: [],
             similarHomes: [],
-            mainImg: ''
+            currentHomeImgList: []
         }
     }
     componentDidMount() {
@@ -31,16 +32,23 @@ class OneHome extends Component {
     getSimilarHomes() {
         axios.get('/api/home-results')
         .then(res => {
-            console.log('res', res.data)
-            console.log('this is the id', this.props.match.params.id)
-
-            let allSimilarHomes = res.data
-
-            console.log('res.data', res)
-            let deleteIndex = this.props.match.params.id - 1;
-            allSimilarHomes.splice(deleteIndex, 1)
+            console.log('res', res)
+            console.log('homeInfo', this.state.homeInfo)
+            console.log('res.data', res.data)
+            let allHomesWithCurrentHome = res.data
+            let allSimilarHomes = allHomesWithCurrentHome
+            console.log('allSimilarHomes', allSimilarHomes)
+            const idNumber  = allSimilarHomes.findIndex(e => {
+                return e.home_id == this.props.match.params.id
+            })
+            // right now the get one home is not getting the image array. So I'm using this endpoint to get the home info for this house to get access to the image array
+            let currentHomeImageArray = res.data[0].imgs
+            console.log(currentHomeImageArray)
+            allSimilarHomes.splice(idNumber, 1)
             this.setState({
-                similarHomes: allSimilarHomes
+                // allHomesInCity: allHomesWithCurrentHome,
+                similarHomes: allSimilarHomes,
+                currentHomeImgList: currentHomeImageArray
             })
             console.log(this.state.similarHomes)
         })
@@ -53,7 +61,12 @@ class OneHome extends Component {
         const {home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests,  describe_guest_access, city, address} = this.state.homeInfo;
         let mappedSimilarListings = this.state.similarHomes.map(home => {
             return (
-                <img></img>
+                <p><b>{home.home_name}</b></p>
+            )
+        })
+        let mappedImages = this.state.currentHomeImgList.map(img => {
+            return (
+                <img className="home-img" src={img.img_url}/>
             )
         })
         return ( 
@@ -81,7 +94,8 @@ class OneHome extends Component {
                 <p>This home is located in {city}</p>
                 <p>Google map here</p>
                 <h2>Similar listings</h2>
-
+                {mappedSimilarListings}
+                {mappedImages}
             </div>
         );
     }
