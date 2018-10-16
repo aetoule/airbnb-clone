@@ -12,10 +12,7 @@ module.exports = {
     // },
 
     getAllHomes: (req, res) => {
-<<<<<<< HEAD
-=======
 
->>>>>>> 71284ace35d0bd7d3888c07a4deceb937ce5533a
         dbInstance = req.app.get('db');
         dbInstance.get_all_homes()
             .then(homes => {
@@ -57,28 +54,6 @@ module.exports = {
         dbInstance = req.app.get('db');
         let { city } = req.body;
         dbInstance.get_homes_in_one_city('Phoenix')
-<<<<<<< HEAD
-        .then(homes => {
-            res.status(200).send(homes)})
-        .catch(err => {
-            res.status(500).send(err)
-        })
-    
-    },
-
-    getOneHome: (req, res) => {
-        dbInstance = req.app.get('db');
-        let {id} = req.params;
-        console.log(id)
-        dbInstance.get_one_home(id)
-        .then(home => {
-            console.log(home)
-            res.status(200).send(home)})
-
-        .catch(err => {
-            res.status(500).send(err)
-        })
-=======
             .then(homes => {
                 let reduced = homes.reduce((prev, curr) => {
                     let { home_id,
@@ -120,8 +95,22 @@ module.exports = {
             .catch(err => {
                 res.status(500).send(err)
             })
->>>>>>> 71284ace35d0bd7d3888c07a4deceb937ce5533a
 
+    },
+
+    getOneHome: (req, res) => {
+        dbInstance = req.app.get('db');
+        let { id } = req.params;
+        console.log(id)
+        dbInstance.get_one_home(id)
+            .then(home => {
+                console.log(home)
+                res.status(200).send(home)
+            })
+
+            .catch(err => {
+                res.status(500).send(err)
+            })
     }
     // createHome: (req, res) => {
     //     const dbInstance = req.app.get('db');
