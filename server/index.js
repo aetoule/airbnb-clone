@@ -9,12 +9,6 @@ const controller = require('./controller');
 
 app.use(bodyParser.json());
 
-massive(process.env.CONNECTION_STRING).then(database => {
-  app.set('db', database);
-  console.log('database is runnin');
-}).catch(error => {
-  console.log('-------------- database issue', error);
-});
 
 
 app.get('/', (req, res) => {
@@ -23,9 +17,16 @@ app.get('/', (req, res) => {
 
 app.get('/api/homes', controller.getAllHomes)
 app.get('/api/home-results', controller.getHomesInCity);
+app.get('/api/home-images', controller.getHomeImgs)
+app.get('/api/mian-img', controller.getMainImg)
 // app.post('/api/home', controller.createHome);
 
-
+massive(process.env.CONNECTION_STRING).then(database => {
+  app.set('db', database);
+  console.log('database is runnin');
+}).catch(error => {
+  console.log('-------------- database issue', error);
+});
 
 const PORT = 4000;
 app.listen(PORT, () => console.log(`Server listening on port 4000`));
