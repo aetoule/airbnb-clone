@@ -4,11 +4,13 @@ import Results from './Components/Results/Results';
 import routes from './routes';
 
 
+
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Results/>
+        {/* <Results/> */}
         {routes}
       </div>
     );

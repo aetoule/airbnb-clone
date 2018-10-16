@@ -1,0 +1,12 @@
+.img-carousel {
+  background-image: url(../../media/toa-heftiba-644507-unsplash.jpg);
+  height: 31vh;
+  width: 100vw;
+  object-fit: cover;
+  background-size: contain;
+  background-repeat: no-repeat; }
+
+.search-bar-header {
+  height: 60px;
+  width: 100vw;
+  background-color: lightblue; }

@@ -1,7 +1,6 @@
 module.exports = {
 
     getAllHomes: (req, res) => {
-        
         dbInstance = req.app.get('db');
         dbInstance.get_all_homes()
         .then(homes => {
@@ -21,6 +20,21 @@ module.exports = {
             res.status(500).send(err)
         })
     
+    },
+
+    getOneHome: (req, res) => {
+        dbInstance = req.app.get('db');
+        let {id} = req.params;
+        console.log(id)
+        dbInstance.get_one_home(id)
+        .then(home => {
+            console.log(home)
+            res.status(200).send(home)})
+
+        .catch(err => {
+            res.status(500).send(err)
+        })
+
     }
     // createHome: (req, res) => {
     //     const dbInstance = req.app.get('db');

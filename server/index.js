@@ -14,6 +14,8 @@ res.send('endpoint live')
 
 app.get('/api/homes', controller.getAllHomes)
 app.get('/api/home-results', controller.getHomesInCity);
+app.get('/api/home/:id', controller.getOneHome);
+
 // app.post('/api/home', controller.createHome);
 
 massive(process.env.CONNECTION_STRING).then(database => {
