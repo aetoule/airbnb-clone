@@ -1,40 +1,63 @@
 import React, { Component } from 'react';
 // import './App.css';
 import axios from 'axios';
-import {connect} from 'react-redux';
-import {getAllHomes} from '../../redux/reducer';
+import { connect } from 'react-redux';
+import { getAllHomes, getCityHomes } from '../../redux/reducer';
 
 class Results extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {  
-      homes:[]
-    }
+  state = {
 
   }
+
   componentDidMount() {
     this.getHomes()
+    this.getResults()
+    this.getMainImg()
   }
 
   getHomes() {
-    axios.get('/api/homes').then( res => {
-      console.log(res.data)
+    axios.get('/api/homes').then(res => {
       this.props.getAllHomes(res.data)
     })
-    .catch(err => {
-      console.log('err', err)
+      .catch(err => {
+        console.log('err', err)
+      })
+  }
+
+  getResults() {
+    axios.get('api/home-results').then(res => {
+      this.props.getCityHomes(res.data)
+    })
+      .catch(err => {
+        console.log('err', err)
+      })
+  }
+
+  getMainImg() {
+    axios.get('api/mian-img').then(res => {
+      console.log(res.data);
+
     })
   }
+
   render() {
-    console.log(this.state.homes)
-    let mappedHomes = this.props.homes.map(home => {
+    const { cityHomes } = this.props
+
+    let mappedHomes = cityHomes.map(home => {
       return (
-        <div>{home.home_name}</div>
+        <div key={home.homeid}>
+          {/* <img src={} alt="pic of home" /> */}
+          <div>{home.address}</div>
+          <div>{home.home_name}</div>
+          <div>{home.price}</div>
+        </div>
       )
     })
     return (
-      <div className="App">
-        App
+      <div className="Results">
+        <div>
+          200+ Homes...
+        </div>
         {mappedHomes}
       </div>
     );
@@ -42,13 +65,15 @@ class Results extends Component {
 }
 
 const mapStateToProps = state => {
-  const {homes} = state;
+  const { homes, cityHomes } = state;
   return {
-    homes
+    homes,
+    cityHomes
   }
 }
 
 const mapDispatchToProps = {
-  getAllHomes
+  getAllHomes,
+  getCityHomes
 }
-export default connect (mapStateToProps, mapDispatchToProps) (Results);
+export default connect(mapStateToProps, mapDispatchToProps)(Results);
