@@ -118,6 +118,7 @@ module.exports = {
             })
 
     },
+
     addUsersCheckoutRecipt: (req, res) => {
         dbInstance = req.app.get('db');
         dbInstance.add_users_checkout_recipt([
@@ -127,7 +128,6 @@ module.exports = {
             // req.body.start_date,
             // req.body.end_date,
             // req.body.total
-
         ]).then(recipt => {
             res.status(200).send(recipt);
         })
