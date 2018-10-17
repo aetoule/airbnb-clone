@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getStartDate, getEndDate} from '../../redux/reducer';
+
 
 class Home extends Component {
     constructor(props) {
@@ -10,18 +12,16 @@ class Home extends Component {
         this.state = { 
             startDate: '',
             endDate: ''
-         }
+        }
     }
-    componentWillUpdate(){
-        this.something()
-    }
-
-    something() {
-        this.props.getStartDate(this.state.startDate);
-        this.props.getEndDate(this.state.endDate);
-    }
+    // componentDidMount() {
+    //     this.props.getStartDate()
+    // }
+    
     render() { 
         console.log(this.props)
+        console.log('this.state.startDate',this.state.startDate)
+        console.log('this.state.endDate', this.state.endDate)
         const { getEndDate, getStartDate, endDate, startDate} = this.props;
 
         return (
@@ -37,11 +37,14 @@ class Home extends Component {
                         return {
                             startDate,
                             endDate
-                         }
-                    })} // PropTypes.func.isRequired,
+                        }
+                    })} 
+                    
+                    // PropTypes.func.isRequired,
                     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                     />
+                    <Link to= '/results/2'>Link to results/2</Link>
             </div>
             );
     }
@@ -50,10 +53,10 @@ class Home extends Component {
 const mapStateToProps = state => {
     const {startDate, endDate} = state;
     return {
-        startDate,
+        startDate: startDate,
         endDate
     }
 }
- 
+
 export default connect (mapStateToProps, {getStartDate, getEndDate}) (Home);
 

@@ -20,6 +20,7 @@ app.get('/api/home-results', controller.getHomesInCity);
 app.get('/api/home/:id', controller.getOneHome);
 
 app.get('/api/home-images', controller.getHomeImgs);
+app.get('/api/getdays', controller.getCalculatedDays);
 // app.post('/api/home', controller.createHome);
 
 massive(process.env.CONNECTION_STRING).then(database => {

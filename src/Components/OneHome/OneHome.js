@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// import PropTypes from 'prop-types';
 import './one-home.css';
 import {connect} from 'react-redux';
 import {getStartDate, getEndDate} from '../../redux/reducer';
@@ -12,12 +13,27 @@ class OneHome extends Component {
             homeInfo: {},
             allHomesInCity: [],
             similarHomes: [],
-            currentHomeImgList: []
+            currentHomeImgList: [],
+            tripLength: 0,
+            toggle: false,
+            serviceFee: 20,
+            tax: 23
+            // startDaate: {}
+            // startOrEndDate: ''
         }
     }
     componentDidMount() {
         this.getHouse()
         this.getSimilarHomes()
+        this.getTripDuration()
+        // let startOrEndDate = (this.props.startDate._d || this.props.endDate._d)
+        // console.log('startOrEndDate', typeof startOrEndDate)
+
+        // this.setState({
+        //     // startOrEndDate: (this.props.startDate._d || this.props.endDate._d)
+        //     startDaate: this.props.startDate._d 
+        // })
+        // console.log('startOrEndDate', this.state.startOrEndDate)
     }
 
     getHouse() {
@@ -33,7 +49,6 @@ class OneHome extends Component {
     getSimilarHomes() {
         axios.get('/api/home-results')
         .then(res => {
-       
             let allHomesWithCurrentHome = res.data
             let allSimilarHomes = allHomesWithCurrentHome
             console.log('allSimilarHomes', allSimilarHomes)
@@ -45,15 +60,25 @@ class OneHome extends Component {
             console.log(currentHomeImageArray)
             allSimilarHomes.splice(idNumber, 1)
             this.setState({
-                // allHomesInCity: allHomesWithCurrentHome,
                 similarHomes: allSimilarHomes,
                 currentHomeImgList: currentHomeImageArray
             })
         })
     }
 
-    render() { 
+    getTripDuration() {
+        console.log('fired')
+        axios.get('/api/getdays').then(res => {
+            console.log(res.data[0].date_part)
+            this.setState({
+                tripLength: res.data[0].date_part
+            })
+        })
+        
+    }
 
+
+    render() { 
         const {home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests,  describe_guest_access, city, address} = this.state.homeInfo;
         let mappedSimilarListings = this.state.similarHomes.map(home => {
             return (
@@ -65,13 +90,25 @@ class OneHome extends Component {
                 <img className="home-img" src={img.img_url}/>
             )
         })
-        console.log(this.props.startDate)
-        
+        // get start date
+        let startDay = this.props.startDate._d.getDate()
+        let startMonth = this.props.startDate._d.getMonth() + 1
+        let startYear = this.props.startDate._d.getFullYear()
+        let startDateString = startMonth + '/' + startDay + '/' + startYear;
+
+        // get end date 
+        let endDay = this.props.endDate._d.getDate()
+        let endMonth = this.props.endDate._d.getMonth() + 1
+        let endYear = this.props.endDate._d.getFullYear()
+        let endDateString = endMonth + '/' + endDay + '/' + endYear;
+
+        let totalPrice = this.state.serviceFee + this.state.tax + (this.state.tripLength * price);
         return ( 
-            <div>
-                <div className="search-bar-header"></div>
+            <div className="one-home-entire-container">
+                <div className="search-bar-header">
+                    {/* <input type='text'>Search</input> */}
+                </div>
                 <div className="img-carousel"></div>
-                {/* <img src={homeImg}/> */}
                 <h1>{home_name}</h1>
                 <p>{city}</p>
                 <p>{max_guests} guests</p>
@@ -94,7 +131,17 @@ class OneHome extends Component {
                 <h2>Similar listings</h2>
                 {mappedSimilarListings}
                 {mappedImages}
-                {this.props.startDate}
+                <p>{startDateString} to {endDateString}</p>
+                {totalPrice}
+                {/* <button onClick={() => this.setState({toggle: !this.state.toggle})} id='book-btn'>Book</button>
+                <div id="book-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                                <p>Text in modal</p>
+                    </div>
+                </div> */}
+                
+
             </div>
         );
     }
@@ -103,10 +150,16 @@ class OneHome extends Component {
 
 const mapStateToProps = state => {
     const {startDate, endDate} = state;
+    console.log(startDate)
     return {
         startDate,
         endDate
     }
 }
 
+
 export default connect (mapStateToProps, {getStartDate, getEndDate}) (OneHome);
+
+// OneHome.propTypes = {
+//     show: PropTypes.bool
+//   }
