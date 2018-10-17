@@ -4,6 +4,7 @@ import Home from './Components/Home/Home';
 import Results from './Components/Results/Results';
 import OneHome from './Components/OneHome/OneHome';
 import Checkout from './Components/Checkout/Checkout';
+import Confirmation from './Components/Confirmation/Confirmation';
 
 export default(
     <Switch>
@@ -11,5 +12,7 @@ export default(
         <Route component={Results} exact path="/results" />
         <Route component={OneHome} exact path="/results/:id" />
         <Route component={Checkout} exact path="/checkout" />
+        <Route component={Confirmation} exact path="/confirmation" />
+
     </Switch> 
 )
