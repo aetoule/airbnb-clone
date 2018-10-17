@@ -6,10 +6,11 @@ import {connect} from 'react-redux';
 import {getStartDate, getEndDate} from '../../redux/reducer';
 
 
+
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             startDate: '',
             endDate: ''
         }
@@ -46,12 +47,12 @@ class Home extends Component {
                     />
                     <Link to= '/results/2'>Link to results/2</Link>
             </div>
-            );
+        );
     }
 }
 
 const mapStateToProps = state => {
-    const {startDate, endDate} = state;
+    const { startDate, endDate } = state;
     return {
         startDate: startDate,
         endDate

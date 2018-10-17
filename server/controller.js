@@ -36,6 +36,24 @@ module.exports = {
 
     },
 
+    getCalculatedDays: (req, res) => {
+        dbInstance = req.app.get('db');
+        dbInstance.calculate_diff_of_days('2011-12-31 01:00:00', '2011-12-19 23:00:00')
+            .then(days => {
+                res.status(200).send(days)
+            })
+
+            .catch(err => {
+                res.status(500).send(err)
+            })
+
+            .catch(err => {
+                res.status(500).send(err)
+            })
+
+    },
+
+
     getHomesInCity: (req, res) => {
         dbInstance = req.app.get('db');
         let { city } = req.body;
@@ -100,23 +118,24 @@ module.exports = {
             })
 
     },
-    getCalculatedDays: (req, res) => {
+    addUsersCheckoutRecipt: (req, res) => {
         dbInstance = req.app.get('db');
-        dbInstance.calculate_diff_of_days('2011-12-31 01:00:00', '2011-12-19 23:00:00')
-            .then(days => {
-                res.status(200).send(days)
-            })
+        dbInstance.add_users_checkout_recipt([
+            // req.body.home_id,
+            // req.session.user.id,
+            // req.body.host_id,
+            // req.body.start_date,
+            // req.body.end_date,
+            // req.body.total
 
-            .catch(err => {
-                res.status(500).send(err)
-            })
-
-            .catch(err => {
-                res.status(500).send(err)
-            })
-
-    },
-
+        ]).then(recipt => {
+            res.status(200).send(recipt);
+        })
+            .catch(error => {
+                console.log(error);
+                res.status(500).send("error");
+            });
+    }
     // createHome: (req, res) => {
     //     const dbInstance = req.app.get('db');
     //     let {home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city} = req.body;
