@@ -38,7 +38,7 @@ module.exports = {
 
     getCalculatedDays: (req, res) => {
         dbInstance = req.app.get('db');
-        dbInstance.calculate_diff_of_days('2011-12-31 01:00:00', '2011-12-19 23:00:00')
+        dbInstance.calculate_diff_of_days('2011-12-30 01:00:00', '2011-12-29 1:00:00')
             .then(days => {
                 res.status(200).send(days)
             })

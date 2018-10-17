@@ -3,7 +3,8 @@ import axios from 'axios';
 // import PropTypes from 'prop-types';
 import './one-home.css';
 import {connect} from 'react-redux';
-import {getStartDate, getEndDate} from '../../redux/reducer';
+import {getStartDate, getEndDate, getTotal} from '../../redux/reducer';
+import TakeMoney from '../StripeCheckout';
 
 class OneHome extends Component {
     constructor(props) {
@@ -17,7 +18,8 @@ class OneHome extends Component {
             tripLength: 0,
             toggle: false,
             serviceFee: 20,
-            tax: 23
+            tax: 23,
+            total: 0
             // startDaate: {}
             // startOrEndDate: ''
         }
@@ -77,9 +79,19 @@ class OneHome extends Component {
         
     }
 
+    // getTotal() {
+    //     console.log('fired')
+        
+    //     console.log()
+    //     console.log(totalPrice)
+    //     this.setState({total: totalPrice})
+    //     console.log(this.state.total)
+    // }
+
 
     render() { 
         const {home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests,  describe_guest_access, city, address} = this.state.homeInfo;
+        const {total} = this.props;
         let mappedSimilarListings = this.state.similarHomes.map(home => {
             return (
                 <p><b>{home.home_name}</b></p>
@@ -102,7 +114,11 @@ class OneHome extends Component {
         let endYear = this.props.endDate._d.getFullYear()
         let endDateString = endMonth + '/' + endDay + '/' + endYear;
 
-        let totalPrice = this.state.serviceFee + this.state.tax + (this.state.tripLength * price);
+        let totalPrice = this.state.serviceFee + this.state.tax + (this.state.tripLength * this.state.homeInfo.price);
+        let totalCents = totalPrice * 100
+        this.props.getTotal(totalCents);
+        console.log(total)
+
         return ( 
             <div className="one-home-entire-container">
                 <div className="search-bar-header">
@@ -132,7 +148,7 @@ class OneHome extends Component {
                 {mappedSimilarListings}
                 {mappedImages}
                 <p>{startDateString} to {endDateString}</p>
-                {totalPrice}
+                
                 {/* <button onClick={() => this.setState({toggle: !this.state.toggle})} id='book-btn'>Book</button>
                 <div id="book-modal" class="modal">
                     <div class="modal-content">
@@ -140,7 +156,7 @@ class OneHome extends Component {
                                 <p>Text in modal</p>
                     </div>
                 </div> */}
-                
+                <TakeMoney/>
 
             </div>
         );
@@ -149,16 +165,17 @@ class OneHome extends Component {
 
 
 const mapStateToProps = state => {
-    const {startDate, endDate} = state;
+    const {startDate, endDate, total} = state;
     console.log(startDate)
     return {
         startDate,
-        endDate
+        endDate,
+        total
     }
 }
 
 
-export default connect (mapStateToProps, {getStartDate, getEndDate}) (OneHome);
+export default connect (mapStateToProps, {getStartDate, getEndDate, getTotal}) (OneHome);
 
 // OneHome.propTypes = {
 //     show: PropTypes.bool

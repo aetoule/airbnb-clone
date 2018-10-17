@@ -5,10 +5,7 @@ const bodyParser = require('body-parser');
 const massive = require('massive');
 const controller = require('./controller');
 
-
-
 app.use(bodyParser.json());
-
 
 
 app.get('/', (req, res) => {
@@ -22,6 +19,24 @@ app.get('/api/getdays', controller.getCalculatedDays);
 app.get('/api/home-images', controller.getHomeImgs);
 app.post('api/chechout', controller.addUsersCheckoutRecipt)
 // app.post('/api/home', controller.createHome);
+
+app.post("/charge", (req, res) => {
+  // let amount = 500;
+
+  stripe.customers.create({
+     email: req.body.stripeEmail,
+    source: req.body.stripeToken
+  })
+  .then(customer =>
+    stripe.charges.create({
+      amount: req.body.total,
+      description: "Sample Charge",
+         currency: "usd",
+         customer: customer.id
+    }))
+  .then(charge => res.render("charge.pug"));
+});
+
 
 massive(process.env.CONNECTION_STRING).then(database => {
   app.set('db', database);
