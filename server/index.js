@@ -18,8 +18,9 @@ app.get('/', (req, res) => {
 app.get('/api/homes', controller.getAllHomes)
 app.get('/api/home-results', controller.getHomesInCity);
 app.get('/api/home/:id', controller.getOneHome);
-
+app.get('/api/getdays', controller.getCalculatedDays);
 app.get('/api/home-images', controller.getHomeImgs);
+app.post('api/chechout', controller.addUsersCheckoutRecipt)
 // app.post('/api/home', controller.createHome);
 
 massive(process.env.CONNECTION_STRING).then(database => {

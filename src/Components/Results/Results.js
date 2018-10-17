@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getAllHomes, getCityHomes } from '../../redux/reducer';
+import { Link } from "react-router-dom";
+
 
 class Results extends Component {
   state = {
@@ -37,14 +39,18 @@ class Results extends Component {
     const { cityHomes } = this.props
     console.log(cityHomes);
     const mappedHomes = cityHomes.map(home => {
+      console.log(home.home_id);
+
       return (
-        <div key={home.id}>
+        <div key={home.home_id}>
           <div>
             {home.imgs.map(img => {
               console.log(img.main);
               console.log(img.img_url);
               return img.main ?
-                <img src={img.img_url} alt="homes main image" />
+                <Link to={`/results/${home.home_id}`}>
+                  <img src={img.img_url} alt="homes main image" />
+                </Link>
                 : ""
             })}
           </div>
