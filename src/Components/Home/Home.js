@@ -12,9 +12,18 @@ class Home extends Component {
             endDate: ''
          }
     }
+    componentWillUpdate(){
+        this.something()
+    }
+
+    something() {
+        this.props.getStartDate(this.state.startDate);
+        this.props.getEndDate(this.state.endDate);
+    }
     render() { 
-        console.log(this.state.startDate)
-        console.log(this.state.endDate)
+        console.log(this.props)
+        const { getEndDate, getStartDate, endDate, startDate} = this.props;
+
         return (
             <div>
                 <DateRangePicker
@@ -22,7 +31,14 @@ class Home extends Component {
                     startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
                     endDate={this.state.endDate} // momentPropTypes.momentObj or null,
                     endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-                    onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+                    onDatesChange={({ startDate, endDate }) => this.setState(() => {
+                        getStartDate(startDate)
+                        getEndDate(endDate)
+                        return {
+                            startDate,
+                            endDate
+                         }
+                    })} // PropTypes.func.isRequired,
                     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                     />

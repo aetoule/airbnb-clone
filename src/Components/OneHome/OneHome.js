@@ -24,7 +24,6 @@ class OneHome extends Component {
         console.log(this.props.match.params.id)
         axios.get(`/api/home/${this.props.match.params.id}`)
         .then(res => {
-            console.log(res)
             this.setState({
                 homeInfo: res.data[0]
             })    
@@ -34,9 +33,7 @@ class OneHome extends Component {
     getSimilarHomes() {
         axios.get('/api/home-results')
         .then(res => {
-            console.log('res', res)
-            console.log('homeInfo', this.state.homeInfo)
-            console.log('res.data', res.data)
+       
             let allHomesWithCurrentHome = res.data
             let allSimilarHomes = allHomesWithCurrentHome
             console.log('allSimilarHomes', allSimilarHomes)
@@ -52,14 +49,11 @@ class OneHome extends Component {
                 similarHomes: allSimilarHomes,
                 currentHomeImgList: currentHomeImageArray
             })
-            console.log(this.state.similarHomes)
         })
     }
 
     render() { 
-        console.log(this.state)
-        console.log(this.state.homeInfo.homeid)
-        console.log(this.state.homeInfo.home_name)
+
         const {home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests,  describe_guest_access, city, address} = this.state.homeInfo;
         let mappedSimilarListings = this.state.similarHomes.map(home => {
             return (
@@ -71,6 +65,7 @@ class OneHome extends Component {
                 <img className="home-img" src={img.img_url}/>
             )
         })
+        console.log(this.props.startDate)
         
         return ( 
             <div>

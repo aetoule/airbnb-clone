@@ -42,6 +42,7 @@ export function getCityHomes(city) {
 }
 
 export function getStartDate(startDate) {
+    console.log('fasdfdsff', startDate._d);
     return {
         type: GET_START_DATE,
         payload: startDate
@@ -49,6 +50,7 @@ export function getStartDate(startDate) {
 }
 
 export function getEndDate(endDate) {
+    console.log('sdfadsfadsfds', endDate._d);
     return {
         type: GET_END_DATE,
         payload: endDate
