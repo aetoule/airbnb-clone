@@ -36,9 +36,19 @@ module.exports = {
 
     },
 
-    getCalculatedDays: (req, res) => {
+    postDates: (req, res) => {
+
+        const { start_date, end_date } = req.body;
+        // dates.push({ start_date, end_date });
+        // res.status(200).send(dates);
+
         dbInstance = req.app.get('db');
-        dbInstance.calculate_diff_of_days('2011-12-30 01:00:00', '2011-12-29 1:00:00')
+
+
+
+
+
+        dbInstance.calculate_diff_of_days(start_date, end_date)
             .then(days => {
                 res.status(200).send(days)
             })
@@ -50,8 +60,29 @@ module.exports = {
             .catch(err => {
                 res.status(500).send(err)
             })
-
     },
+
+    // getCalculatedDays: (req, res) => {
+    //     dbInstance = req.app.get('db');
+    //     console.log(dates);
+    //     const startDate = dates[0]
+    //     const endDate = dates[1]
+
+
+    //     dbInstance.calculate_diff_of_days(startDate.start_date, endDate.end_data)
+    //         .then(days => {
+    //             res.status(200).send(days)
+    //         })
+
+    //         .catch(err => {
+    //             res.status(500).send(err)
+    //         })
+
+    //         .catch(err => {
+    //             res.status(500).send(err)
+    //         })
+
+    // },
 
 
     getHomesInCity: (req, res) => {

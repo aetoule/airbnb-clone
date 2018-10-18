@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getStartDate, getEndDate} from '../../redux/reducer';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getStartDate, getEndDate } from '../../redux/reducer';
 
 
 
@@ -18,12 +18,12 @@ class Home extends Component {
     // componentDidMount() {
     //     this.props.getStartDate()
     // }
-    
-    render() { 
+
+    render() {
         console.log(this.props)
-        console.log('this.state.startDate',this.state.startDate)
+        console.log('this.state.startDate', this.state.startDate)
         console.log('this.state.endDate', this.state.endDate)
-        const { getEndDate, getStartDate, endDate, startDate} = this.props;
+        const { getEndDate, getStartDate, endDate, startDate } = this.props;
 
         return (
             <div>
@@ -39,13 +39,13 @@ class Home extends Component {
                             startDate,
                             endDate
                         }
-                    })} 
-                    
+                    })}
+
                     // PropTypes.func.isRequired,
                     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-                    />
-                    <Link to= '/results/2'>Link to results/2</Link>
+                />
+                <Link to='/results/'>Link to results/2</Link>
             </div>
         );
     }
@@ -59,5 +59,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect (mapStateToProps, {getStartDate, getEndDate}) (Home);
+export default connect(mapStateToProps, { getStartDate, getEndDate })(Home);
 
