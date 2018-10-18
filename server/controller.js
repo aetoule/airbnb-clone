@@ -2,17 +2,6 @@
 
 module.exports = {
 
-    // getAllHomes: (req, res) => {
-    //     dbInstance = req.app.get('db');
-    //     dbInstance.get_all_homes()
-    //         .then(homes => {
-    //             res.status(200).send(homes)
-    //         })
-    //         .catch(err => {
-    //             res.status(200).send(err)
-    //         })
-    // },
-
     getAllHomes: (req, res) => {
         dbInstance = req.app.get('db');
         dbInstance.get_all_homes()
@@ -37,9 +26,9 @@ module.exports = {
 
     },
 
-    getCalculatedDays: (req, res) => {
+    postDates: (req, res) => {
         dbInstance = req.app.get('db');
-        const{startDate, endDate} = req.body;
+        const { startDate, endDate } = req.body;
         dbInstance.calculate_diff_of_days(startDate, endDate)
             .then(days => {
                 res.status(200).send(days)
@@ -52,7 +41,6 @@ module.exports = {
             .catch(err => {
                 res.status(500).send(err)
             })
-
     },
 
     postCity: (req, res) => {
