@@ -4,7 +4,8 @@ const initialState = {
     cityHomes: [],
     startDate: '',
     endDate: '',
-    total: 0
+    total: 0,
+    city: ''
     // guests: 0
 }
 
@@ -13,6 +14,7 @@ const GET_CITY_HOMES = "GET_CITY_HOMES";
 const GET_START_DATE = "GET_START_DATE";
 const GET_END_DATE = "GET_END_DATE";
 const GET_TOTAL = "GET_TOTAL";
+const GET_CITY = "GET_CITY";
 
 
 export default function reducer(state = initialState, action) {
@@ -27,6 +29,8 @@ export default function reducer(state = initialState, action) {
             return {...state, endDate: action.payload}   
         case GET_TOTAL:
             return {...state, total: action.payload}
+        case GET_CITY:
+            return {...state, city: action.payload}
         default:
             return { ...state }
     }
@@ -39,10 +43,10 @@ export function getAllHomes(homes) {
     }
 }
 
-export function getCityHomes(city) {
+export function getCityHomes(cityHomes) {
     return {
         type: GET_CITY_HOMES,
-        payload: city
+        payload: cityHomes
     }
 }
 
@@ -66,5 +70,12 @@ export function getTotal(total) {
     return {
         type: GET_TOTAL,
         payload: total
+    }
+}
+
+export function getCity(city) {
+    return {
+        type: GET_CITY,
+        payload: city
     }
 }

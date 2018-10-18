@@ -49,7 +49,7 @@ class OneHome extends Component {
     }
 
     getSimilarHomes() {
-        axios.get('/api/home-results')
+        axios.post('/api/home-results', null)
         .then(res => {
             let allHomesWithCurrentHome = res.data
             let allSimilarHomes = allHomesWithCurrentHome
@@ -70,7 +70,7 @@ class OneHome extends Component {
 
     getTripDuration() {
         console.log('fired')
-        axios.get('/api/getdays').then(res => {
+        axios.post('/api/getdays', {}).then(res => {
             console.log(res.data[0].date_part)
             this.setState({
                 tripLength: res.data[0].date_part

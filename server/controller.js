@@ -1,15 +1,6 @@
-module.exports = {
 
-    // getAllHomes: (req, res) => {
-    //     dbInstance = req.app.get('db');
-    //     dbInstance.get_all_homes()
-    //         .then(homes => {
-    //             res.status(200).send(homes)
-    //         })
-    //         .catch(err => {
-    //             res.status(200).send(err)
-    //         })
-    // },
+
+module.exports = {
 
     getAllHomes: (req, res) => {
         dbInstance = req.app.get('db');
@@ -20,7 +11,6 @@ module.exports = {
             .catch(err => {
                 res.status(500).send(err)
             })
-
     },
 
     getHomeImgs: (req, res) => {
@@ -37,18 +27,9 @@ module.exports = {
     },
 
     postDates: (req, res) => {
-
-        const { start_date, end_date } = req.body;
-        // dates.push({ start_date, end_date });
-        // res.status(200).send(dates);
-
         dbInstance = req.app.get('db');
-
-
-
-
-
-        dbInstance.calculate_diff_of_days(start_date, end_date)
+        const { startDate, endDate } = req.body;
+        dbInstance.calculate_diff_of_days(startDate, endDate)
             .then(days => {
                 res.status(200).send(days)
             })
@@ -62,33 +43,12 @@ module.exports = {
             })
     },
 
-    // getCalculatedDays: (req, res) => {
-    //     dbInstance = req.app.get('db');
-    //     console.log(dates);
-    //     const startDate = dates[0]
-    //     const endDate = dates[1]
 
-
-    //     dbInstance.calculate_diff_of_days(startDate.start_date, endDate.end_data)
-    //         .then(days => {
-    //             res.status(200).send(days)
-    //         })
-
-    //         .catch(err => {
-    //             res.status(500).send(err)
-    //         })
-
-    //         .catch(err => {
-    //             res.status(500).send(err)
-    //         })
-
-    // },
-
-
-    getHomesInCity: (req, res) => {
+    postCity: (req, res) => {
+        console.log(req.body)
+        const { city } = req.body;
         dbInstance = req.app.get('db');
-        let { city } = req.body;
-        dbInstance.get_homes_in_one_city('Phoenix')
+        dbInstance.get_homes_in_one_city(city)
             .then(homes => {
                 let reduced = homes.reduce((prev, curr) => {
                     let { home_id,
@@ -131,6 +91,8 @@ module.exports = {
                 res.status(500).send(err)
             })
     },
+
+
 
     getOneHome: (req, res) => {
         dbInstance = req.app.get('db');
