@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getStartDate, getEndDate, getCity} from '../../redux/reducer';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getStartDate, getEndDate, getCity } from '../../redux/reducer';
 import axios from 'axios';
 
 
@@ -14,7 +14,7 @@ class Home extends Component {
             startDate: '',
             endDate: '',
         }
-    
+
     }
 
     // componentDidMount() {
@@ -23,18 +23,18 @@ class Home extends Component {
     handleChange(event) {
         // console.log(this.refs.city.value)
         console.log(event.target.value)
-        console.log(this.props.getCity(event.target.value)) 
+        console.log(this.props.getCity(event.target.value))
         // this.props.(event)
     }
-    
-    render() { 
+
+    render() {
         console.log(this.props.city)
         // console.log(this.refs.city.value)
         // console.log({value: event.target.value})
 
-        console.log('this.state.startDate',this.state.startDate)
+        console.log('this.state.startDate', this.state.startDate)
         console.log('this.state.endDate', this.state.endDate)
-        const { getEndDate, getStartDate, endDate, startDate} = this.props;
+        const { getEndDate, getStartDate, endDate, startDate } = this.props;
         return (
             <div>
                 <DateRangePicker
@@ -49,22 +49,22 @@ class Home extends Component {
                             startDate,
                             endDate
                         }
-                    })} 
-                    
+                    })}
+
                     // PropTypes.func.isRequired,
                     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-                    />
-                    
-                    <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)}>
-                        <option value="Phoenix">Phoenix</option>
-                        <option value="Flagstaff">Flagstaff</option>
-                        <option value="Sedona">Sedona</option>
-                        <option value="Tucson">Tucson</option>
-                        <option value="Williams">Williams</option>
-                    </select>
-                            
-                    <Link to= '/results/'>Link to results</Link>
+                />
+
+                <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)}>
+                    <option value="Phoenix">Phoenix</option>
+                    <option value="Flagstaff">Flagstaff</option>
+                    <option value="Sedona">Sedona</option>
+                    <option value="Tucson">Tucson</option>
+                    <option value="Williams">Williams</option>
+                </select>
+
+                <Link to='/results/'>Link to results</Link>
             </div>
         );
     }
@@ -79,5 +79,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect (mapStateToProps, {getStartDate, getEndDate, getCity}) (Home);
+export default connect(mapStateToProps, { getStartDate, getEndDate, getCity })(Home);
 

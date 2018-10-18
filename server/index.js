@@ -18,6 +18,7 @@ app.get('/api/home/:id', controller.getOneHome);
 // app.get('/api/getdays', controller.getCalculatedDays);
 app.get('/api/home-images', controller.getHomeImgs);
 app.post('api/chechout', controller.addUsersCheckoutRecipt)
+app.post('/api/getdays', controller.postDates)
 // app.post('/api/home', controller.createHome);
 app.post('/api/homes-results', controller.postCity)
 
@@ -25,17 +26,17 @@ app.post("/charge", (req, res) => {
   // let amount = 500;
 
   stripe.customers.create({
-     email: req.body.stripeEmail,
+    email: req.body.stripeEmail,
     source: req.body.stripeToken
   })
-  .then(customer =>
-    stripe.charges.create({
-      amount: req.body.total,
-      description: "Sample Charge",
-         currency: "usd",
-         customer: customer.id
-    }))
-  .then(charge => res.render("charge.pug"));
+    .then(customer =>
+      stripe.charges.create({
+        amount: req.body.total,
+        description: "Sample Charge",
+        currency: "usd",
+        customer: customer.id
+      }))
+    .then(charge => res.render("charge.pug"));
 });
 
 // Nodemailer
