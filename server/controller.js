@@ -1,3 +1,5 @@
+
+
 module.exports = {
 
     // getAllHomes: (req, res) => {
@@ -20,7 +22,6 @@ module.exports = {
             .catch(err => {
                 res.status(500).send(err)
             })
-
     },
 
     getHomeImgs: (req, res) => {
@@ -38,7 +39,8 @@ module.exports = {
 
     getCalculatedDays: (req, res) => {
         dbInstance = req.app.get('db');
-        dbInstance.calculate_diff_of_days('2011-12-30 01:00:00', '2011-12-29 1:00:00')
+        const{startDate, endDate} = req.body;
+        dbInstance.calculate_diff_of_days(startDate, endDate)
             .then(days => {
                 res.status(200).send(days)
             })
@@ -53,53 +55,61 @@ module.exports = {
 
     },
 
-
-    getHomesInCity: (req, res) => {
+    postCity: (req, res) => {
+        console.log(req.body)
+        const { city } = req.body;
         dbInstance = req.app.get('db');
-        let { city } = req.body;
-        dbInstance.get_homes_in_one_city('Phoenix')
-            .then(homes => {
-                let reduced = homes.reduce((prev, curr) => {
-                    let { home_id,
-                        home_name,
-                        price, max_guests,
-                        describe_main,
-                        describe_space,
-                        describe_guest_access,
-                        describe_interaction_with_guests,
-                        describe_other_things_to_note,
-                        address,
-                        img_url,
-                        city, } = curr;
+        dbInstance.get_homes_in_one_city(city)
+        .then(homes => {
+            let reduced = homes.reduce((prev, curr) => {
+                let { home_id,
+                    home_name,
+                    price, max_guests,
+                    describe_main,
+                    describe_space,
+                    describe_guest_access,
+                    describe_interaction_with_guests,
+                    describe_other_things_to_note,
+                    address,
+                    img_url,
+                    city, } = curr;
 
-                    prev[home_id] = prev[home_id] || {
-                        home_id,
-                        home_name,
-                        price,
-                        max_guests,
-                        describe_main,
-                        describe_space,
-                        describe_guest_access,
-                        describe_interaction_with_guests,
-                        describe_other_things_to_note,
-                        address,
-                        city,
-                        imgs: []
-                    };
-                    prev[home_id].imgs.push({
-                        img_url,
-                        main: Boolean(curr.main_image)
-                    });
-                    return prev;
-                }, {});
-                let homeArray = Object.keys(reduced).map(key => reduced[key]);
+                prev[home_id] = prev[home_id] || {
+                    home_id,
+                    home_name,
+                    price,
+                    max_guests,
+                    describe_main,
+                    describe_space,
+                    describe_guest_access,
+                    describe_interaction_with_guests,
+                    describe_other_things_to_note,
+                    address,
+                    city,
+                    imgs: []
+                };
+                prev[home_id].imgs.push({
+                    img_url,
+                    main: Boolean(curr.main_image)
+                });
+                return prev;
+            }, {});
+            let homeArray = Object.keys(reduced).map(key => reduced[key]);
 
-                res.status(200).send(homeArray);
-            })
-            .catch(err => {
-                res.status(500).send(err)
-            })
+            res.status(200).send(homeArray);
+        })
+        .catch(err => {
+            res.status(500).send(err)
+        })
     },
+
+    // getHomesInCity: (req, res) => {
+
+    //     dbInstance = req.app.get('db');
+    //     let { city } = req.body;
+
+       
+    // },
 
     getOneHome: (req, res) => {
         dbInstance = req.app.get('db');

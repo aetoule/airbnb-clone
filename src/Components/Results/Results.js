@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 // import './App.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getAllHomes, getCityHomes } from '../../redux/reducer';
+import { getAllHomes, getCityHomes, getCity } from '../../redux/reducer';
 import { Link } from "react-router-dom";
-
 
 class Results extends Component {
   state = {
@@ -27,7 +26,9 @@ class Results extends Component {
   // }
 
   getResults() {
-    axios.get('/api/home-results').then(res => {
+    axios.post('/api/homes-results', {city: this.props.city}).then(res => {
+      console.log('getResultsfired')
+      console.log(res.data)
       this.props.getCityHomes(res.data)
     })
       .catch(err => {
@@ -36,6 +37,8 @@ class Results extends Component {
   }
 
   render() {
+    console.log(this.props.city);
+
     const { cityHomes } = this.props
     console.log(cityHomes);
     const mappedHomes = cityHomes.map(home => {
@@ -87,15 +90,17 @@ class Results extends Component {
 }
 
 const mapStateToProps = state => {
-  const { homes, cityHomes } = state;
+  const { homes, cityHomes, city } = state;
   return {
     homes,
-    cityHomes
+    cityHomes,
+    city
   }
 }
 
 const mapDispatchToProps = {
   getAllHomes,
-  getCityHomes
+  getCityHomes,
+  getCity
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

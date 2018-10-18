@@ -3,8 +3,8 @@ import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getStartDate, getEndDate} from '../../redux/reducer';
-
+import {getStartDate, getEndDate, getCity} from '../../redux/reducer';
+import axios from 'axios';
 
 
 class Home extends Component {
@@ -12,19 +12,29 @@ class Home extends Component {
         super(props);
         this.state = {
             startDate: '',
-            endDate: ''
+            endDate: '',
         }
+    
     }
+
     // componentDidMount() {
     //     this.props.getStartDate()
     // }
+    handleChange(event) {
+        // console.log(this.refs.city.value)
+        console.log(event.target.value)
+        console.log(this.props.getCity(event.target.value)) 
+        // this.props.(event)
+    }
     
     render() { 
-        console.log(this.props)
+        console.log(this.props.city)
+        // console.log(this.refs.city.value)
+        // console.log({value: event.target.value})
+
         console.log('this.state.startDate',this.state.startDate)
         console.log('this.state.endDate', this.state.endDate)
         const { getEndDate, getStartDate, endDate, startDate} = this.props;
-
         return (
             <div>
                 <DateRangePicker
@@ -45,19 +55,29 @@ class Home extends Component {
                     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                     />
-                    <Link to= '/results/2'>Link to results/2</Link>
+                    
+                    <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)}>
+                        <option value="Phoenix">Phoenix</option>
+                        <option value="Flagstaff">Flagstaff</option>
+                        <option value="Sedona">Sedona</option>
+                        <option value="Tucson">Tucson</option>
+                        <option value="Williams">Williams</option>
+                    </select>
+                            
+                    <Link to= '/results/'>Link to results</Link>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    const { startDate, endDate } = state;
+    const { startDate, endDate, city } = state;
     return {
-        startDate: startDate,
-        endDate
+        startDate,
+        endDate,
+        city
     }
 }
 
-export default connect (mapStateToProps, {getStartDate, getEndDate}) (Home);
+export default connect (mapStateToProps, {getStartDate, getEndDate, getCity}) (Home);
 
