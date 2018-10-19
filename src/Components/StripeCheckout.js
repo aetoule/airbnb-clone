@@ -25,7 +25,6 @@ class TakeMoney extends React.Component {
       <StripeCheckout
         token={this.onToken} // submit callback
         stripeKey= {process.env.REACT_APP_PUBLISHABLE_KEY}
-
         amount={this.props.total}
         />
         

@@ -9,7 +9,6 @@ import TakeMoney from '../StripeCheckout';
 class OneHome extends Component {
     constructor(props) {
         super(props);
-        // let houseId = this.props.match.params.id;
         this.state = {
             homeInfo: {},
             allHomesInCity: [],
@@ -20,22 +19,12 @@ class OneHome extends Component {
             serviceFee: 20,
             tax: 23,
             total: 0
-            // startDaate: {}
-            // startOrEndDate: ''
         }
     }
     componentDidMount() {
         this.getHouse()
         this.getSimilarHomes()
         this.getTripDuration()
-        // let startOrEndDate = (this.props.startDate._d || this.props.endDate._d)
-        // console.log('startOrEndDate', typeof startOrEndDate)
-
-        // this.setState({
-        //     // startOrEndDate: (this.props.startDate._d || this.props.endDate._d)
-        //     startDaate: this.props.startDate._d 
-        // })
-        // console.log('startOrEndDate', this.state.startOrEndDate)
     }
 
     getHouse() {
@@ -93,18 +82,15 @@ class OneHome extends Component {
 
     render() {
         console.log(this.state.currentHomeImgList);
-
         const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.state.homeInfo;
         const { total } = this.props;
         let mainImage = this.state.currentHomeImgList.map(e => {
             if (e.main == true) {
                 console.log(e.img_url);
-
                 return <img src={e.img_url} alt="main image" />
             } else {
                 ''
             }
-
 
         })
         let mappedSimilarListings = this.state.similarHomes.map(home => {
@@ -148,8 +134,6 @@ class OneHome extends Component {
                 <p>{describe_main}</p>
                 <h3>The space</h3>
                 <p>{describe_space}</p>
-                <h3>The space</h3>
-                <p>{describe_space}</p>
                 <h3>Guest access</h3>
                 <p>{describe_guest_access}</p>
                 <h3>Interaction with guests</h3>
@@ -163,16 +147,9 @@ class OneHome extends Component {
                 <p>Google map here</p>
                 <h2>Similar listings</h2>
                 {mappedSimilarListings}
+                <h2>Other images of current home</h2>
                 {mappedImages}
                 <p>{startDateString} to {endDateString}</p>
-
-                {/* <button onClick={() => this.setState({toggle: !this.state.toggle})} id='book-btn'>Book</button>
-                <div id="book-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                                <p>Text in modal</p>
-                    </div>
-                </div> */}
                 <TakeMoney />
 
             </div>

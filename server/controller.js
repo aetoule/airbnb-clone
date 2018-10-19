@@ -23,7 +23,6 @@ module.exports = {
             .catch(err => {
                 res.status(500).send(err)
             })
-
     },
 
     postDates: (req, res) => {

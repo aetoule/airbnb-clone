@@ -17,14 +17,12 @@ class Home extends Component {
 
     }
 
-    // componentDidMount() {
-    //     this.props.getStartDate()
-    // }
     handleChange(event) {
-        // console.log(this.refs.city.value)
-        console.log(event.target.value)
-        console.log(this.props.getCity(event.target.value))
-        // this.props.(event)
+        if(event.target.value == '') {
+            alert('Please select a city')
+        } else {
+            console.log(this.props.getCity(event.target.value))
+        }
     }
 
     render() {
@@ -55,8 +53,8 @@ class Home extends Component {
                     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                 />
-
-                <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)}>
+                <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
+                    <option value="">Select a City</option>
                     <option value="Phoenix">Phoenix</option>
                     <option value="Flagstaff">Flagstaff</option>
                     <option value="Sedona">Sedona</option>
