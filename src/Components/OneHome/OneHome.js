@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import PropTypes from 'prop-types';
 import './one-home.css';
-import {connect} from 'react-redux';
-import {getStartDate, getEndDate, getTotal} from '../../redux/reducer';
+import { connect } from 'react-redux';
+import { getStartDate, getEndDate, getTotal } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 
 class OneHome extends Component {
     constructor(props) {
         super(props);
         // let houseId = this.props.match.params.id;
-        this.state = { 
+        this.state = {
             homeInfo: {},
             allHomesInCity: [],
             similarHomes: [],
@@ -41,31 +41,33 @@ class OneHome extends Component {
     getHouse() {
         console.log(this.props.match.params.id)
         axios.get(`/api/home/${this.props.match.params.id}`)
-        .then(res => {
-            this.setState({
-                homeInfo: res.data[0]
-            })    
-        })
+            .then(res => {
+                this.setState({
+                    homeInfo: res.data[0]
+                })
+            })
     }
 
     getSimilarHomes() {
-        axios.post('/api/home-results', null)
-        .then(res => {
-            let allHomesWithCurrentHome = res.data
-            let allSimilarHomes = allHomesWithCurrentHome
-            console.log('allSimilarHomes', allSimilarHomes)
-            const idNumber  = allSimilarHomes.findIndex(e => {
-                return e.home_id == this.props.match.params.id
+        axios.post('/api/homes-results', { city: this.props.city })
+            .then(res => {
+                let allHomesWithCurrentHome = res.data
+                let allSimilarHomes = allHomesWithCurrentHome
+                console.log('allSimilarHomes', allSimilarHomes)
+                const idNumber = allSimilarHomes.findIndex(e => {
+                    return e.home_id == this.props.match.params.id
+                })
+                // right now the get one home is not getting the image array. So I'm using this endpoint to get the home info for this house to get access to the image array
+                let currentHomeImageArray = res.data[idNumber].imgs
+
+
+                console.log(currentHomeImageArray)
+                allSimilarHomes.splice(idNumber, 1)
+                this.setState({
+                    similarHomes: allSimilarHomes,
+                    currentHomeImgList: currentHomeImageArray
+                })
             })
-            // right now the get one home is not getting the image array. So I'm using this endpoint to get the home info for this house to get access to the image array
-            let currentHomeImageArray = res.data[0].imgs
-            console.log(currentHomeImageArray)
-            allSimilarHomes.splice(idNumber, 1)
-            this.setState({
-                similarHomes: allSimilarHomes,
-                currentHomeImgList: currentHomeImageArray
-            })
-        })
     }
 
     getTripDuration() {
@@ -76,12 +78,12 @@ class OneHome extends Component {
                 tripLength: res.data[0].date_part
             })
         })
-        
+
     }
 
     // getTotal() {
     //     console.log('fired')
-        
+
     //     console.log()
     //     console.log(totalPrice)
     //     this.setState({total: totalPrice})
@@ -89,9 +91,22 @@ class OneHome extends Component {
     // }
 
 
-    render() { 
-        const {home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests,  describe_guest_access, city, address} = this.state.homeInfo;
-        const {total} = this.props;
+    render() {
+        console.log(this.state.currentHomeImgList);
+
+        const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.state.homeInfo;
+        const { total } = this.props;
+        let mainImage = this.state.currentHomeImgList.map(e => {
+            if (e.main == true) {
+                console.log(e.img_url);
+
+                return <img src={e.img_url} alt="main image" />
+            } else {
+                ''
+            }
+
+
+        })
         let mappedSimilarListings = this.state.similarHomes.map(home => {
             return (
                 <p><b>{home.home_name}</b></p>
@@ -99,7 +114,7 @@ class OneHome extends Component {
         })
         let mappedImages = this.state.currentHomeImgList.map(img => {
             return (
-                <img className="home-img" src={img.img_url}/>
+                <img className="home-img" src={img.img_url} />
             )
         })
         // get start date
@@ -119,12 +134,14 @@ class OneHome extends Component {
         this.props.getTotal(totalCents);
         console.log(total)
 
-        return ( 
+        return (
             <div className="one-home-entire-container">
                 <div className="search-bar-header">
+
                     {/* <input type='text'>Search</input> */}
                 </div>
-                <div className="img-carousel"></div>
+                <div className="im-carousel"></div>
+                <div>{mainImage}</div>
                 <h1>{home_name}</h1>
                 <p>{city}</p>
                 <p>{max_guests} guests</p>
@@ -148,7 +165,7 @@ class OneHome extends Component {
                 {mappedSimilarListings}
                 {mappedImages}
                 <p>{startDateString} to {endDateString}</p>
-                
+
                 {/* <button onClick={() => this.setState({toggle: !this.state.toggle})} id='book-btn'>Book</button>
                 <div id="book-modal" class="modal">
                     <div class="modal-content">
@@ -156,7 +173,7 @@ class OneHome extends Component {
                                 <p>Text in modal</p>
                     </div>
                 </div> */}
-                <TakeMoney/>
+                <TakeMoney />
 
             </div>
         );
@@ -165,17 +182,18 @@ class OneHome extends Component {
 
 
 const mapStateToProps = state => {
-    const {startDate, endDate, total} = state;
+    const { startDate, endDate, total, city } = state;
     console.log(startDate)
     return {
         startDate,
         endDate,
-        total
+        total,
+        city
     }
 }
 
 
-export default connect (mapStateToProps, {getStartDate, getEndDate, getTotal}) (OneHome);
+export default connect(mapStateToProps, { getStartDate, getEndDate, getTotal })(OneHome);
 
 // OneHome.propTypes = {
 //     show: PropTypes.bool
