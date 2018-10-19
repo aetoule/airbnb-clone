@@ -49,23 +49,6 @@ class OneHome extends Component {
     }
 
     getSimilarHomes() {
-<<<<<<< HEAD
-        axios.post('/api/homes-results', {city: this.props.city})
-        .then(res => {
-            let allHomesWithCurrentHome = res.data
-            let allSimilarHomes = allHomesWithCurrentHome
-            console.log('allSimilarHomes', allSimilarHomes)
-            const idNumber  = allSimilarHomes.findIndex(e => {
-                return e.home_id == this.props.match.params.id
-            })
-            // right now the get one home is not getting the image array. So I'm using this endpoint to get the home info for this house to get access to the image array
-            let currentHomeImageArray = res.data[idNumber].imgs
-            console.log(currentHomeImageArray)
-            allSimilarHomes.splice(idNumber, 1)
-            this.setState({
-                similarHomes: allSimilarHomes,
-                currentHomeImgList: currentHomeImageArray
-=======
         axios.post('/api/homes-results', { city: this.props.city })
             .then(res => {
                 let allHomesWithCurrentHome = res.data
@@ -84,7 +67,6 @@ class OneHome extends Component {
                     similarHomes: allSimilarHomes,
                     currentHomeImgList: currentHomeImageArray
                 })
->>>>>>> 3c8abc835babf9f8f24a7aa6e78e7bf6501e9ad8
             })
     }
 
@@ -158,13 +140,8 @@ class OneHome extends Component {
 
                     {/* <input type='text'>Search</input> */}
                 </div>
-<<<<<<< HEAD
-                <div className="igm-carousel"></div>
-                {/* <img src={}/> */}
-=======
                 <div className="im-carousel"></div>
                 <div>{mainImage}</div>
->>>>>>> 3c8abc835babf9f8f24a7aa6e78e7bf6501e9ad8
                 <h1>{home_name}</h1>
                 <p>{city}</p>
                 <p>{max_guests} guests</p>
@@ -205,11 +182,7 @@ class OneHome extends Component {
 
 
 const mapStateToProps = state => {
-<<<<<<< HEAD
-    const {startDate, endDate, total, city} = state;
-=======
     const { startDate, endDate, total, city } = state;
->>>>>>> 3c8abc835babf9f8f24a7aa6e78e7bf6501e9ad8
     console.log(startDate)
     return {
         startDate,
