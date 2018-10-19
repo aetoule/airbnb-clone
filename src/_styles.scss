@@ -7,21 +7,30 @@ $orange: #FC642D;
 $black: #484848;
 $gray: #767676;
 
-// titles
+// @font-face {
+//     font-family: AirbnbCereal;
+//     src: url('/src/Cereal_Airbnb_Typeface/AirbnbCereal-Bold.ttf') format('truetype');
+//     font-style: normal;
+//     font-weight: 100;
+//   }
+
+// fonts
 h1 {
     font-size: 56px;
-    color: $black
+    color: $black;
+    // font-family: AirbnbCereal, sans-serif;
+    font-weight: 100;
 }
 
 //
 h2 {
     font-size: 36px;
-    color: $black
+    color: $black;
 }
 
 h3 {
     font-size: 28px;
-    color: $black
+    color: $black;
 }
 
 // green text
@@ -31,5 +40,5 @@ h4 {
 }
 p {
     color: $black;
-    
+
 }

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getStartDate, getEndDate, getCity } from '../../redux/reducer';
 import axios from 'axios';
+import './Home.css';
 
 
 class Home extends Component {
@@ -35,6 +36,7 @@ class Home extends Component {
         const { getEndDate, getStartDate, endDate, startDate } = this.props;
         return (
             <div>
+                <h1>HI ABCD</h1>
                 <DateRangePicker
                     startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                     startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
