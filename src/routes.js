@@ -5,6 +5,7 @@ import Results from './Components/Results/Results';
 import OneHome from './Components/OneHome/OneHome';
 import Checkout from './Components/Checkout/Checkout';
 import Confirmation from './Components/Confirmation/Confirmation';
+import BookingDetails from './Components/BookingDetails/BookingDetails';
 
 export default(
     <Switch>
@@ -13,6 +14,7 @@ export default(
         <Route component={OneHome} exact path="/results/:id" />
         <Route component={Checkout} exact path="/checkout" />
         <Route component={Confirmation} exact path="/confirmation" />
+        <Route component={BookingDetails} exact path="/booking-details/:id" />
 
     </Switch> 
 )

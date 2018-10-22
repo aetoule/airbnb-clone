@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 class Confirmation extends Component {
     constructor(props) {
         super(props);
@@ -9,7 +11,9 @@ class Confirmation extends Component {
         console.log(this.props.userEmail);
 
         return (
-            <div>Thanks 4 ur shit man</div>
+            <div>Have a great trip!
+            <Link to='/results/'><button className="search-btn">Back to results</button></Link>
+            </div>
         );
     }
 }

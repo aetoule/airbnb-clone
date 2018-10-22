@@ -3,6 +3,8 @@
 
 @mixin searchButton {
     background: #FF5A5F;
+    border-style: none;
+    border-radius: 5px;
     color: white;
     font-size: 18px;
     width: 315px;

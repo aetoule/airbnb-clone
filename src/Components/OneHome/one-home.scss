@@ -20,6 +20,14 @@
     .small-space {
         height: 10px;
     }
+
+    .book-btn {
+        @include searchButton;
+        margin: 0 auto;
+    }
+    .oneHome-right-side-container {
+        display: none;
+    }
     footer {
         background:white;
         position: fixed;
