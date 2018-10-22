@@ -7,7 +7,7 @@ import { getStartDate, getEndDate, getTotal } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 import ImageGallery from 'react-image-gallery';
 import { start } from 'pretty-error';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import GoogleMap from '../GoogleMap/GoogleMap';
 
 
@@ -84,7 +84,7 @@ class OneHome extends Component {
                 <p><b>{home.home_name}</b></p>
             )
         })
-    
+
         //  get start date
         let startDay = this.props.startDate._d.getDate()
         let startMonth = this.props.startDate._d.getMonth() + 1
@@ -105,13 +105,13 @@ class OneHome extends Component {
         console.log(totalCents)
         this.props.getTotal(totalCents)
 
-        let pushedImgs = this.state.currentHomeImgList.map( img => {
-            return img.img_url;  
+        let pushedImgs = this.state.currentHomeImgList.map(img => {
+            return img.img_url;
         })
         let pushedWithText = [];
         for (let i = 0; i < pushedImgs.length; i++) {
             // let obj = {src: pushedImgs[i]}
-            let obj = {original: pushedImgs[i]}
+            let obj = { original: pushedImgs[i] }
             pushedWithText.push(obj)
         }
         return (
@@ -119,7 +119,7 @@ class OneHome extends Component {
                 <div className="search-bar-header">
                 </div>
                 <div className="oneHome-img-gallery">
-                <ImageGallery items={pushedWithText} />
+                    <ImageGallery items={pushedWithText} />
                 </div>
 
                 <div className="oneHome-left-and-right-container">
@@ -138,7 +138,7 @@ class OneHome extends Component {
                         <p>{describe_other_things_to_note}</p>
                         <hr></hr>
                         <h3>Amenities</h3>
-                        
+
                         <h5>Similar listings</h5>
                         {mappedSimilarListings}
                         {/* {mappedImagesOfCurrHouse} */}
@@ -148,7 +148,7 @@ class OneHome extends Component {
                         <hr></hr>
                         <h6>{this.props.total}</h6>
                         <div className="trip-dates-box">
-                            {/* <p>{startDateString} to {endDateString}</p> */}           
+                            {/* <p>{startDateString} to {endDateString}</p> */}
                         </div>
                         <div className="trip-costs-list">
                             <div className="list-price-times-days">
@@ -174,7 +174,7 @@ class OneHome extends Component {
                         <h5>The neighborhood</h5>
                         <p>This home is located in {city}</p>
                         <p>Google map here</p>
-                        <GoogleMap/>
+                        <GoogleMap />
                     </div>
                     <footer>Sticky Footer</footer>
                 </div>
@@ -201,10 +201,10 @@ const mapStateToProps = state => {
 // export default connect(mapStateToProps, {getTotal })(OneHome);
 
 //real one:
-export default  connect(mapStateToProps, { getStartDate, getEndDate, getTotal })(OneHome) 
+export default connect(mapStateToProps, { getStartDate, getEndDate, getTotal })(OneHome)
 GoogleApiWrapper({
     apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
-  });
+});
 
 
 // OneHome.propTypes = {

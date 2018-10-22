@@ -11,24 +11,23 @@ class Results extends Component {
   }
 
   componentDidMount() {
-    // this.getHomes()
+    this.getHomes()
     this.getResults()
 
   }
 
-  // getHomes() {
-  //   axios.get('/api/homes').then(res => {
-  //     this.props.getAllHomes(res.data)
-  //   })
-  //     .catch(err => {
-  //       console.log('err', err)
-  //     })
-  // }
+  getHomes() {
+    axios.get('/api/homes').then(res => {
+      this.props.getAllHomes(res.data)
+    })
+      .catch(err => {
+        console.log('err', err)
+      })
+  }
 
   getResults() {
-    axios.post('/api/homes-results', {city: this.props.city}).then(res => {
-      console.log('getResultsfired')
-      console.log(res.data)
+    axios.post('/api/homes-results', { city: this.props.city }).then(res => {
+
       this.props.getCityHomes(res.data)
     })
       .catch(err => {
@@ -39,20 +38,46 @@ class Results extends Component {
   render() {
     console.log(this.props.city);
 
+    const home = !this.props.city ?
+      this.props.homes.map(e => {
+        return (
+          <div key={e.home_id}>
+            <div>
+              {e.imgs.map(img => {
+
+                return img.main ?
+                  <Link to={`/results/${e.home_id}`}>
+                    <img className='results-images' src={img.img_url} alt="homes main image" />
+                  </Link>
+                  : ""
+              })}
+            </div>
+            <div>
+              <h5>
+                {e.max_guests} Guests
+              </h5>
+              <h4>
+                {e.home_name}
+              </h4>
+              <h5>
+                ${e.price} per night
+              </h5>
+            </div>
+          </div>
+        )
+      })
+      : ''
     const { cityHomes } = this.props
-    console.log(cityHomes);
     const mappedHomes = cityHomes.map(home => {
-      console.log(home.home_id);
 
       return (
         <div key={home.home_id}>
           <div>
             {home.imgs.map(img => {
-              console.log(img.main);
-              console.log(img.img_url);
+
               return img.main ?
                 <Link to={`/results/${home.home_id}`}>
-                  <img src={img.img_url} alt="homes main image" />
+                  <img className='results-images' src={img.img_url} alt="homes main image" />
                 </Link>
                 : ""
             })}
@@ -75,6 +100,7 @@ class Results extends Component {
 
     return (
       <div className="Results">
+
         <div className='users-dates'>
           <div>
             start date-end date
@@ -83,6 +109,7 @@ class Results extends Component {
         <div>
           200+ Homes...
         </div>
+        {home}
         {mappedHomes}
       </div>
     );

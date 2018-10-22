@@ -18,11 +18,10 @@ class Home extends Component {
 
 
     handleChange(event) {
-        if(event.target.value == '') {
-            alert('Please select a city')
-        } else {
-            console.log(this.props.getCity(event.target.value))
-        }
+        // console.log(this.refs.city.value)
+        // console.log(event.target.value)
+        this.props.getCity(event.target.value)
+        // this.props.(event)
     }
 
     render() {
@@ -37,7 +36,7 @@ class Home extends Component {
                     <br></br>
 
                 </div>
-            
+
                 <div className='home-filter-container'>
                     <h6 className="home-box-titles">WHERE</h6>
                     <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
@@ -50,27 +49,27 @@ class Home extends Component {
                     </select>
                     <h6 className="home-box-titles">DATES</h6>
                     <DateRangePicker
-                    startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                    startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-                    endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                    endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-                    onDatesChange={({ startDate, endDate }) => this.setState(() => {
-                        getStartDate(startDate)
-                        getEndDate(endDate)
-                        return {
-                            startDate,
-                            endDate
-                        }
-                    })}
+                        startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                        startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                        endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                        endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+                        onDatesChange={({ startDate, endDate }) => this.setState(() => {
+                            getStartDate(startDate)
+                            getEndDate(endDate)
+                            return {
+                                startDate,
+                                endDate
+                            }
+                        })}
 
-                    // PropTypes.func.isRequired,
-                    focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                    onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-                />
+                        // PropTypes.func.isRequired,
+                        focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                        onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+                    />
 
                     <Link to='/results/'><button className="search-btn">Search</button></Link>
                 </div>
-                
+
             </div>
         );
     }

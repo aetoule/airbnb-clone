@@ -23,13 +23,13 @@ app.post('/api/getdays', controller.postDates)
 app.post('/api/homes-results', controller.postCity)
 
 app.post("/charge", (req, res) => {
-  // let amount = 500;
 
   stripe.customers.create({
     email: req.body.stripeEmail,
     source: req.body.stripeToken
   })
     .then(customer =>
+
       stripe.charges.create({
         amount: req.body.total,
         description: "Sample Charge",
@@ -42,7 +42,7 @@ app.post("/charge", (req, res) => {
 // Nodemailer
 // var transport = {
 //   host: 'smtp.gmail.com',
-  
+
 //   auth: {
 //     user: creds.USER,
 //     pass: creds.PASS

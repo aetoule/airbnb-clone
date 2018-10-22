@@ -5,7 +5,8 @@ const initialState = {
     startDate: '',
     endDate: '',
     total: 0,
-    city: ''
+    city: '',
+    userEmail: []
     // guests: 0
 }
 
@@ -15,6 +16,7 @@ const GET_START_DATE = "GET_START_DATE";
 const GET_END_DATE = "GET_END_DATE";
 const GET_TOTAL = "GET_TOTAL";
 const GET_CITY = "GET_CITY";
+const GET_USERS_EMAIL = 'GET_USERS_EMAIL';
 
 
 export default function reducer(state = initialState, action) {
@@ -23,14 +25,16 @@ export default function reducer(state = initialState, action) {
             return { ...state, homes: action.payload }
         case GET_CITY_HOMES:
             return { ...state, cityHomes: action.payload }
-        case GET_START_DATE: 
-            return {...state, startDate: action.payload}
-        case GET_END_DATE: 
-            return {...state, endDate: action.payload}   
+        case GET_START_DATE:
+            return { ...state, startDate: action.payload }
+        case GET_END_DATE:
+            return { ...state, endDate: action.payload }
         case GET_TOTAL:
-            return {...state, total: action.payload}
+            return { ...state, total: action.payload }
         case GET_CITY:
-            return {...state, city: action.payload}
+            return { ...state, city: action.payload }
+        case GET_USERS_EMAIL:
+            return { ...state, userEmail: action.payload }
         default:
             return { ...state }
     }
@@ -51,7 +55,7 @@ export function getCityHomes(cityHomes) {
 }
 
 export function getStartDate(startDate) {
-    console.log('startDate in getStartDate reducer', typeof startDate);
+    // console.log('startDate in getStartDate reducer', typeof startDate);
     return {
         type: GET_START_DATE,
         payload: startDate
@@ -59,7 +63,7 @@ export function getStartDate(startDate) {
 }
 
 export function getEndDate(endDate) {
-    console.log('endDate in getEndDate reducer', endDate);
+    // console.log('endDate in getEndDate reducer', endDate);
     return {
         type: GET_END_DATE,
         payload: endDate
@@ -77,5 +81,12 @@ export function getCity(city) {
     return {
         type: GET_CITY,
         payload: city
+    }
+}
+
+export function getUsersEmail(userEmail) {
+    return {
+        type: GET_USERS_EMAIL,
+        payload: userEmail
     }
 }
