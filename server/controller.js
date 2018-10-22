@@ -27,9 +27,11 @@ module.exports = {
     },
 
     postDates: (req, res) => {
+        console.log(req.body);
+
         dbInstance = req.app.get('db');
-        const { startDate, endDate } = req.body;
-        dbInstance.calculate_diff_of_days(startDate, endDate)
+        const { start_date, end_date } = req.body;
+        dbInstance.calculate_diff_of_days(start_date, end_date)
             .then(days => {
                 res.status(200).send(days)
             })

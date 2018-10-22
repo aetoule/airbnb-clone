@@ -39,7 +39,7 @@ class OneHome extends Component {
     }
 
     getHouse() {
-        console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
         axios.get(`/api/home/${this.props.match.params.id}`)
             .then(res => {
                 this.setState({
@@ -53,7 +53,7 @@ class OneHome extends Component {
             .then(res => {
                 let allHomesWithCurrentHome = res.data
                 let allSimilarHomes = allHomesWithCurrentHome
-                console.log('allSimilarHomes', allSimilarHomes)
+                // console.log('allSimilarHomes', allSimilarHomes)
                 const idNumber = allSimilarHomes.findIndex(e => {
                     return e.home_id == this.props.match.params.id
                 })
@@ -61,7 +61,7 @@ class OneHome extends Component {
                 let currentHomeImageArray = res.data[idNumber].imgs
 
 
-                console.log(currentHomeImageArray)
+
                 allSimilarHomes.splice(idNumber, 1)
                 this.setState({
                     similarHomes: allSimilarHomes,
@@ -71,9 +71,8 @@ class OneHome extends Component {
     }
 
     getTripDuration() {
-        console.log('fired')
-        axios.post('/api/getdays', {}).then(res => {
-            console.log(res.data[0].date_part)
+
+        axios.post('/api/getdays', { start_date: this.props.endDate, end_date: this.props.startDate }).then(res => {
             this.setState({
                 tripLength: res.data[0].date_part
             })
@@ -92,13 +91,11 @@ class OneHome extends Component {
 
 
     render() {
-        console.log(this.state.currentHomeImgList);
-
         const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.state.homeInfo;
         const { total } = this.props;
         let mainImage = this.state.currentHomeImgList.map(e => {
             if (e.main == true) {
-                console.log(e.img_url);
+
 
                 return <img src={e.img_url} alt="main image" />
             } else {
@@ -132,7 +129,7 @@ class OneHome extends Component {
         let totalPrice = this.state.serviceFee + this.state.tax + (this.state.tripLength * this.state.homeInfo.price);
         let totalCents = totalPrice * 100
         this.props.getTotal(totalCents);
-        console.log(total)
+        // console.log(total)
 
         return (
             <div className="one-home-entire-container">
@@ -183,7 +180,7 @@ class OneHome extends Component {
 
 const mapStateToProps = state => {
     const { startDate, endDate, total, city } = state;
-    console.log(startDate)
+    // console.log(startDate)
     return {
         startDate,
         endDate,

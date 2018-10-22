@@ -26,9 +26,8 @@ class Results extends Component {
   // }
 
   getResults() {
-    axios.post('/api/homes-results', {city: this.props.city}).then(res => {
-      console.log('getResultsfired')
-      console.log(res.data)
+    axios.post('/api/homes-results', { city: this.props.city }).then(res => {
+
       this.props.getCityHomes(res.data)
     })
       .catch(err => {
@@ -37,19 +36,15 @@ class Results extends Component {
   }
 
   render() {
-    console.log(this.props.city);
 
     const { cityHomes } = this.props
-    console.log(cityHomes);
     const mappedHomes = cityHomes.map(home => {
-      console.log(home.home_id);
 
       return (
         <div key={home.home_id}>
           <div>
             {home.imgs.map(img => {
-              console.log(img.main);
-              console.log(img.img_url);
+
               return img.main ?
                 <Link to={`/results/${home.home_id}`}>
                   <img src={img.img_url} alt="homes main image" />
