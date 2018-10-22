@@ -40,7 +40,7 @@ class OneHome extends Component {
             })
     }
     getSimilarHomes() {
-        axios.post('/api/homes-results', { city: this.props.city })
+        axios.get('/api/homes')
             .then(res => {
                 let allHomesWithCurrentHome = res.data
                 let allSimilarHomes = allHomesWithCurrentHome
@@ -48,10 +48,10 @@ class OneHome extends Component {
                     return e.home_id == this.props.match.params.id
                 })
                 // right now the get one home is not getting the image array. So I'm using this endpoint to get the home info for this house to get access to the image array
-                let currentHomeImageArray = res.data[idNumber].imgs
+                const currentHomeImageArray = res.data[idNumber].imgs
                 allSimilarHomes.splice(idNumber, 1)
                 this.setState({
-                    similarHomes: allSimilarHomes,
+                    // similarHomes: allSimilarHomes,
                     currentHomeImgList: currentHomeImageArray
                 })
             })

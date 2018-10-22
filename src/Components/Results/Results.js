@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { getAllHomes, getCityHomes, getCity } from '../../redux/reducer';
 import { Link } from "react-router-dom";
+import Search from '../Search/Search'
 
 class Results extends Component {
   state = {
@@ -14,6 +15,13 @@ class Results extends Component {
     this.getHomes()
     this.getResults()
 
+
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.city !== prevProps.city) {
+      this.getResults(this.props.city)
+    }
   }
 
   getHomes() {
@@ -103,6 +111,7 @@ class Results extends Component {
 
         <div className='users-dates'>
           <div>
+            <Search  > </Search>
             start date-end date
         </div>
         </div>

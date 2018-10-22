@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getStartDate, getEndDate, getCity } from '../../redux/reducer';
 import axios from 'axios';
 import './Home.css';
+import Search from '../Search/Search'
 
 class Home extends Component {
     constructor(props) {
@@ -36,8 +37,10 @@ class Home extends Component {
                     <br></br>
 
                 </div>
-
-                <div className='home-filter-container'>
+                <div>
+                    <Search />
+                </div>
+                {/* <div className='home-filter-container'>
                     <h6 className="home-box-titles">WHERE</h6>
                     <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
                         <option value="">Select a City</option>
@@ -68,7 +71,7 @@ class Home extends Component {
                     />
 
                     <Link to='/results/'><button className="search-btn">Search</button></Link>
-                </div>
+                </div> */}
 
             </div>
         );
