@@ -60,9 +60,26 @@ module.exports = {
             })
     },
 
+    // postDates: (req, res) => {
+    //     dbInstance = req.app.get('db');
+    //     const { start_date, end_date } = req.body;
+    //     console.log('from postDates', req.body)
+    //     dbInstance.calculate_diff_of_days(end_date, start_date)
+    //         .then(days => {
+    //             res.status(200).send(days)
+    //         })
+
+    //         .catch(err => {
+    //             res.status(500).send(err)
+    //         })
+
+    //         .catch(err => {
+    //             res.status(500).send(err)
+    //         })
+    // },
+
     postDates: (req, res) => {
         console.log(req.body);
-
         dbInstance = req.app.get('db');
         const { start_date, end_date } = req.body;
         dbInstance.calculate_diff_of_days(start_date, end_date)
@@ -81,7 +98,7 @@ module.exports = {
 
 
     postCity: (req, res) => {
-        console.log(req.body)
+        // console.log(req.body)
         const { city } = req.body;
         dbInstance = req.app.get('db');
         dbInstance.get_homes_in_one_city(city)
