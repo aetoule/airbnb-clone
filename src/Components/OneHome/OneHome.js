@@ -210,7 +210,3 @@ GoogleApiWrapper({
 // OneHome.propTypes = {
 //     show: PropTypes.bool
 //   }
-
-// export default GoogleApiWrapper({
-//     apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
-//   })(Contact)
