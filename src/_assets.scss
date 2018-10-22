@@ -1,1 +1,10 @@
 // buttons, boxes, etc
+// @import '../../styles';
+
+@mixin searchButton {
+    background: #FF5A5F;
+    color: white;
+    font-size: 18px;
+    width: 315px;
+    height: 50px;
+}

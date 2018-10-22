@@ -1,26 +1,6 @@
-// h1 {
-//     font-family: 'AirbnbCereal', san-serif;
-// }
-
-// @font-face {
-//     font-family: "AirbnbCereal";
-//     src: url(../../Cereal_Airbnb_Typeface/AirbnbCereal-Black.ttf) format ("ttf");
-// }
+@import '../../styles';
+@import '../../assets';
 @import "node_modules/react-image-gallery/styles/scss/image-gallery.scss";
-
-
-.one-home-entire-container {
-    padding: 0 80px;
-}
-
-.img-carousel {
-    background-image: url(../../media/toa-heftiba-644507-unsplash.jpg);
-    height: 31vh;
-    width: 100vw;
-    object-fit: cover;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
 
 .image-gallery-thumbnail.active {
     display: none;
@@ -29,72 +9,70 @@
 .image-gallery-play-button {
     display: none;
 }
-
-.search-bar-header{
-    height: 60px;
-    width: 100vw;
-    background-color: lightblue;
+.image-gallery-fullscreen-button::before, .image-gallery-play-button::before {
+    display: none;
 }
 
-h1, h2, p, h3 {
-    text-align: left;
-}
-
-.small-space {
-    height: 10px;
-}
-
-.oneHome-left-and-right-container {
-    width: 100%;
-    .oneHome-left-side-container {
-        display: inline-block;
-        width: 47%;
-        vertical-align: top;
-
+@media (max-width: 770px) {
+    .oneHome-left-and-right-container {
+        padding: 0 30px;
     }
-    .oneHome-right-side-container{
-        background: pink;
-        // height:
-        width: 30%;
-        display: inline-block;
-        width: 40%
+    .small-space {
+        height: 10px;
     }
+    footer {
+        background:white;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 70px;
+        border-top: solid $gray 2px;
+    }
+    
 }
-
-
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+@media (min-width: 769px) {
+    .one-home-entire-container {
+        padding: 0 80px;
+    }
+    
+    .img-carousel {
+        background-image: url(../../media/toa-heftiba-644507-unsplash.jpg);
+        height: 31vh;
+        width: 100vw;
+        object-fit: cover;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    
+    .search-bar-header{
+        height: 60px;
+        width: 100vw;
+        background-color: lightblue;
+    }
+    
+    h1, h2, p, h3 {
+        text-align: left;
+    }
+    
+    .small-space {
+        height: 10px;
+    }
+    
+    .oneHome-left-and-right-container {
+        width: 100%;
+        .oneHome-left-side-container {
+            display: inline-block;
+            width: 47%;
+            vertical-align: top;
+    
+        }
+        .oneHome-right-side-container{
+            background: pink;
+            // height:
+            width: 30%;
+            display: inline-block;
+            width: 40%
+        }
+    }
 }

@@ -26,9 +26,54 @@ h4 {
 h5 {
   font-size: 24px; }
 
+h6 {
+  font-size: 14px;
+  color: #484848;
+  font-weight: 600; }
+
 p {
   font-size: 16px;
   color: #484848;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-style: normal; }
+
+.home-main-img {
+  background-image: url("../../media//marion-michele-770316-unsplash.jpg");
+  width: 100vw;
+  height: 40vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center; }
+  .home-main-img .home-h1 {
+    color: white;
+    padding-top: 30vh;
+    padding-left: 30px;
+    max-width: 80vw; }
+
+.home-filter-container {
+  max-width: 315px;
+  margin: 0 auto;
+  margin-top: 30px; }
+
+select {
+  font-size: 19px;
+  font-weight: 200;
+  line-height: 24px;
+  color: #484848;
+  padding: 11px 11px 9px;
+  margin: 10px 0;
+  border: 1px solid #dbdbdb;
+  border-radius: 2px; }
+
+.search-btn {
+  background: #FF5A5F;
+  color: white;
+  font-size: 18px;
+  width: 315px;
+  height: 50px;
+  margin: 10px 0; }
+
+.home-box-titles {
+  margin: 10px 0; }

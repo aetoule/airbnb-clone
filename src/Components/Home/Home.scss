@@ -1,2 +1,48 @@
 @import '../../styles';
+@import '../../assets';
 
+.home-main-img {
+    background-image: url('../../media//marion-michele-770316-unsplash.jpg');
+    width: 100vw;
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center;
+    // position
+    .home-h1 {
+        color: white;
+        padding-top: 30vh;
+        padding-left: 30px;
+        max-width: 80vw;
+    }
+}
+
+.home-filter-container {
+    max-width: 315px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+select {
+    font-size: 19px;
+    font-weight: 200;
+    line-height: 24px;
+    color: $black;
+    // background: lightpink;
+    padding: 11px 11px 9px;
+    // border: solid $black 1px;
+    // border: 2px solid transparent;
+    margin: 10px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 2px;
+}
+
+.search-btn {
+    @include searchButton;
+    margin: 10px 0;
+}
+
+.home-box-titles {
+    margin: 10px 0;
+}
