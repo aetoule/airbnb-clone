@@ -6,6 +6,12 @@
 //     font-family: "AirbnbCereal";
 //     src: url(../../Cereal_Airbnb_Typeface/AirbnbCereal-Black.ttf) format ("ttf");
 // }
+@import "node_modules/react-image-gallery/styles/scss/image-gallery.scss";
+
+
+.one-home-entire-container {
+    padding: 0 80px;
+}
 
 .img-carousel {
     background-image: url(../../media/toa-heftiba-644507-unsplash.jpg);
@@ -16,15 +22,45 @@
     background-repeat: no-repeat;
 }
 
+.image-gallery-thumbnail.active {
+    display: none;
+}
+
+.image-gallery-play-button {
+    display: none;
+}
+
 .search-bar-header{
     height: 60px;
     width: 100vw;
     background-color: lightblue;
 }
 
-h1, h2, p {
+h1, h2, p, h3 {
     text-align: left;
 }
+
+.small-space {
+    height: 10px;
+}
+
+.oneHome-left-and-right-container {
+    width: 100%;
+    .oneHome-left-side-container {
+        display: inline-block;
+        width: 47%;
+        vertical-align: top;
+
+    }
+    .oneHome-right-side-container{
+        background: pink;
+        // height:
+        width: 30%;
+        display: inline-block;
+        width: 40%
+    }
+}
+
 
 .modal {
     display: none; /* Hidden by default */

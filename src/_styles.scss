@@ -7,19 +7,19 @@ $orange: #FC642D;
 $black: #484848;
 $gray: #767676;
 
-// @font-face {
-//     font-family: AirbnbCereal;
-//     src: url('/src/Cereal_Airbnb_Typeface/AirbnbCereal-Bold.ttf') format('truetype');
-//     font-style: normal;
-//     font-weight: 100;
-//   }
+@font-face {
+    font-family: recta;
+    src: url('/src/TestBlueberryFont/Recta-Regular.otf') format('opentype');
+  }
 
 // fonts
 h1 {
-    font-size: 56px;
+    font-size: 32px;
     color: $black;
-    // font-family: AirbnbCereal, sans-serif;
-    font-weight: 100;
+    font-family: 'Montserrat', sans-serif;    
+    font-weight: 700;
+    font-style: normal;
+    padding: 10px 0;
 }
 
 //
@@ -28,9 +28,12 @@ h2 {
     color: $black;
 }
 
+// for small description headers
 h3 {
-    font-size: 28px;
+    font-size: 18px;
     color: $black;
+    font-weight: 600;
+    padding: 15px 0;
 }
 
 // green text
@@ -38,7 +41,16 @@ h4 {
     color: $green;
 
 }
-p {
-    color: $black;
 
+// for big sub headings 
+h5 {
+    font-size: 24px;
+
+}
+p {
+    font-size: 16px;
+    color: $black;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }

@@ -15,8 +15,8 @@ class Home extends Component {
             startDate: '',
             endDate: '',
         }
-
     }
+
 
     handleChange(event) {
         if(event.target.value == '') {
@@ -28,9 +28,6 @@ class Home extends Component {
 
     render() {
         console.log(this.props.city)
-        // console.log(this.refs.city.value)
-        // console.log({value: event.target.value})
-
         console.log('this.state.startDate', this.state.startDate)
         console.log('this.state.endDate', this.state.endDate)
         const { getEndDate, getStartDate, endDate, startDate } = this.props;
