@@ -27,7 +27,7 @@ class OneHome extends Component {
     }
     componentDidMount() {
         this.getHouse()
-        // this.getSimilarHomes()
+        this.getSimilarHomes()
         this.getTripDuration()
     }
 
@@ -68,6 +68,9 @@ class OneHome extends Component {
     }
 
     render() {
+        console.log(this.state.tripLength);
+        console.log(this.props.startDate);
+
         const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.state.homeInfo;
         // let mainImage = this.state.currentHomeImgList.map(e => {
         //     if (e.main == true) {
@@ -148,7 +151,7 @@ class OneHome extends Component {
                         <hr></hr>
                         <h6>{this.props.total}</h6>
                         <div className="trip-dates-box">
-                            {/* <p>{startDateString} to {endDateString}</p> */}
+                            <p>{startDateString} to {endDateString}</p>
                         </div>
                         <div className="trip-costs-list">
                             <div className="list-price-times-days">
