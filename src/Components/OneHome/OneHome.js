@@ -27,7 +27,7 @@ class OneHome extends Component {
     }
     componentDidMount() {
         this.getHouse()
-        this.getSimilarHomes()
+        // this.getSimilarHomes()
         this.getTripDuration()
     }
 
