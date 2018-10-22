@@ -91,6 +91,8 @@ class OneHome extends Component {
 
 
     render() {
+
+
         const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.state.homeInfo;
         const { total } = this.props;
         let mainImage = this.state.currentHomeImgList.map(e => {
@@ -129,11 +131,13 @@ class OneHome extends Component {
         let totalPrice = this.state.serviceFee + this.state.tax + (this.state.tripLength * this.state.homeInfo.price);
         let totalCents = totalPrice * 100
         this.props.getTotal(totalCents);
-        // console.log(total)
+        console.log(total)
 
         return (
             <div className="one-home-entire-container">
                 <div className="search-bar-header">
+
+
 
                     {/* <input type='text'>Search</input> */}
                 </div>
