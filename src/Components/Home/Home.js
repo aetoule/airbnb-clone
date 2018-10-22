@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getStartDate, getEndDate, getCity } from '../../redux/reducer';
 import axios from 'axios';
+import './Home.css';
 
 
 class Home extends Component {
@@ -17,9 +18,6 @@ class Home extends Component {
 
     }
 
-    // componentDidMount() {
-    //     this.props.getStartDate()
-    // }
     handleChange(event) {
         // console.log(this.refs.city.value)
         // console.log(event.target.value)
@@ -37,6 +35,7 @@ class Home extends Component {
         const { getEndDate, getStartDate, endDate, startDate } = this.props;
         return (
             <div>
+                <h1>HI ABCD</h1>
                 <DateRangePicker
                     startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                     startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
@@ -55,8 +54,8 @@ class Home extends Component {
                     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                 />
-
-                <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)}>
+                <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
+                    <option value="">Select a City</option>
                     <option value="Phoenix">Phoenix</option>
                     <option value="Flagstaff">Flagstaff</option>
                     <option value="Sedona">Sedona</option>
