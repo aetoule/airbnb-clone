@@ -3,13 +3,14 @@ import axios from 'axios';
 // import PropTypes from 'prop-types';
 import './one-home.css';
 import { connect } from 'react-redux';
-import { getStartDate, getEndDate, getTotal } from '../../redux/reducer';
+import { getStartDate, getEndDate, getTotal, getTripLength } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 import ImageGallery from 'react-image-gallery';
 import { start } from 'pretty-error';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import GoogleMap from '../GoogleMap/GoogleMap';
-
+import BookingDetails from '../BookingDetails/BookingDetails';
+import { Link } from 'react-router-dom';
 
 class OneHome extends Component {
     constructor(props) {
@@ -19,15 +20,13 @@ class OneHome extends Component {
             allHomesInCity: [],
             similarHomes: [],
             currentHomeImgList: [],
-            tripLength: 0,
+            // tripLength: 0,
             toggle: false,
-            serviceFee: 20,
-            tax: 23,
         }
     }
     componentDidMount() {
         this.getHouse()
-        // this.getSimilarHomes()
+        this.getSimilarHomes()
         this.getTripDuration()
     }
 
@@ -43,6 +42,7 @@ class OneHome extends Component {
         axios.get('/api/homes')
             .then(res => {
                 let allHomesWithCurrentHome = res.data
+                console.log(res.data)
                 let allSimilarHomes = allHomesWithCurrentHome
                 const idNumber = allSimilarHomes.findIndex(e => {
                     return e.home_id == this.props.match.params.id
@@ -60,9 +60,11 @@ class OneHome extends Component {
 
     getTripDuration() {
         axios.post('/api/getdays', { start_date: this.props.endDate, end_date: this.props.startDate }).then(res => {
-            this.setState({
-                tripLength: res.data[0].date_part
-            })
+            console.log('res.data[0].date_part',res.data[0].date_part)
+            this.props.getTripLength(res.data[0].date_part)
+            // this.setState({
+            //     tripLength: 
+            // })
         })
 
     }
@@ -86,19 +88,19 @@ class OneHome extends Component {
         })
 
         //  get start date
-        let startDay = this.props.startDate._d.getDate()
-        let startMonth = this.props.startDate._d.getMonth() + 1
-        let startYear = this.props.startDate._d.getFullYear()
-        let startDateString = startMonth + '/' + startDay + '/' + startYear;
+        // let startDay = this.props.startDate._d.getDate()
+        // let startMonth = this.props.startDate._d.getMonth() + 1
+        // let startYear = this.props.startDate._d.getFullYear()
+        // let startDateString = startMonth + '/' + startDay + '/' + startYear;
 
-        // get end date 
-        let endDay = this.props.endDate._d.getDate()
-        let endMonth = this.props.endDate._d.getMonth() + 1
-        let endYear = this.props.endDate._d.getFullYear()
-        let endDateString = endMonth + '/' + endDay + '/' + endYear;
+        // // get end date 
+        // let endDay = this.props.endDate._d.getDate()
+        // let endMonth = this.props.endDate._d.getMonth() + 1
+        // let endYear = this.props.endDate._d.getFullYear()
+        // let endDateString = endMonth + '/' + endDay + '/' + endYear;
 
 
-        let totalPrice = this.state.serviceFee + this.state.tax + (this.state.tripLength * this.state.homeInfo.price);
+        let totalPrice = this.state.serviceFee + this.state.tax + (this.props.tripLength * this.state.homeInfo.price);
         let totalCents = totalPrice * 100
         console.log(totalPrice)
         // this.props.getTotal(totalCents);
@@ -137,12 +139,15 @@ class OneHome extends Component {
                         <h3>Other things to note</h3>
                         <p>{describe_other_things_to_note}</p>
                         <hr></hr>
-                        <h3>Amenities</h3>
+                        {/* <h3>Amenities</h3>
 
                         <h5>Similar listings</h5>
-                        {mappedSimilarListings}
+                        {mappedSimilarListings} */}
                         {/* {mappedImagesOfCurrHouse} */}
                     </div>
+                    <h5>The neighborhood</h5>
+                        <p>This home is located in <b>{city}</b></p>
+                        <GoogleMap />
                     <div className="oneHome-right-side-container">
                         <h5>${price} per night</h5>
                         <hr></hr>
@@ -150,8 +155,9 @@ class OneHome extends Component {
                         <div className="trip-dates-box">
                             {/* <p>{startDateString} to {endDateString}</p> */}
                         </div>
+                        
                         <div className="trip-costs-list">
-                            <div className="list-price-times-days">
+                            {/* <div className="list-price-times-days">
                                 <p>${price} x {this.state.tripLength} nights</p>
                             </div>
                             <div className="list-cleaning-fee">
@@ -165,18 +171,25 @@ class OneHome extends Component {
                             </div>
                             <div className="list-total">
                                 <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
+                            </div> */}
 
-
+                            <TakeMoney />
+                        </div>
+                        
+                    </div>
+                    {!this.props.startDate 
+                    ?
+                    <div></div> :
+                        <div>
+                           <footer>
+                        <div>
+                            <Link to={`/booking-details/${this.props.match.params.id}`}><button className="book-btn">Book</button></Link>
                         </div>
 
-                        <TakeMoney />
-                        <h5>The neighborhood</h5>
-                        <p>This home is located in {city}</p>
-                        <p>Google map here</p>
-                        <GoogleMap />
+                    </footer> 
                     </div>
-                    <footer>Sticky Footer</footer>
+                    }
+                    
                 </div>
 
             </div>
@@ -186,14 +199,15 @@ class OneHome extends Component {
 
 
 const mapStateToProps = state => {
-    const { startDate, endDate, total, city } = state;
+    const { startDate, endDate, total, city, tripLength } = state;
     // const {total, city } = state;
 
     return {
         startDate,
         endDate,
         total,
-        city
+        city,
+        tripLength
     }
 }
 
@@ -201,7 +215,7 @@ const mapStateToProps = state => {
 // export default connect(mapStateToProps, {getTotal })(OneHome);
 
 //real one:
-export default connect(mapStateToProps, { getStartDate, getEndDate, getTotal })(OneHome)
+export default connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength })(OneHome)
 GoogleApiWrapper({
     apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
 });

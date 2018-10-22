@@ -52,7 +52,7 @@ class GoogleMap extends Component {
             left: '-41px',
             /* right: 0px; */
             /* bottom: 0px; */
-            top: '40%',
+            // top: '20%',
             /* top: -9%; */
             height: '310px',
             width: '310px',

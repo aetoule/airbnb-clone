@@ -6,7 +6,8 @@ const initialState = {
     endDate: '',
     total: 0,
     city: '',
-    userEmail: []
+    userEmail: [],
+    tripLength: 0
     // guests: 0
 }
 
@@ -17,7 +18,7 @@ const GET_END_DATE = "GET_END_DATE";
 const GET_TOTAL = "GET_TOTAL";
 const GET_CITY = "GET_CITY";
 const GET_USERS_EMAIL = 'GET_USERS_EMAIL';
-
+const GET_TRIP_LENGTH = 'GET_TRIP_LENGTH';
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -35,6 +36,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, city: action.payload }
         case GET_USERS_EMAIL:
             return { ...state, userEmail: action.payload }
+        case GET_TRIP_LENGTH:
+            return {...state, tripLength: action.payload}
         default:
             return { ...state }
     }
@@ -88,5 +91,13 @@ export function getUsersEmail(userEmail) {
     return {
         type: GET_USERS_EMAIL,
         payload: userEmail
+    }
+}
+
+
+export function getTripLength(tripLength) {
+    return {
+        type: GET_TRIP_LENGTH,
+        payload: tripLength
     }
 }
