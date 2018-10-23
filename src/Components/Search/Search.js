@@ -7,7 +7,7 @@ import { getStartDate, getEndDate, getCity } from '../../redux/reducer';
 import axios from 'axios';
 // import './Home.css';
 
-class Home extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,13 +76,15 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-  const { startDate, endDate, city } = state;
+  const { startDate, endDate, city, tripLength } = state;
   return {
     startDate,
     endDate,
-    city
+    city,
+    tripLength
+
   }
 }
 
-export default connect(mapStateToProps, { getStartDate, getEndDate, getCity })(Home);
+export default connect(mapStateToProps, { getStartDate, getEndDate, getCity })(Search);
 

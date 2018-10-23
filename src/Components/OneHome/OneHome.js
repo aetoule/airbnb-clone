@@ -11,6 +11,7 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import GoogleMap from '../GoogleMap/GoogleMap';
 import BookingDetails from '../BookingDetails/BookingDetails';
 import { Link } from 'react-router-dom';
+import Search from '../Search/Search'
 
 class OneHome extends Component {
     constructor(props) {
@@ -21,13 +22,16 @@ class OneHome extends Component {
             similarHomes: [],
             currentHomeImgList: [],
             // tripLength: 0,
-            toggle: false,
+            searchToggle: false,
         }
     }
     componentDidMount() {
         this.getHouse()
         this.getSimilarHomes()
         this.getTripDuration()
+        this.setState({
+            searchToggle: false
+        })
     }
 
     getHouse() {
@@ -60,7 +64,7 @@ class OneHome extends Component {
 
     getTripDuration() {
         axios.post('/api/getdays', { start_date: this.props.endDate, end_date: this.props.startDate }).then(res => {
-            console.log('res.data[0].date_part',res.data[0].date_part)
+            console.log('res.data[0].date_part', res.data[0].date_part)
             this.props.getTripLength(res.data[0].date_part)
             // this.setState({
             //     tripLength: 
@@ -72,6 +76,13 @@ class OneHome extends Component {
     render() {
         console.log(this.state.tripLength);
         console.log(this.props.startDate);
+
+        const ToggleSearchButton = this.state.searchToggle === true ? <div>
+            <button onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
+            <Search></Search>
+
+        </div> :
+            ''
 
         const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.state.homeInfo;
         // let mainImage = this.state.currentHomeImgList.map(e => {
@@ -119,6 +130,9 @@ class OneHome extends Component {
             let obj = { original: pushedImgs[i] }
             pushedWithText.push(obj)
         }
+
+
+
         return (
             <div className="one-home-entire-container">
                 <div className="search-bar-header">
@@ -149,16 +163,16 @@ class OneHome extends Component {
                         {/* {mappedImagesOfCurrHouse} */}
                     </div>
                     <h5>The neighborhood</h5>
-                        <p>This home is located in <b>{city}</b></p>
-                        <GoogleMap />
+                    <p>This home is located in <b>{city}</b></p>
+                    {/* <GoogleMap /> */}
                     <div className="oneHome-right-side-container">
                         <h5>${price} per night</h5>
                         <hr></hr>
                         <h6>{this.props.total}</h6>
                         <div className="trip-dates-box">
-                            <p>{startDateString} to {endDateString}</p>
+                            {/* <p>{startDateString} to {endDateString}</p> */}
                         </div>
-                        
+
                         <div className="trip-costs-list">
                             {/* <div className="list-price-times-days">
                                 <p>${price} x {this.state.tripLength} nights</p>
@@ -178,21 +192,28 @@ class OneHome extends Component {
 
                             <TakeMoney />
                         </div>
-                        
-                    </div>
-                    {!this.props.startDate 
-                    ?
-                    <div></div> :
-                        <div>
-                           <footer>
-                        <div>
-                            <Link to={`/booking-details/${this.props.match.params.id}`}><button className="book-btn">Book</button></Link>
-                        </div>
 
-                    </footer> 
                     </div>
+                    {!this.props.endDate
+                        ?
+                        <div>
+                            <footer>
+
+                                <button onClick={() => this.setState({ searchToggle: true })}>Select Dates</button>
+                            </footer>
+                            {ToggleSearchButton}
+                        </div>
+                        :
+                        <div>
+                            <footer>
+                                <div>
+                                    <Link onClick={() => this.getTripDuration()} to={`/booking-details/${this.props.match.params.id}`}><button className="book-btn">Book</button></Link>
+                                </div>
+
+                            </footer>
+                        </div>
                     }
-                    
+
                 </div>
 
             </div>
