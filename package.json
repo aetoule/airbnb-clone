@@ -30,6 +30,7 @@
     "react-stripe-checkout": "^2.6.3",
     "redux": "^4.0.1",
     "redux-promise-middleware": "^5.1.1",
+    "sinon": "^7.0.0",
     "stripe": "^6.12.1"
   },
   "scripts": {
@@ -38,6 +39,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "integration-test": "jest --watch Server/",
     "eject": "react-scripts eject"
   }
 }
