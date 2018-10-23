@@ -80,7 +80,7 @@ class GoogleMap extends Component {
                                 initialCenter={coords}
                                 style={style}
                                 >
-                                {/* <Circle
+                                <Circle
                                     radius={300}
                                     center={coords}
                                     onMouseover={() => console.log('mouseover')}
@@ -91,7 +91,7 @@ class GoogleMap extends Component {
                                     strokeWeight={5}
                                     fillColor='#FF0000'
                                     fillOpacity={0.2}
-                                /> */}
+                                />
                         
                                 <Marker onClick={this.onMarkerClick}
                                         name={'Current location'}

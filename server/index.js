@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const massive = require('massive');
 const controller = require('./controller');
 // const nodemailer = require('nodemailer');
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(bodyParser.json());
 
@@ -99,6 +100,12 @@ massive(process.env.CONNECTION_STRING).then(database => {
 }).catch(error => {
   console.log('-------------- database issue', error);
 });
+
+const path = require('path')
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+})
+
 
 const PORT = 4000;
 app.listen(PORT, () => console.log(`Server listening on port 4000`));

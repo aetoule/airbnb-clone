@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import PropTypes from 'prop-types';
 import './one-home.css';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getStartDate, getEndDate, getTotal, getTripLength } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 import ImageGallery from 'react-image-gallery';
-import { start } from 'pretty-error';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import GoogleMap from '../GoogleMap/GoogleMap';
-import BookingDetails from '../BookingDetails/BookingDetails';
-import { Link } from 'react-router-dom';
 import Search from '../Search/Search'
 
 class OneHome extends Component {
@@ -21,8 +18,6 @@ class OneHome extends Component {
             allHomesInCity: [],
             similarHomes: [],
             currentHomeImgList: [],
-            // tripLength: 0,
-            searchToggle: false,
         }
     }
     componentDidMount() {
@@ -236,13 +231,8 @@ const mapStateToProps = state => {
 }
 
 
-// export default connect(mapStateToProps, {getTotal })(OneHome);
+export default connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength })(OneHome);
 
-//real one:
-export default connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength })(OneHome)
-GoogleApiWrapper({
-    apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
-});
 
 
 // OneHome.propTypes = {

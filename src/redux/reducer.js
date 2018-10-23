@@ -7,7 +7,7 @@ const initialState = {
     total: 0,
     city: '',
     userEmail: [],
-    tripLength: 0
+    tripLength: 0,
     // guests: 0
 }
 
