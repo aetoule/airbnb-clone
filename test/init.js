@@ -1,11 +1,11 @@
-const massive = require('massive');
+const massive = require('massive')
 require('dotenv').config()
 
-let db;
+let dbPromise;
 
 module.exports = {
-    initDb(){
-        db = db || massive(process.env.TEST_CONNECTION_STRING);
-        return db;
-    }
+  initDb() {
+    dbPromise = dbPromise || massive(process.env.TEST_CONNECTION_STRING)
+    return dbPromise
+  }
 }
