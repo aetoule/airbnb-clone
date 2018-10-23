@@ -1,26 +1,79 @@
-const sinon = require('sinon');
-const testDb = require('../../test/init');
-const homeData = require('./homeData');
+const sinon = require('sinon')
+const testDb = require('../../Test/init')
+const toDoData = require('./homeData')
+
 
 describe('Unit Test', () => {
-    describe('Get', () => {
-        it('Should get all homes', () => {
-            const home = {
-                homeName: 'testing home (name)',
-                
-            }
-            const fakeDb = {
-                query: sinon.mock().withArgs(
-                    sinon.match.string,
-                    sinon.match({
-                        
-                    })
-                )
-            }
-            return homeData.getHomes(fakeDb, {
-                name: home_name
-            })
-        })
+  describe('Create', () => {
+    it("Should pass in created home", () => {
+      const home = {
+        home_name: 'home name',
+        price: 56,
+        max_guests: 2,
+        describe_main: 'main description',
+        describe_space: 'home space',
+        describe_guest_access: 'home guest acces',
+        describe_interaction_with_guests: 'home interations with guests',
+        describe_other_things_to_note: 'home describe other things to note',
+        address: 'home address',
+        city: 'home city'
+      }
+
+      const fakeDb = {
+        query: sinon.mock().withArgs(
+          sinon.match.string,
+          sinon.match({
+            home_name: home.name,
+            price: home.price,
+            max_guests: home.max_guest,
+            describe_main: home.describe_main,
+            describe_space: home.describe_space,
+            describe_guest_access: home.describe_guest_access,
+            describe_interaction_with_guests: home.describe_interaction_with_guests,
+            describe_other_things_to_note: home.describe_other_things_to_note,
+            address: home.address,
+            city: home.city
+          })
+        )
+      }
+      return toDoData.createHome(fakeDb, {
+        home_name: home.name,
+        price: home.price,
+        max_guests: home.max_guest,
+        describe_main: home.describe_main,
+        describe_space: home.describe_space,
+        describe_guest_access: home.describe_guest_access,
+        describe_interaction_with_guests: home.describe_interaction_with_guests,
+        describe_other_things_to_note: home.describe_other_things_to_note,
+        address: home.address,
+        city: home.city
+      })
     })
+  })
+
 })
+
+
+describe('Integration Test', () => {
+  let db
+  beforeAll(() => {
+    return testDb.initDb().then(dataBase => {
+      db = dataBase
+
+    })
+  })
+
+  describe('read', () => {
+    it('read homes', () => {
+      return toDoData.getHomes(db).then(homes => {
+        expect(homes.length).not.toEqual(0)
+
+      })
+
+    })
+  })
+
+})
+
+
 

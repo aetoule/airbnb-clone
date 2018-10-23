@@ -39,7 +39,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "integration-test": "jest --watch server/",
+    "integration-test": "jest --watch Server/",
     "eject": "react-scripts eject"
   }
 }
