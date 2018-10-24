@@ -148,26 +148,12 @@ class OneHome extends Component {
             marginLeft: 'auto',
             marginRight: 'auto',
         } 
-        let laatitude = 35.20048;
-        let loongitude = -111.65308;
-        console.log(typeof lat)
         let latNum = parseFloat(lat)
         let lngNum = parseFloat(long)
-
-        console.log(typeof latNum)
-        console.log(latNum) 
-        // console.log(typeof laatitude)
-        // console.log(laatitude) 
-
-        // const coords = { lat: latNum, lng: lngNum};
-        // const coords = {lat: laatitude, lng: loongitude}
-        console.log('coords', coords)
-        console.log('other coords', {lat: laatitude, lng: loongitude})
         const coords = { lat: latNum, lng: lngNum}
         const googleMap =
         <div><Map google={this.props.google} zoom={14}
         onClick = { this.onMapClick }
-
         initialCenter={coords}
         center={coords}
         style={style}
@@ -176,7 +162,6 @@ class OneHome extends Component {
         <Marker onClick={this.onMarkerClick}
         name={'Current location'}
         position = {coords}
-                //   position = {{ lat: 33.4508, lng: -112.09048 }}
         />
         </Map></div>
 
@@ -187,7 +172,6 @@ class OneHome extends Component {
                 <div className="oneHome-img-gallery">
                     <ImageGallery items={pushedWithText} />
                 </div>
-
                 <div className="oneHome-left-and-right-container">
                     <div className="oneHome-left-side-container">
                         <h1>{home_name}</h1>

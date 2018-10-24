@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getAllHomes, getCityHomes, getCity } from '../../redux/reducer';
 import { Link } from "react-router-dom";
 import Search from '../Search/Search'
+import Geocoding from '../Geocoding/Geocoding';
 
 class Results extends Component {
   state = {
@@ -44,7 +45,6 @@ class Results extends Component {
   }
 
   render() {
-    console.log(this.props.city);
 
     const home = !this.props.city ?
       this.props.homes.map(e => {
@@ -80,6 +80,7 @@ class Results extends Component {
 
       return (
         <div key={home.home_id}>
+          <Geocoding/>
           <div>
             {home.imgs.map(img => {
 
