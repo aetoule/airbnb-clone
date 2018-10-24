@@ -17,7 +17,9 @@ module.exports = {
                         describe_other_things_to_note,
                         address,
                         img_url,
-                        city, } = curr;
+                        city,
+                        lat,
+                        long } = curr;
 
                     prev[home_id] = prev[home_id] || {
                         home_id,
@@ -31,6 +33,8 @@ module.exports = {
                         describe_other_things_to_note,
                         address,
                         city,
+                        lat,
+                        long,
                         imgs: []
                     };
                     prev[home_id].imgs.push({
@@ -114,7 +118,9 @@ module.exports = {
                         describe_other_things_to_note,
                         address,
                         img_url,
-                        city, } = curr;
+                        city,
+                        lat,
+                        long } = curr;
 
                     prev[home_id] = prev[home_id] || {
                         home_id,
@@ -128,6 +134,8 @@ module.exports = {
                         describe_other_things_to_note,
                         address,
                         city,
+                        lat,
+                        long,
                         imgs: []
                     };
                     prev[home_id].imgs.push({

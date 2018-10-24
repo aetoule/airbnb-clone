@@ -31,6 +31,10 @@ insert into users
 values
 ('38ndnw2', 'John Doe', 'true')
 
+alter table home
+add lat numeric,
+add long numeric;
+
 insert into home
 (home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, host_id)
 values
