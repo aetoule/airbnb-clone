@@ -39,6 +39,9 @@ class Home extends Component {
                 </div>
                 <div>
                     <Search />
+                    <Link to="/get-started">
+                        <button>Host</button>
+                    </Link>
                 </div>
                 {/* <div className='home-filter-container'>
                     <h6 className="home-box-titles">WHERE</h6>
