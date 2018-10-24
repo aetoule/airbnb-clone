@@ -9,8 +9,6 @@ app.use(express.static(`${__dirname}/../build`));
 
 app.use(bodyParser.json());
 
-
-
 app.get('/api/homes', controller.getAllHomes)
 // app.get('/api/home-results', controller.getHomesInCity);
 app.get('/api/home/:id', controller.getOneHome);

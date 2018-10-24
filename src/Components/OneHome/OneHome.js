@@ -4,11 +4,12 @@ import axios from 'axios';
 import './one-home.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getStartDate, getEndDate, getTotal, getTripLength } from '../../redux/reducer';
+import { getStartDate, getEndDate, getTotal, getTripLength, getAllHomes } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 import ImageGallery from 'react-image-gallery';
-import GoogleMap from '../GoogleMap/GoogleMap';
-import Search from '../Search/Search'
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import Search from '../Search/Search';
+import {compose} from 'redux';
 
 class OneHome extends Component {
     constructor(props) {
@@ -18,7 +19,11 @@ class OneHome extends Component {
             allHomesInCity: [],
             similarHomes: [],
             currentHomeImgList: [],
+            activeMarker: {},
+            selectedPlace: {},
         }
+        this.onMarkerClick = this.onMarkerClick.bind(this);
+        this.onMapClick = this.onMapClick.bind(this);
     }
     componentDidMount() {
         this.getHouse()
@@ -29,14 +34,19 @@ class OneHome extends Component {
         })
     }
 
-    getHouse() {
-        axios.get(`/api/home/${this.props.match.params.id}`)
+    
+    async getHouse() {
+        
+        await axios.get(`/api/home/${this.props.match.params.id}`)
             .then(res => {
                 this.setState({
                     homeInfo: res.data[0]
                 })
-            })
+        })
+        
+        
     }
+
     getSimilarHomes() {
         axios.get('/api/homes')
             .then(res => {
@@ -59,36 +69,32 @@ class OneHome extends Component {
 
     getTripDuration() {
         axios.post('/api/getdays', { start_date: this.props.endDate, end_date: this.props.startDate }).then(res => {
-            console.log('res.data[0].date_part', res.data[0].date_part)
             this.props.getTripLength(res.data[0].date_part)
-            // this.setState({
-            //     tripLength: 
-            // })
         })
 
     }
+    onMarkerClick = (props, marker, e) => {
+        this.setState({
+          selectedPlace: props,
+          activeMarker: marker,
+        });
+      }
+      onMapClick = (props) => {
+        if (this.state.showingInfoWindow) {
+          this.setState({
+            activeMarker: null
+          });
+        }
+      }
 
     render() {
-        console.log(this.state.tripLength);
-        console.log(this.props.startDate);
-
         const ToggleSearchButton = this.state.searchToggle === true ? <div>
             <button onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
             <Search></Search>
-
         </div> :
             ''
 
-        const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.state.homeInfo;
-        // let mainImage = this.state.currentHomeImgList.map(e => {
-        //     if (e.main == true) {
-        //         return <img src={e.img_url} alt="main image" />
-        //     } else {
-        //         ''
-        //     }
-
-        // })
-
+        const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address, lat, long } = this.state.homeInfo;
         // mapping over to get the house names of other similar homes
         let mappedSimilarListings = this.state.similarHomes.map(home => {
             return (
@@ -96,25 +102,11 @@ class OneHome extends Component {
             )
         })
 
-        //  get start date
-        // let startDay = this.props.startDate._d.getDate()
-        // let startMonth = this.props.startDate._d.getMonth() + 1
-        // let startYear = this.props.startDate._d.getFullYear()
-        // let startDateString = startMonth + '/' + startDay + '/' + startYear;
-
-        // // get end date 
-        // let endDay = this.props.endDate._d.getDate()
-        // let endMonth = this.props.endDate._d.getMonth() + 1
-        // let endYear = this.props.endDate._d.getFullYear()
-        // let endDateString = endMonth + '/' + endDay + '/' + endYear;
-
-
-        let totalPrice = this.state.serviceFee + this.state.tax + (this.props.tripLength * this.state.homeInfo.price);
-        let totalCents = totalPrice * 100
-        console.log(totalPrice)
-        // this.props.getTotal(totalCents);
-        console.log(totalCents)
-        this.props.getTotal(totalCents)
+        // let totalPrice = this.state.serviceFee + this.state.tax + (this.props.tripLength * this.state.homeInfo.price);
+        // let totalCents = totalPrice * 100
+        // // this.props.getTotal(totalCents);
+        // console.log(totalCents)
+        // this.props.getTotal(totalCents)
 
         let pushedImgs = this.state.currentHomeImgList.map(img => {
             return img.img_url;
@@ -126,7 +118,67 @@ class OneHome extends Component {
             pushedWithText.push(obj)
         }
 
+        const style = {
+            // height: '300px',
+            // width: '300px',
+            // top: '40%',
+    
+            // // z-index: 3;
+            // position: 'relative',
+            // padding: '0px',
+            // // border-width: '0px',
+            // // margin: '50px',
+            // margin: '0 auto',
+            // left: '0px',
+            // top: '0px',
 
+            position: 'relative',
+            left: '-41px',
+            /* right: 0px; */
+            /* bottom: 0px; */
+            // top: '20%',
+            /* top: -9%; */
+            height: '310px',
+            width: '310px',
+            /* padding: 0px; */
+            /* margin: 0px auto; */
+            display: 'inherit',
+            overflow: 'hidden',
+            zIndex: 0,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        } 
+        let laatitude = 35.20048;
+        let loongitude = -111.65308;
+        console.log(typeof lat)
+        let latNum = parseFloat(lat)
+        let lngNum = parseFloat(long)
+
+        console.log(typeof latNum)
+        console.log(latNum) 
+        // console.log(typeof laatitude)
+        // console.log(laatitude) 
+
+        // const coords = { lat: latNum, lng: lngNum};
+        // const coords = {lat: laatitude, lng: loongitude}
+        console.log('coords', coords)
+        console.log('other coords', {lat: laatitude, lng: loongitude})
+        const coords = { lat: latNum, lng: lngNum}
+        const googleMap =
+        <div><Map google={this.props.google} zoom={14}
+        onClick = { this.onMapClick }
+
+        initialCenter={coords}
+        center={coords}
+        style={style}
+        resetBoundsOnResize
+        >
+        <Marker onClick={this.onMarkerClick}
+        name={'Current location'}
+        position = {coords}
+                //   position = {{ lat: 33.4508, lng: -112.09048 }}
+        />
+        </Map></div>
 
         return (
             <div className="one-home-entire-container">
@@ -159,7 +211,12 @@ class OneHome extends Component {
                     </div>
                     <h5>The neighborhood</h5>
                     <p>This home is located in <b>{city}</b></p>
-                    {/* <GoogleMap /> */}
+                    {/* <GoogleMap latitude={lat} longitude={long} /> */}
+                    <div className="outside-map-container">
+                    <div className="map-container">
+                            {googleMap}
+                    </div>
+                </div>
                     <div className="oneHome-right-side-container">
                         <h5>${price} per night</h5>
                         <hr></hr>
@@ -229,12 +286,13 @@ const mapStateToProps = state => {
         tripLength
     }
 }
-
-
-export default connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength })(OneHome);
-
-
-
 // OneHome.propTypes = {
 //     show: PropTypes.bool
 //   }
+
+export default compose(
+    connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength }),
+    GoogleApiWrapper({
+            apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
+          })
+)(OneHome)

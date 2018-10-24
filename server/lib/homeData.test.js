@@ -16,7 +16,9 @@ describe('Unit Test', () => {
         describe_interaction_with_guests: 'home interations with guests',
         describe_other_things_to_note: 'home describe other things to note',
         address: 'home address',
-        city: 'home city'
+        city: 'home city',
+        lat: 34.7451,
+        long: -112.02168
       }
 
       const fakeDb = {
@@ -32,7 +34,9 @@ describe('Unit Test', () => {
             describe_interaction_with_guests: home.describe_interaction_with_guests,
             describe_other_things_to_note: home.describe_other_things_to_note,
             address: home.address,
-            city: home.city
+            city: home.city,
+            lat: home.lat,
+            long: home.long
           })
         )
       }
@@ -46,7 +50,9 @@ describe('Unit Test', () => {
         describe_interaction_with_guests: home.describe_interaction_with_guests,
         describe_other_things_to_note: home.describe_other_things_to_note,
         address: home.address,
-        city: home.city
+        city: home.city,
+        lat: home.lat,
+        long: home.long
       })
     })
   })

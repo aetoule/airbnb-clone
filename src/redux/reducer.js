@@ -8,6 +8,7 @@ const initialState = {
     city: '',
     userEmail: [],
     tripLength: 0,
+    // homeInfo:{}
     // guests: 0
 }
 
@@ -19,6 +20,7 @@ const GET_TOTAL = "GET_TOTAL";
 const GET_CITY = "GET_CITY";
 const GET_USERS_EMAIL = 'GET_USERS_EMAIL';
 const GET_TRIP_LENGTH = 'GET_TRIP_LENGTH';
+// const GET_ONE_HOME = 'GET_ONE_HOME';
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
