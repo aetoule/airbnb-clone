@@ -5,23 +5,22 @@ const bodyParser = require('body-parser');
 const massive = require('massive');
 const controller = require('./controller');
 // const nodemailer = require('nodemailer');
-app.use( express.static( `${__dirname}/../build` ) );
+app.use(express.static(`${__dirname}/../build`));
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('endpoint live')
-});
+
 
 app.get('/api/homes', controller.getAllHomes)
 // app.get('/api/home-results', controller.getHomesInCity);
 app.get('/api/home/:id', controller.getOneHome);
 // app.get('/api/getdays', controller.getCalculatedDays);
-app.get('/api/home-images', controller.getHomeImgs);
+// app.get('/api/home-images', controller.getHomeImgs);
 app.post('api/chechout', controller.addUsersCheckoutRecipt)
 app.post('/api/getdays', controller.postDates)
 // app.post('/api/home', controller.createHome);
 app.post('/api/homes-results', controller.postCity)
+app.post('/api/myhomes', controller.createHome)
 
 app.post("/charge", (req, res) => {
 
@@ -102,7 +101,7 @@ massive(process.env.CONNECTION_STRING).then(database => {
 });
 
 const path = require('path')
-app.get('*', (req, res)=>{
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 })
 

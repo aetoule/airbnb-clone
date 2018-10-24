@@ -48,17 +48,17 @@ module.exports = {
             })
     },
 
-    getHomeImgs: (req, res) => {
-        dbInstance = req.app.get('db');
-        let { imgs } = req.body;
-        dbInstance.get_home_imgs_by_id(2)
-            .then(imgs => {
-                res.status(200).send(imgs)
-            })
-            .catch(err => {
-                res.status(500).send(err)
-            })
-    },
+    // getHomeImgs: (req, res) => {
+    //     dbInstance = req.app.get('db');
+    //     let { imgs } = req.body;
+    //     dbInstance.get_home_imgs_by_id(2)
+    //         .then(imgs => {
+    //             res.status(200).send(imgs)
+    //         })
+    //         .catch(err => {
+    //             res.status(500).send(err)
+    //         })
+    // },
 
     // postDates: (req, res) => {
     //     dbInstance = req.app.get('db');
@@ -181,15 +181,16 @@ module.exports = {
                 console.log(error);
                 res.status(500).send("error");
             });
+    },
+    createHome: (req, res) => {
+        const dbInstance = req.app.get('db');
+        let { home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long, host_id } = req.body;
+        dbInstance.add_home([home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long, 1])
+            .then(home => {
+                res.status(200).send(home)
+            })
+            .catch(err => {
+                res.status(500).send(err)
+            })
     }
-    // createHome: (req, res) => {
-    //     const dbInstance = req.app.get('db');
-    //     let {home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city} = req.body;
-    //     dbInstance.add_home([home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city])
-    //     .then(home => {
-    //         res.status(200).send(home)})
-    //     .catch(err => {
-    //         res.status(500).send(err)
-    //     })
-    // }
 }
