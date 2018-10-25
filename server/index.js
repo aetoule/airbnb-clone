@@ -19,6 +19,8 @@ app.post('/api/getdays', controller.postDates)
 // app.post('/api/home', controller.createHome);
 app.post('/api/homes-results', controller.postCity)
 app.post('/api/myhomes', controller.createHome)
+app.post('/api/myimgs', controller.createImagesForHome)
+app.get('/api/getallhomes', controller.getAllHomesWithoutImgs)
 
 app.post("/charge", (req, res) => {
 

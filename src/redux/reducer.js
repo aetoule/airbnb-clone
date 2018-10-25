@@ -1,5 +1,7 @@
 
 const initialState = {
+    hostNewHome: [],
+    homesWithoutImgs: [],
     homes: [],
     cityHomes: [],
     startDate: '',
@@ -47,6 +49,8 @@ const GET_HOST_DESCRIBE_INTERACTION = 'GET_HOST_DESCRIBE_INTERACTION';
 const GET_HOST_DESCRIBE_OTHER = 'GET_HOST_DESCRIBE_OTHER';
 const GET_HOST_HOME_NAME = 'GET_HOST_HOME_NAME';
 const GET_HOST_HOME_PRICE = 'GET_HOST_HOME_PRICE';
+const GET_ALL_HOMES_WITHOUT_IMGS = 'GET_ALL_HOMES_WITHOUT_IMGS';
+const GET_HOST_NEW_HOME = 'GET_HOST_NEW_HOME'
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -93,6 +97,10 @@ export default function reducer(state = initialState, action) {
             return { ...state, hostHomeName: action.payload }
         case GET_HOST_HOME_PRICE:
             return { ...state, hostHomePrice: action.payload }
+        case GET_ALL_HOMES_WITHOUT_IMGS:
+            return { ...state, homesWithoutImgs: action.payload }
+        case GET_HOST_NEW_HOME:
+            return { ...state, hostNewHome: action.payload }
         default:
             return { ...state }
     }
@@ -102,6 +110,20 @@ export function getAllHomes(homes) {
     return {
         type: GET_ALL_HOMES,
         payload: homes
+    }
+}
+
+export function getHostNewHome(hostNewHome) {
+    return {
+        type: GET_HOST_NEW_HOME,
+        payload: hostNewHome
+    }
+}
+
+export function getAllHomesWithoutImgs(homesWithoutImgs) {
+    return {
+        type: GET_ALL_HOMES_WITHOUT_IMGS,
+        payload: homesWithoutImgs
     }
 }
 

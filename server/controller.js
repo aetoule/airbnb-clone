@@ -2,6 +2,18 @@
 
 module.exports = {
 
+    getAllHomesWithoutImgs: (req, res) => {
+        dbInstance = req.app.get('db');
+        dbInstance.get_all_homes_without_imgs()
+            .then(homes => {
+                res.status(200).send(homes);
+            })
+            .catch(err => {
+                res.status(500).send(err)
+
+            })
+    },
+
     getAllHomes: (req, res) => {
         dbInstance = req.app.get('db');
         dbInstance.get_all_homes()
@@ -190,10 +202,54 @@ module.exports = {
                 res.status(500).send("error");
             });
     },
-    createHome: (req, res) => {
+
+    CreateImgForHost: (req, res) => {
         const dbInstance = req.app.get('db');
-        let { home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long, imgs, host_id } = req.body;
-        dbInstance.add_home([home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long, imgs, 1])
+        dbInstance.add_imgs_for_host([req.body.lat, req.body.long])
+            .then(() => {
+                res.status(200).send()
+            })
+            .catch(err => {
+                res.status(500).send(err)
+            })
+
+    },
+
+    createHome: (req, res) => {
+        console.log('a string');
+        console.log(req.body);
+
+        const dbInstance = req.app.get('db');
+        const { home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long } = req.body;
+        dbInstance.add_home([
+            home_name,
+            price,
+            max_guests,
+            describe_main,
+            describe_space,
+            describe_guest_access,
+            describe_interaction_with_guests,
+            describe_other_things_to_note,
+            address,
+            city,
+            lat,
+            long,
+            1]).then(homes => {
+                console.log('fired here');
+                console.log(homes);
+
+                res.status(200).send(homes);
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).send("error");
+            });
+    },
+
+    createImagesForHome: (req, res) => {
+        const dbInstance = req.app.get('db');
+        let { img_url, home_id } = req.body;
+        dbInstance.add_imgs_for_host([img_url, home_id])
             .then(home => {
                 res.status(200).send(home)
             })
