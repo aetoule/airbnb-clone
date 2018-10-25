@@ -73,12 +73,9 @@ describe('Integration Test', () => {
     it('read homes', () => {
       return toDoData.getHomes(db).then(homes => {
         expect(homes.length).not.toEqual(0)
-
       })
-
     })
   })
-
 })
 
 
