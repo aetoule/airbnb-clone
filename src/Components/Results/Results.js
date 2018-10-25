@@ -75,18 +75,21 @@ class Results extends Component {
       : ''
     const { cityHomes } = this.props
     const mappedHomes = cityHomes.map(home => {
+      console.log(home);
 
       return (
         <div key={home.home_id}>
           <div>
-            {home.imgs.map(img => {
 
-              return img.main ?
-                <Link to={`/results/${home.home_id}`}>
-                  <img className='results-images' src={img.img_url} alt="homes main image" />
-                </Link>
-                : ""
-            })}
+
+
+
+            <Link to={`/results/${home.home_id}`}>
+              <img className='results-images' src={home.imgs[0].img_url} alt="homes main image" />
+            </Link>
+
+
+
           </div>
           <div>
             <h5>
@@ -108,7 +111,7 @@ class Results extends Component {
       <div className="Results">
         <div className='users-dates'>
           <div>
-            <Search  > </Search>
+            <Search> </Search>
             start date-end date
         </div>
         </div>
