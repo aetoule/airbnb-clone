@@ -192,8 +192,8 @@ module.exports = {
     },
     createHome: (req, res) => {
         const dbInstance = req.app.get('db');
-        let { home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long, host_id } = req.body;
-        dbInstance.add_home([home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long, 1])
+        let { home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long, imgs, host_id } = req.body;
+        dbInstance.add_home([home_name, price, max_guests, describe_main, describe_space, describe_guest_access, describe_interaction_with_guests, describe_other_things_to_note, address, city, lat, long, imgs, 1])
             .then(home => {
                 res.status(200).send(home)
             })
