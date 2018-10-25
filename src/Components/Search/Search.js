@@ -43,7 +43,7 @@ class Search extends Component {
             <option value="">Select a City</option>
             <option value="Phoenix">Phoenix</option>
             <option value="Flagstaff">Flagstaff</option>
-            {/* <option value="Sedona">Sedona</option> */}
+            <option value="Sedona">Sedona</option>
             <option value="Tucson">Tucson</option>
             <option value="Williams">Williams</option>
           </select>
