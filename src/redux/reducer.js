@@ -8,6 +8,7 @@ const initialState = {
     city: '',
     userEmail: [],
     tripLength: 0,
+    hostImgs: []
     // homeInfo:{}
     // guests: 0
 }
@@ -20,6 +21,7 @@ const GET_TOTAL = "GET_TOTAL";
 const GET_CITY = "GET_CITY";
 const GET_USERS_EMAIL = 'GET_USERS_EMAIL';
 const GET_TRIP_LENGTH = 'GET_TRIP_LENGTH';
+const ADD_HOST_IMGS = 'ADD_HOST_IMGS'
 // const GET_ONE_HOME = 'GET_ONE_HOME';
 
 export default function reducer(state = initialState, action) {
@@ -39,7 +41,9 @@ export default function reducer(state = initialState, action) {
         case GET_USERS_EMAIL:
             return { ...state, userEmail: action.payload }
         case GET_TRIP_LENGTH:
-            return {...state, tripLength: action.payload}
+            return { ...state, tripLength: action.payload }
+        case ADD_HOST_IMGS:
+            return { ...state, hostImgs: action.payload }
         default:
             return { ...state }
     }
@@ -101,5 +105,12 @@ export function getTripLength(tripLength) {
     return {
         type: GET_TRIP_LENGTH,
         payload: tripLength
+    }
+}
+
+export function addHostImgs(hostImgs) {
+    return {
+        type: ADD_HOST_IMGS,
+        payload: hostImgs
     }
 }
