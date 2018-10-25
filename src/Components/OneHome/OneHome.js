@@ -79,13 +79,13 @@ class OneHome extends Component {
           activeMarker: marker,
         });
       }
-      onMapClick = (props) => {
-        if (this.state.showingInfoWindow) {
-          this.setState({
-            activeMarker: null
-          });
-        }
-      }
+    onMapClick = (props) => {
+    if (this.state.showingInfoWindow) {
+        this.setState({
+        activeMarker: null
+        });
+    }
+    }
 
     render() {
         const ToggleSearchButton = this.state.searchToggle === true ? <div>
@@ -93,7 +93,6 @@ class OneHome extends Component {
             <Search></Search>
         </div> :
             ''
-
         const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address, lat, long } = this.state.homeInfo;
         // mapping over to get the house names of other similar homes
         let mappedSimilarListings = this.state.similarHomes.map(home => {
@@ -148,26 +147,12 @@ class OneHome extends Component {
             marginLeft: 'auto',
             marginRight: 'auto',
         } 
-        let laatitude = 35.20048;
-        let loongitude = -111.65308;
-        console.log(typeof lat)
         let latNum = parseFloat(lat)
         let lngNum = parseFloat(long)
-
-        console.log(typeof latNum)
-        console.log(latNum) 
-        // console.log(typeof laatitude)
-        // console.log(laatitude) 
-
-        // const coords = { lat: latNum, lng: lngNum};
-        // const coords = {lat: laatitude, lng: loongitude}
-        console.log('coords', coords)
-        console.log('other coords', {lat: laatitude, lng: loongitude})
         const coords = { lat: latNum, lng: lngNum}
         const googleMap =
         <div><Map google={this.props.google} zoom={14}
         onClick = { this.onMapClick }
-
         initialCenter={coords}
         center={coords}
         style={style}
@@ -176,7 +161,6 @@ class OneHome extends Component {
         <Marker onClick={this.onMarkerClick}
         name={'Current location'}
         position = {coords}
-                //   position = {{ lat: 33.4508, lng: -112.09048 }}
         />
         </Map></div>
 
@@ -187,7 +171,6 @@ class OneHome extends Component {
                 <div className="oneHome-img-gallery">
                     <ImageGallery items={pushedWithText} />
                 </div>
-
                 <div className="oneHome-left-and-right-container">
                     <div className="oneHome-left-side-container">
                         <h1>{home_name}</h1>
@@ -250,7 +233,6 @@ class OneHome extends Component {
                         ?
                         <div>
                             <footer>
-
                                 <button onClick={() => this.setState({ searchToggle: true })}>Select Dates</button>
                             </footer>
                             {ToggleSearchButton}
@@ -265,14 +247,11 @@ class OneHome extends Component {
                             </footer>
                         </div>
                     }
-
                 </div>
-
             </div>
         );
     }
 }
-
 
 const mapStateToProps = state => {
     const { startDate, endDate, total, city, tripLength } = state;
@@ -293,6 +272,6 @@ const mapStateToProps = state => {
 export default compose(
     connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength }),
     GoogleApiWrapper({
-            apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
-          })
+        apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
+    })
 )(OneHome)

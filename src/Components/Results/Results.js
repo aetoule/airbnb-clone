@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import './App.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getAllHomes, getCityHomes, getCity } from '../../redux/reducer';
@@ -44,7 +43,6 @@ class Results extends Component {
   }
 
   render() {
-    console.log(this.props.city);
 
     const home = !this.props.city ?
       this.props.homes.map(e => {
@@ -108,7 +106,6 @@ class Results extends Component {
 
     return (
       <div className="Results">
-
         <div className='users-dates'>
           <div>
             <Search  > </Search>
