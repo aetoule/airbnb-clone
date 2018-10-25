@@ -92,7 +92,6 @@ export class PlaceLocation extends Component {
           <button disabled onClick={() => this.handleSubmitAddress(streetAddress, city, zip)}>Next</button>
         </Link>
       }
-        
       </div>
     )
   }

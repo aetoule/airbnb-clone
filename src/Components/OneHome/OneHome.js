@@ -79,13 +79,13 @@ class OneHome extends Component {
           activeMarker: marker,
         });
       }
-      onMapClick = (props) => {
-        if (this.state.showingInfoWindow) {
-          this.setState({
-            activeMarker: null
-          });
-        }
-      }
+    onMapClick = (props) => {
+    if (this.state.showingInfoWindow) {
+        this.setState({
+        activeMarker: null
+        });
+    }
+    }
 
     render() {
         const ToggleSearchButton = this.state.searchToggle === true ? <div>
@@ -93,7 +93,6 @@ class OneHome extends Component {
             <Search></Search>
         </div> :
             ''
-
         const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address, lat, long } = this.state.homeInfo;
         // mapping over to get the house names of other similar homes
         let mappedSimilarListings = this.state.similarHomes.map(home => {
@@ -234,7 +233,6 @@ class OneHome extends Component {
                         ?
                         <div>
                             <footer>
-
                                 <button onClick={() => this.setState({ searchToggle: true })}>Select Dates</button>
                             </footer>
                             {ToggleSearchButton}
@@ -249,14 +247,11 @@ class OneHome extends Component {
                             </footer>
                         </div>
                     }
-
                 </div>
-
             </div>
         );
     }
 }
-
 
 const mapStateToProps = state => {
     const { startDate, endDate, total, city, tripLength } = state;
@@ -277,6 +272,6 @@ const mapStateToProps = state => {
 export default compose(
     connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength }),
     GoogleApiWrapper({
-            apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
-          })
+        apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
+    })
 )(OneHome)

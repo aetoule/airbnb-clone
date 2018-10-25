@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getStartDate, getEndDate, getCity } from '../../redux/reducer';
 import axios from 'axios';
-// import './Home.css';
 
 class Search extends Component {
   constructor(props) {
