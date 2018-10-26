@@ -44,10 +44,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "integration-test": "jest --watch Server/",
+    "integration-test": "jest --watch server/",
     "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "jest": "^23.6.0"
   }
 }

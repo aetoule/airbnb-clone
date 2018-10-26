@@ -57,6 +57,32 @@ describe('Unit Test', () => {
     })
   })
 
+  // describe('Create', () => {
+  //   it("Should pass in created user", () => {
+  //     const user = {
+  //       auth0_id: 'blah12eurh2',
+  //       name: 'bob ross', 
+  //       is_host: 'true'
+  //     }
+
+  //     const fakeDb = {
+  //       query: sinon.mock().withArgs(
+  //         sinon.match.string,
+  //         sinon.match({
+  //           auth0_id: user.auth0_id,
+  //           name: user.name, 
+  //           is_host: user.is_host
+  //         })
+  //       )
+  //     }
+  //     return homeData.createUser(fakeDb, {
+  //       auth0_id: user.auth0_id,
+  //       name: user.name, 
+  //       is_host: user.is_host
+  //     })
+  //   })
+  // })
+
 })
 
 
@@ -71,11 +97,19 @@ describe('Integration Test', () => {
 
   describe('read', () => {
     it('read homes', () => {
-      return toDoData.getHomes(db).then(homes => {
+      return homeData.getHomes(db).then(homes => {
         expect(homes.length).not.toEqual(0)
       })
     })
   })
+
+  // describe('read users', () => {
+  //   it('reads users', () => {
+  //     return homeData.getUsers(db).then(users => {
+  //       expect(users.length).not.toEqual(0)
+  //     })
+  //   })
+  // })
 })
 
 
