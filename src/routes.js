@@ -11,6 +11,8 @@ import PlaceLocation from './Host_Components/PlaceLocation/PlaceLocation';
 import UploadPhotos from './Host_Components/UploadPhotos/UploadPhotos';
 import AddDescription from './Host_Components/AddDescriptions/AddDescriptions';
 import NameandPrice from './Host_Components/NameandPrice/NameandPrice';
+import Host from './Host_Components/Host/Host';
+import AboutUs from './Components/AboutUs/AboutUs';
 
 export default (
     <Switch>
@@ -25,7 +27,8 @@ export default (
         <Route component={UploadPhotos} exact path="/upload-photos" />
         <Route component={AddDescription} exact path="/description" />
         <Route component={NameandPrice} exact path="/name-price" />
-
+        <Route component={Host} exact path="/become-a-host"/>
+        <Route component={AboutUs} exact path="/about-us"/>
 
     </Switch>
 )

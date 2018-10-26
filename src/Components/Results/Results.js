@@ -3,9 +3,10 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { getAllHomes, getCityHomes, getCity } from '../../redux/reducer';
 import { Link } from "react-router-dom";
-import Search from '../Search/Search'
+import Search from '../Search/Search';
 
 class Results extends Component {
+
   state = {
 
   }
@@ -154,10 +155,10 @@ class Results extends Component {
 
     return (
       <div className="Results">
+        
         <div className='users-dates'>
           <div>
             <Search> </Search>
-            start date-end date
         </div>
         </div>
         <div>
