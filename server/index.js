@@ -20,6 +20,7 @@ app.post('/api/getdays', controller.postDates)
 app.post('/api/homes-results', controller.postCity)
 app.post('/api/myhomes', controller.createHome)
 app.post('/api/myimgs', controller.createImagesForHome)
+app.patch('/api/host-signup', controller.makeUserAHost)
 app.get('/api/getallhomes', controller.getAllHomesWithoutImgs)
 
 app.post("/charge", (req, res) => {

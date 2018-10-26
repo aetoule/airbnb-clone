@@ -82,7 +82,7 @@ export class NameandPrice extends Component {
         home_id: this.props.hostNewHome.homeid
       }).then(res => {
         console.log('this is imgs!!!');
-
+        window.location.replace('/results')
         console.log(res.data);
 
       }).catch(error => {
@@ -140,8 +140,8 @@ export class NameandPrice extends Component {
 
         <h2>Price Your Place</h2>
         <input type="text" value={hostHomePrice} onChange={(e) => this.handleHomePrice(e.target.value)} />
-
-        {hostHomeName && hostHomePrice ?
+        <button onClick={() => this.postHostsHome()}>Finish</button>
+        {/* {hostHomeName && hostHomePrice ?
           <Link to="/">
             <button onClick={() => this.postHostsHome()}>Finish</button>
           </Link>
@@ -149,7 +149,7 @@ export class NameandPrice extends Component {
           <Link to="/">
             <button disabled>Finish</button>
           </Link>
-        }
+        } */}
       </div>
     )
   }

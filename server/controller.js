@@ -19,7 +19,7 @@ module.exports = {
         dbInstance.get_all_homes()
             .then(homes => {
                 let reduced = homes.reduce((prev, curr) => {
-                    let { home_id,
+                    let { homeid,
                         home_name,
                         price, max_guests,
                         describe_main,
@@ -33,8 +33,8 @@ module.exports = {
                         lat,
                         long } = curr;
 
-                    prev[home_id] = prev[home_id] || {
-                        home_id,
+                    prev[homeid] = prev[homeid] || {
+                        homeid,
                         home_name,
                         price,
                         max_guests,
@@ -49,10 +49,12 @@ module.exports = {
                         long,
                         imgs: []
                     };
-                    prev[home_id].imgs.push({
-                        img_url,
-                        main: Boolean(curr.main_image)
-                    });
+                    if (img_url !== null) {
+                        prev[homeid].imgs.push({
+                            img_url,
+                            main: Boolean(curr.main_image)
+                        })
+                    }
                     return prev;
                 }, {});
                 let homeArray = Object.keys(reduced).map(key => reduced[key]);
@@ -120,7 +122,7 @@ module.exports = {
         dbInstance.get_homes_in_one_city(city)
             .then(homes => {
                 let reduced = homes.reduce((prev, curr) => {
-                    let { home_id,
+                    let { homeid,
                         home_name,
                         price, max_guests,
                         describe_main,
@@ -134,8 +136,8 @@ module.exports = {
                         lat,
                         long } = curr;
 
-                    prev[home_id] = prev[home_id] || {
-                        home_id,
+                    prev[homeid] = prev[homeid] || {
+                        homeid,
                         home_name,
                         price,
                         max_guests,
@@ -150,10 +152,12 @@ module.exports = {
                         long,
                         imgs: []
                     };
-                    prev[home_id].imgs.push({
-                        img_url,
-                        main: Boolean(curr.main_image)
-                    });
+                    if (img_url !== null) {
+                        prev[homeid].imgs.push({
+                            img_url,
+                            main: Boolean(curr.main_image)
+                        })
+                    }
                     return prev;
                 }, {});
                 let homeArray = Object.keys(reduced).map(key => reduced[key]);
@@ -255,6 +259,18 @@ module.exports = {
             })
             .catch(err => {
                 res.status(500).send(err)
+            })
+    },
+
+    makeUserAHost: (req, res) => {
+        const db = req.app.get("db");
+        // req.session.user.id
+        db.make_user_a_host(3)
+            .then(() => {
+                res.status(200).send()
+            }).catch(error => {
+                res.status(500).send(error)
+
             })
     }
 }

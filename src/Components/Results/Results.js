@@ -46,64 +46,109 @@ class Results extends Component {
 
     const home = !this.props.city ?
       this.props.homes.map(e => {
+        console.log(e);
+
+        console.log(e.imgs.length);
+        if (e.imgs.length !== 0) {
+          return (
+            <div key={e.home_id}>
+              <div>
+                <Link to={`/results/${e.home_id}`}>
+                  <img className='results-images' src={e.imgs[0].img_url} alt="homes main image" />
+                </Link>
+
+
+              </div>
+              <div>
+                <h5>
+                  {e.max_guests} Guests
+              </h5>
+                <h4>
+                  {e.home_name}
+                </h4>
+                <h5>
+                  ${e.price} per night
+              </h5>
+              </div>
+            </div>
+          )
+        } else {
+          return (
+            <div key={e.home_id}>
+              <div>
+                <Link to={`/results/${e.home_id}`}>
+                  <img className='results-images' src='https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' alt="homes main image" />
+                </Link>
+
+
+              </div>
+              <div>
+                <h5>
+                  {e.max_guests} Guests
+              </h5>
+                <h4>
+                  {e.home_name}
+                </h4>
+                <h5>
+                  ${e.price} per night
+              </h5>
+              </div>
+            </div>
+          )
+        }
+      })
+      : ''
+    const { cityHomes } = this.props
+    const mappedHomes = cityHomes.map(e => {
+      if (e.imgs.length !== 0) {
         return (
           <div key={e.home_id}>
             <div>
-              {e.imgs.map(img => {
+              <Link to={`/results/${e.home_id}`}>
+                <img className='results-images' src={e.imgs[0].img_url} alt="homes main image" />
+              </Link>
 
-                return img.main ?
-                  <Link to={`/results/${e.home_id}`}>
-                    <img className='results-images' src={img.img_url} alt="homes main image" />
-                  </Link>
-                  : ""
-              })}
+
             </div>
             <div>
               <h5>
                 {e.max_guests} Guests
-              </h5>
+            </h5>
               <h4>
                 {e.home_name}
               </h4>
               <h5>
                 ${e.price} per night
-              </h5>
+            </h5>
             </div>
           </div>
         )
-      })
-      : ''
-    const { cityHomes } = this.props
-    const mappedHomes = cityHomes.map(home => {
-      console.log(home);
-
-      return (
-        <div key={home.home_id}>
-          <div>
+      } else {
+        return (
+          <div key={e.home_id}>
+            <div>
+              <Link to={`/results/${e.home_id}`}>
+                <img className='results-images' src='https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' alt="homes main image" />
+              </Link>
 
 
-
-
-            <Link to={`/results/${home.home_id}`}>
-              <img className='results-images' src={home.imgs[0].img_url} alt="homes main image" />
-            </Link>
-
-
-
-          </div>
-          <div>
-            <h5>
-              {home.max_guests} Guests
+            </div>
+            <div>
+              <h5>
+                {e.max_guests} Guests
             </h5>
-            <h4>
-              {home.home_name}
-            </h4>
-            <h5>
-              ${home.price} per night
+              <h4>
+                {e.home_name}
+              </h4>
+              <h5>
+                ${e.price} per night
             </h5>
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
+
+
     })
 
 
