@@ -1,0 +1,172 @@
+h1 {
+  font-size: 32px;
+  color: #484848;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 10px 0; }
+
+h2 {
+  font-size: 16px;
+  color: #484848;
+  font-weight: 600; }
+
+h3 {
+  font-size: 12px;
+  color: #484848;
+  font-weight: 600;
+  padding: 15px 0; }
+
+h4 {
+  color: #00A699; }
+
+h5 {
+  font-size: 24px; }
+
+h6 {
+  font-size: 14px;
+  color: #484848;
+  font-weight: 600; }
+
+p {
+  font-size: 16px;
+  color: #484848;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.airbnb-logo {
+  background-image: url("../../media/AirbnbLogo.svg"); }
+
+.search-box {
+  height: 50px;
+  border: 1px solid #EBEBEB;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center; }
+  .search-box .search-icon {
+    margin-left: 15px;
+    background-image: url("../../media/search-icon.svg");
+    object-fit: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px; }
+  .search-box .search-text {
+    font-weight: 700;
+    padding-left: 14px;
+    color: #767676; }
+
+.nav-links {
+  color: #484848;
+  font-weight: 400; }
+
+a {
+  text-decoration: none;
+  color: #484848;
+  font-weight: 400; }
+
+@media (max-width: 1127px) {
+  .header-body {
+    padding: 12px 24px;
+    z-index: 999999; }
+  .logo-and-search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    .logo-and-search-container .logo-and-arrow-container .logo-and-arrow {
+      align-items: center;
+      display: flex;
+      flex-direction: row; }
+      .logo-and-search-container .logo-and-arrow-container .logo-and-arrow .airbnb-logo {
+        height: 32px;
+        width: 32px; }
+      .logo-and-search-container .logo-and-arrow-container .logo-and-arrow .down-arrow {
+        margin-left: 10px;
+        margin-right: 12px;
+        height: 10px;
+        width: 10px; }
+    .logo-and-search-container .search-box {
+      width: 100%; }
+  header nav {
+    padding: 20px 24px;
+    z-index: 999999;
+    top: 55px;
+    right: 0px;
+    width: 100%;
+    background: white;
+    transform: translate(0px, -1000px);
+    position: absolute;
+    transition: 0.3s; }
+  header nav ul:focus {
+    min-width: 100vw;
+    height: 600px;
+    flex-direction: column;
+    padding: 10px 0;
+    visibility: visible; }
+  .nav-links {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 20px 0; }
+  .nav-links-small-only {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 20px 0; }
+  .dropdown-line {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 0 auto;
+    margin-right: 0 auto;
+    opacity: 0.2;
+    width: 100%; }
+  header .show {
+    transform: translate(0px, 0px); }
+  .hidden-text-to-make-whitespace {
+    color: white; } }
+
+@media (min-width: 1128px) {
+  .header-body {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 24px;
+    align-items: center;
+    justify-content: space-between; }
+  .logo-and-search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    .logo-and-search-container .down-arrow {
+      display: none; }
+    .logo-and-search-container .airbnb-logo-big-only {
+      background-image: url("../../media/AirbnbLogo.svg");
+      margin-right: 25px;
+      height: 35px;
+      width: 35px;
+      background-repeat: no-repeat; }
+    .logo-and-search-container .airbnb-logo {
+      display: none; }
+    .logo-and-search-container .search-box {
+      width: 450px; }
+  .small-space {
+    display: none; }
+  header nav ul {
+    display: flex;
+    flex-direction: row; }
+    header nav ul .nav-links-small-only {
+      display: none; }
+    header nav ul .dropdown-line {
+      display: none; }
+    header nav ul .hidden-text-to-make-whitespace {
+      display: none; }
+    header nav ul a {
+      text-decoration: none;
+      color: #484848;
+      font-size: 14px;
+      padding-left: 10px;
+      font-family: 'Poppins', sans-serif; }
+    header nav ul .nav-links {
+      color: #484848;
+      font-size: 14px;
+      padding-left: 10px;
+      font-family: 'Poppins', sans-serif; } }

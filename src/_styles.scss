@@ -3,16 +3,13 @@
 //colors
 $pink: #FF5A5F;
 $green: #00A699;
+$darkGreen: #378288;
 $orange: #FC642D;
 $black: #484848;
 $gray: #767676;
 $yellow: #FFB400;
 $otherYellow:#F5B63F;
-
-@font-face {
-    font-family: recta;
-    src: url('/src/TestBlueberryFont/Recta-Regular.otf') format('opentype');
-  }
+$maroon: #572533;
 
 // fonts
 h1 {
@@ -24,15 +21,16 @@ h1 {
     padding: 10px 0;
 }
 
-//
+// House name on results page
 h2 {
-    font-size: 36px;
+    font-size: 16px;
     color: $black;
+    font-weight: 600;
 }
 
-// for small description headers
+// for description headers
 h3 {
-    font-size: 18px;
+    font-size: 12px;
     color: $black;
     font-weight: 600;
     padding: 15px 0;

@@ -33,38 +33,46 @@ class OneHome extends Component {
             searchToggle: false
         })
     }
-
     
-    async getHouse() {
-        
-        await axios.get(`/api/home/${this.props.match.params.id}`)
+    getHouse() {
+       axios.get(`/api/home/${this.props.match.params.id}`)
             .then(res => {
+                console.log('getHouse with params fired')
                 this.setState({
                     homeInfo: res.data[0]
                 })
-        })
-        
-        
+        })  
     }
 
     getSimilarHomes() {
         axios.get('/api/homes')
             .then(res => {
                 let allHomesWithCurrentHome = res.data
-                console.log(res.data)
+                console.log(res.data[this.props.match.params.id])
+                console.log(this.props.match.params.id)
                 let allSimilarHomes = allHomesWithCurrentHome
                 const idNumber = allSimilarHomes.findIndex(e => {
-                    return e.home_id == this.props.match.params.id
+                    console.log(e)
+                    return e.homeid == this.props.match.params.id
                 })
                 // right now the get one home is not getting the image array. So I'm using this endpoint to get the home info for this house to get access to the image array
-                const currentHomeImageArray = res.data[idNumber].imgs
-                allSimilarHomes.splice(idNumber, 1)
+                console.log(res.data[idNumber].imgs)
+                let currentHomeImageArray;
+                if (res.data[idNumber].imgs.length !== 0) {
+                    currentHomeImageArray = res.data[idNumber].imgs
+                } else {
+                    currentHomeImageArray = [{img_url: 'https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png'}]
+                }
+
+                console.log(currentHomeImageArray)
+
+                // currentHomeImageArray = res.data[idNumber].imgs
+                // allSimilarHomes.splice(idNumber, 1)
                 this.setState({
                     // similarHomes: allSimilarHomes,
                     currentHomeImgList: currentHomeImageArray
                 })
             })
-
     }
 
     getTripDuration() {
@@ -163,7 +171,7 @@ class OneHome extends Component {
         position = {coords}
         />
         </Map></div>
-
+        console.log('currentHomeimgarry', this.state.currentHomeImgList)
         return (
             <div className="one-home-entire-container">
                 <div className="search-bar-header">

@@ -17,10 +17,7 @@ class Search extends Component {
 
 
   handleChange(event) {
-    // console.log(this.refs.city.value)
-    // console.log(event.target.value)
     this.props.getCity(event.target.value)
-    // this.props.(event)
   }
 
   render() {
