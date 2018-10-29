@@ -12,8 +12,11 @@
 .image-gallery-fullscreen-button::before, .image-gallery-play-button::before {
     display: none;
 }
+.medium-space{
+    height: 15px;
+}
 
-@media (max-width: 770px) {
+@media (max-width: 1127px) {
     .oneHome-left-and-right-container {
         padding: 0 30px;
     }
@@ -28,13 +31,24 @@
     .oneHome-right-side-container {
         display: none;
     }
+    .oneHome-right-side-container {
+        display: none;
+    }
     .image-gallery-content {
         margin: 0 auto;
     }
     .oneHome-img-gallery {
         margin: 0 auto;
-
     }
+    .booking-info-line {
+        margin-top:10px;
+        margin-bottom: 10px;
+        margin-left: 0 auto;
+        margin-right: 0 auto;
+        opacity: 0.2;
+        width: 100%;
+    }
+    
     footer {
         background:white;
         position: fixed;
@@ -46,20 +60,11 @@
     }
     
 }
-@media (min-width: 769px) {
+@media (min-width: 1128px) {
     .one-home-entire-container {
-        padding: 0 80px;
+        // padding: 0 80px;
+        margin: 0 auto;
     }
-    
-    .img-carousel {
-        background-image: url(../../media/toa-heftiba-644507-unsplash.jpg);
-        height: 31vh;
-        width: 100vw;
-        object-fit: cover;
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
-    
     .image-gallery-slide img {
         width: 100%;
         max-height: 750px;
@@ -70,12 +75,6 @@
         background-repeat: no-repeat;
         // background-position: 50% 50%;
     }
-    .search-bar-header{
-        height: 60px;
-        width: 100vw;
-        background-color: lightblue;
-    }
-    
     h1, h2, p, h3 {
         text-align: left;
     }
@@ -85,19 +84,129 @@
     }
     
     .oneHome-left-and-right-container {
+        padding: 0 80px;
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        // flex-direction: row;
         .oneHome-left-side-container {
             display: inline-block;
             width: 47%;
             vertical-align: top;
-    
+            // .medium-space {
+            //     height: 15px;
+            // }
+            .outside-map-container{
+                display: flex;
+                flex-direction: column;
+            }
         }
         .oneHome-right-side-container{
-            background: pink;
             // height:
-            width: 30%;
+            // width: 30%;
             display: inline-block;
-            width: 40%
+            width: 40%;
+            padding-left: 24px;
+            padding-right: 24px;
+            background-color: rgb(255, 255, 255);
+            margin: 0px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: rgb(228, 228, 228);
+            border-image: initial;
+            margin-top: 16px;
+            margin-bottom: 24px;
+            .x-box {
+                display: none;
+            }
+            .price-per-night {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                padding-top: 20px;
+            }
+            .five-stars {
+                display: flex;
+                flex-direction: row;
+                margin-top: 10px;
+                align-items: center;
+                .star {
+                    background-image: url('../../media/star-icon.svg');
+                    height: 10px;
+                    width: 10px;
+                    object-fit: cover;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                .ratings-number-oneHome {
+                    margin-left: 5px;
+                    font-weight: 300;
+                }
+            }
+            .price-amount {
+                padding-right: 5px;
+                font-size: 24px;
+            }
+            .trip-dates-box {
+                background-color: #fff;
+                display: block;
+                border: 1px solid #EBEBEB;
+                border-radius: 2px;
+                width: 100%;
+                margin-bottom: 10px;
+                padding: 5px 0;
+            }
+            .trip-costs-list {
+                display: flex;
+                flex-direction: column;
+                .booking-detail-text {
+                    font-size: 14px;
+                }
+                .list-price-times-days{
+                    display: flex;
+                    flex-direction: row;
+                    align-items:center;
+                    justify-content: space-between;
+                }
+                .list-service-fee {
+                    display: flex;
+                    flex-direction: row;
+                    align-items:center;
+                    justify-content: space-between;
+                }
+                .list-tax-fee {
+                    display: flex;
+                    flex-direction: row;
+                    align-items:center;
+                    justify-content: space-between;
+                }
+                .total-count {
+                    display: flex;
+                    flex-direction: row;
+                    align-items:center;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                }
+                .wont-be-charged-text{
+                    margin-top: 5px;
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 12px;
+                    text-align: center;
+                    font-weight: 400;
+                }
+            }
         }
+        .booking-info-line {
+            margin-top:10px;
+            margin-bottom: 10px;
+            margin-left: 0 auto;
+            margin-right: 0 auto;
+            opacity: 0.2;
+            width: 100%;
+        }
+        
+    }
+    .StripeCheckout{
+        background: pink;
     }
 }

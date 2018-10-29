@@ -21,12 +21,14 @@ h4 {
   color: #00A699; }
 
 h5 {
-  font-size: 24px; }
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif; }
 
 h6 {
   font-size: 14px;
   color: #484848;
-  font-weight: 600; }
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif; }
 
 p {
   font-size: 16px;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import './Host.css';
 
 class Host extends Component {
     constructor(props) {
@@ -10,10 +10,13 @@ class Host extends Component {
     render() { 
         return ( 
             <div>
-                <p>This is the become a host page</p>
-                <Link to="/get-started">
-                    <button>Get started</button>
-                </Link>
+                <div className="top-background-image">
+                    <p>HOST ON AIRBNB</p>
+                    <h1>Earn money as an Airbnb host</h1>
+                    <Link to="/get-started">
+                        <button className="get-started-host">Get started</button>
+                    </Link>
+                </div>
             </div>
          );
     }

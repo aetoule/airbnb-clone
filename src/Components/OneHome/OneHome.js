@@ -10,6 +10,7 @@ import ImageGallery from 'react-image-gallery';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Search from '../Search/Search';
 import {compose} from 'redux';
+import BookingDetails from '../BookingDetails/BookingDetails';
 
 class OneHome extends Component {
     constructor(props) {
@@ -97,7 +98,7 @@ class OneHome extends Component {
 
     render() {
         const ToggleSearchButton = this.state.searchToggle === true ? <div>
-            <button onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
+            <button className="cancel-btn" onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
             <Search></Search>
         </div> :
             ''
@@ -139,7 +140,7 @@ class OneHome extends Component {
             // left: '0px',
             // top: '0px',
 
-            position: 'relative',
+            // position: 'relative',
             left: '-41px',
             /* right: 0px; */
             /* bottom: 0px; */
@@ -172,10 +173,9 @@ class OneHome extends Component {
         />
         </Map></div>
         console.log('currentHomeimgarry', this.state.currentHomeImgList)
+        console.log(this.props.match.params.id)
         return (
             <div className="one-home-entire-container">
-                <div className="search-bar-header">
-                </div>
                 <div className="oneHome-img-gallery">
                     <ImageGallery items={pushedWithText} />
                 </div>
@@ -183,61 +183,44 @@ class OneHome extends Component {
                     <div className="oneHome-left-side-container">
                         <h1>{home_name}</h1>
                         <p>{city}  ·  {max_guests} guests</p>
-                        <div className="small-space"></div>
+                        <div className="medium-space"></div>
+                        <div className="medium-space"></div>
                         <p>{describe_main}</p>
-                        <h3>The space</h3>
+                        <div className="medium-space"></div>
+                        <h2>The space</h2>
+                        <div className="medium-space"></div>
                         <p>{describe_space}</p>
-                        <h3>Guest access</h3>
+                        <div className="medium-space"></div>
+                        <h2>Guest access</h2>
+                        <div className="medium-space"></div>
                         <p>{describe_guest_access}</p>
-                        <h3>Interaction with guests</h3>
+                        <div className="medium-space"></div>
+                        <h2>Interaction with guests</h2>
+                        <div className="medium-space"></div>
                         <p>{describe_interaction_with_guests}</p>
-                        <h3>Other things to note</h3>
+                        <div className="medium-space"></div>
+                        <h2>Other things to note</h2>
+                        <div className="medium-space"></div>
                         <p>{describe_other_things_to_note}</p>
-                        <hr></hr>
+                        <hr className="booking-info-line"></hr>
                         {/* <h3>Amenities</h3>
 
                         <h5>Similar listings</h5>
                         {mappedSimilarListings} */}
                         {/* {mappedImagesOfCurrHouse} */}
-                    </div>
-                    <h5>The neighborhood</h5>
-                    <p>This home is located in <b>{city}</b></p>
-                    {/* <GoogleMap latitude={lat} longitude={long} /> */}
-                    <div className="outside-map-container">
-                    <div className="map-container">
-                            {googleMap}
-                    </div>
-                </div>
-                    <div className="oneHome-right-side-container">
-                        <h5>${price} per night</h5>
-                        <hr></hr>
-                        <h6>{this.props.total}</h6>
-                        <div className="trip-dates-box">
-                            {/* <p>{startDateString} to {endDateString}</p> */}
+                        <div className="medium-space"></div>
+                        <div className="medium-space"></div>
+                        <h5>The neighborhood</h5>
+                        <div className="medium-space"></div>
+                        <p>This home is located in <b>{city}</b></p>
+                        <div className="medium-space"></div>
+                        <div className="medium-space"></div>
+                        <div className="outside-map-container">
+                            <div className="map-container">
+                                {googleMap}
+                            </div>
                         </div>
-
-                        <div className="trip-costs-list">
-                            {/* <div className="list-price-times-days">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-cleaning-fee">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-service-fee">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-tax-fee">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-total">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div> */}
-
-                            <TakeMoney />
-                        </div>
-
-                    </div>
-                    {!this.props.endDate
+                        {!this.props.endDate
                         ?
                         <div>
                             <footer>
@@ -255,7 +238,13 @@ class OneHome extends Component {
                             </footer>
                         </div>
                     }
+                    </div>
+                    
+                    <div className="oneHome-right-side-container">
+                        <BookingDetails houseId={this.props.match.params.id} homeInformation={this.state.homeInfo}/>
+                    </div>
                 </div>
+                
             </div>
         );
     }

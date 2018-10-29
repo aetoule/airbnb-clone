@@ -4,46 +4,11 @@
 .airbnb-logo {
     background-image: url('../../media/AirbnbLogo.svg');
 }
-.search-box {
-    height: 50px;
-    border: 1px solid #EBEBEB;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    .search-icon {
-        margin-left: 15px;
-        background-image: url('../../media/search-icon.svg');
-        object-fit: cover;
-        background-size: contain;
-        background-repeat: no-repeat;
-        height: 20px;
-        width: 20px;
-    }
-    .search-text {
-        font-weight: 700;
-        padding-left: 14px;
-        color: $gray;
-    }
-}
-
-.nav-links {
-    color: $black;
-    font-weight: 400;
-}
-a {
-    text-decoration: none;
-    color: $black;
-    font-weight: 400;
-}
 
 // styles for mobile
 @media (max-width: 1127px) {  
     .header-body {
         padding: 12px 24px;
-        // display: flex;
-        // flex-direction: row;
-        // align-items: center;
         z-index: 999999;
     }
     .logo-and-search-container {
@@ -70,20 +35,51 @@ a {
             }
         }
         .search-box {
+            height: 50px;
             width: 100%;
-        }
+            border: 1px solid #EBEBEB;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        
+            .search-icon {
+                margin-left: 15px;
+                background-image: url('../../media/search-icon.svg');
+                object-fit: cover;
+                background-size: contain;
+                background-repeat: no-repeat;
+                height: 20px;
+                width: 20px;
+            }
+            .search-text {
+                font-weight: 700;
+                padding-left: 14px;
+                color: $gray;
+            }
+        }    
     }
 
     header nav {
         padding: 20px 24px;
         z-index: 999999;
-        top: 55px;
+        top: 70px;
         right: 0px;
         width: 100%;
         background: white;
         transform: translate(0px, -1000px);
         position: absolute;
         transition: 0.3s; 
+    }
+
+    .nav-links {
+        color: $black;
+        font-weight: 400;
+    }
+    a {
+        text-decoration: none;
+        color: $black;
+        font-weight: 400;
     }
     header nav ul:focus {
         min-width: 100vw;
@@ -119,6 +115,10 @@ a {
     .hidden-text-to-make-whitespace {
         color: white;
     }
+
+    .large-horizontal-nav {
+        display: none;
+    }
 }
 
 // styles for big/full desktop (horizontal menu)
@@ -148,48 +148,105 @@ a {
         .airbnb-logo {
             display: none;
         }
+
         .search-box {
-            // height: 50px;
+            height: 50px;
             width: 450px;
-        }
+            border: 1px solid #EBEBEB;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        
+            .search-icon {
+                margin-left: 15px;
+                background-image: url('../../media/search-icon.svg');
+                object-fit: cover;
+                background-size: contain;
+                background-repeat: no-repeat;
+                height: 20px;
+                width: 20px;
+            }
+            .search-text {
+                font-weight: 700;
+                padding-left: 14px;
+                color: $gray;
+            }
+        } 
     }
     .small-space {
         display: none;
     }
 
-    header nav ul {
+    .horizontal-nav-container {
         display: flex;
         flex-direction: row;
-        
-        .nav-links-small-only {
-            display: none;
+        .large-horizontal-nav {
+            display: flex;
+            flex-direction: row;
+            a {
+                text-decoration: none;
+                color: $black;
+                font-size: 14px;
+                //  font-weight: 500;
+                padding-left: 12px;
+                // font-family: 'Montserrat',bold, sans-serif;
+                font-family: 'Poppins', sans-serif;
+                // font-family: 'Nunito', sans-serif;
+            }
+            .nav-links-horizontal {
+                color: $black;
+                // font-weight: 500;
+                font-size: 14px;
+                padding-left: 12px;
+                font-family: 'Poppins', sans-serif;
+                color: $black;
+                font-weight: 400;
+                // font-family: 'Nunito', sans-serif;
+            }
+                    
         }
-        .dropdown-line {
-            display: none;
-        }
-        .hidden-text-to-make-whitespace {
-            display: none;
-        }
-        a {
-            text-decoration: none;
-            color: $black;
-            font-size: 14px;
-            //  font-weight: 500;
-            padding-left: 10px;
-            // font-family: 'Montserrat',bold, sans-serif;
-            font-family: 'Poppins', sans-serif;
-            // font-family: 'Nunito', sans-serif;
-        }
-        .nav-links {
-            color: $black;
-            // font-weight: 500;
-            font-size: 14px;
-            padding-left: 10px;
-            font-family: 'Poppins', sans-serif;
-            // font-family: 'Nunito', sans-serif;
-
-        }
+    
     }
+
+    
+    nav {
+        display: none;
+    }
+
+    // header nav ul {
+    //     display: flex;
+    //     flex-direction: row;
+        
+    //     .nav-links-small-only {
+    //         display: none;
+    //     }
+    //     .dropdown-line {
+    //         display: none;
+    //     }
+    //     .hidden-text-to-make-whitespace {
+    //         display: none;
+    //     }
+    //     a {
+    //         text-decoration: none;
+    //         color: $black;
+    //         font-size: 14px;
+    //         //  font-weight: 500;
+    //         padding-left: 10px;
+    //         // font-family: 'Montserrat',bold, sans-serif;
+    //         font-family: 'Poppins', sans-serif;
+    //         // font-family: 'Nunito', sans-serif;
+    //     }
+    //     .nav-links {
+    //         color: $black;
+    //         // font-weight: 500;
+    //         font-size: 14px;
+    //         padding-left: 10px;
+    //         font-family: 'Poppins', sans-serif;
+    //         // font-family: 'Nunito', sans-serif;
+
+    //     }
+    // }
     
     
 }
