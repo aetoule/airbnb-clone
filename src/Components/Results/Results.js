@@ -52,9 +52,9 @@ class Results extends Component {
         console.log(e.imgs.length);
         if (e.imgs.length !== 0) {
           return (
-            <div key={e.home_id}>
+            <div key={e.homeid}>
               <div>
-                <Link to={`/results/${e.home_id}`}>
+                <Link to={`/results/${e.homeid}`}>
                   <img className='results-images' src={e.imgs[0].img_url} alt="homes main image" />
                 </Link>
 
@@ -77,7 +77,7 @@ class Results extends Component {
           return (
             <div key={e.home_id}>
               <div>
-                <Link to={`/results/${e.home_id}`}>
+                <Link to={`/results/${e.homeid}`}>
                   <img className='results-images' src='https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' alt="homes main image" />
                 </Link>
 
@@ -102,10 +102,12 @@ class Results extends Component {
     const { cityHomes } = this.props
     const mappedHomes = cityHomes.map(e => {
       if (e.imgs.length !== 0) {
+        console.log(e);
+
         return (
-          <div key={e.home_id}>
+          <div key={e.homeid}>
             <div>
-              <Link to={`/results/${e.home_id}`}>
+              <Link to={`/results/${e.homeid}`}>
                 <img className='results-images' src={e.imgs[0].img_url} alt="homes main image" />
               </Link>
 
@@ -126,9 +128,9 @@ class Results extends Component {
         )
       } else {
         return (
-          <div key={e.home_id}>
+          <div key={e.homeid}>
             <div>
-              <Link to={`/results/${e.home_id}`}>
+              <Link to={`/results/${e.homeid}`}>
                 <img className='results-images' src='https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' alt="homes main image" />
               </Link>
 
@@ -155,11 +157,11 @@ class Results extends Component {
 
     return (
       <div className="Results">
-        
+
         <div className='users-dates'>
           <div>
             <Search> </Search>
-        </div>
+          </div>
         </div>
         <div>
           200+ Homes...

@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import { getStartDate, getEndDate, getTotal, getTripLength, getAllHomes } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 import ImageGallery from 'react-image-gallery';
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import Search from '../Search/Search';
-import {compose} from 'redux';
+import { compose } from 'redux';
 
 class OneHome extends Component {
     constructor(props) {
@@ -34,17 +34,17 @@ class OneHome extends Component {
         })
     }
 
-    
+
     async getHouse() {
-        
+
         await axios.get(`/api/home/${this.props.match.params.id}`)
             .then(res => {
                 this.setState({
                     homeInfo: res.data[0]
                 })
-        })
-        
-        
+            })
+
+
     }
 
     getSimilarHomes() {
@@ -54,10 +54,17 @@ class OneHome extends Component {
                 console.log(res.data)
                 let allSimilarHomes = allHomesWithCurrentHome
                 const idNumber = allSimilarHomes.findIndex(e => {
-                    return e.home_id == this.props.match.params.id
+                    return e.homeid == this.props.match.params.id
                 })
-                // right now the get one home is not getting the image array. So I'm using this endpoint to get the home info for this house to get access to the image array
-                const currentHomeImageArray = res.data[idNumber].imgs
+                console.log(idNumber);
+
+                // right now the get one home is not getting the image array.So I'm using this endpoint to get the home info for this house to get access to the image array
+                let currentHomeImageArray;
+                if (res.data[idNumber].imgs.length !== 0) {
+                    currentHomeImageArray = res.data[idNumber].imgs
+                } else {
+                    currentHomeImageArray = [{ img_url: 'https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' }]
+                }
                 allSimilarHomes.splice(idNumber, 1)
                 this.setState({
                     // similarHomes: allSimilarHomes,
@@ -75,19 +82,22 @@ class OneHome extends Component {
     }
     onMarkerClick = (props, marker, e) => {
         this.setState({
-          selectedPlace: props,
-          activeMarker: marker,
-        });
-      }
-    onMapClick = (props) => {
-    if (this.state.showingInfoWindow) {
-        this.setState({
-        activeMarker: null
+            selectedPlace: props,
+            activeMarker: marker,
         });
     }
+    onMapClick = (props) => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                activeMarker: null
+            });
+        }
     }
 
     render() {
+
+        console.log(this.state.currentHomeImgList);
+
         const ToggleSearchButton = this.state.searchToggle === true ? <div>
             <button onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
             <Search></Search>
@@ -121,7 +131,7 @@ class OneHome extends Component {
             // height: '300px',
             // width: '300px',
             // top: '40%',
-    
+
             // // z-index: 3;
             // position: 'relative',
             // padding: '0px',
@@ -146,23 +156,23 @@ class OneHome extends Component {
             zIndex: 0,
             marginLeft: 'auto',
             marginRight: 'auto',
-        } 
+        }
         let latNum = parseFloat(lat)
         let lngNum = parseFloat(long)
-        const coords = { lat: latNum, lng: lngNum}
+        const coords = { lat: latNum, lng: lngNum }
         const googleMap =
-        <div><Map google={this.props.google} zoom={14}
-        onClick = { this.onMapClick }
-        initialCenter={coords}
-        center={coords}
-        style={style}
-        resetBoundsOnResize
-        >
-        <Marker onClick={this.onMarkerClick}
-        name={'Current location'}
-        position = {coords}
-        />
-        </Map></div>
+            <div><Map google={this.props.google} zoom={14}
+                onClick={this.onMapClick}
+                initialCenter={coords}
+                center={coords}
+                style={style}
+                resetBoundsOnResize
+            >
+                <Marker onClick={this.onMarkerClick}
+                    name={'Current location'}
+                    position={coords}
+                />
+            </Map></div>
 
         return (
             <div className="one-home-entire-container">
@@ -196,10 +206,10 @@ class OneHome extends Component {
                     <p>This home is located in <b>{city}</b></p>
                     {/* <GoogleMap latitude={lat} longitude={long} /> */}
                     <div className="outside-map-container">
-                    <div className="map-container">
+                        <div className="map-container">
                             {googleMap}
+                        </div>
                     </div>
-                </div>
                     <div className="oneHome-right-side-container">
                         <h5>${price} per night</h5>
                         <hr></hr>
