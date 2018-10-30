@@ -4,7 +4,7 @@ import axios from 'axios';
 import './one-home.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getStartDate, getEndDate, getTotal, getTripLength, getAllHomes } from '../../redux/reducer';
+import { getStartDate, getEndDate, getTotal, getTripLength, getAllHomes, getCurrHome } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 import ImageGallery from 'react-image-gallery';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
@@ -16,7 +16,7 @@ class OneHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            homeInfo: {},
+            // homeInfo: {},
             allHomesInCity: [],
             similarHomes: [],
             currentHomeImgList: [],
@@ -39,9 +39,7 @@ class OneHome extends Component {
        axios.get(`/api/home/${this.props.match.params.id}`)
             .then(res => {
                 console.log('getHouse with params fired')
-                this.setState({
-                    homeInfo: res.data[0]
-                })
+                this.props.getCurrHome(res.data[0])
         })  
     }
 
@@ -102,7 +100,7 @@ class OneHome extends Component {
             <Search></Search>
         </div> :
             ''
-        const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address, lat, long } = this.state.homeInfo;
+        const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address, lat, long } = this.props.homeInformation;
         // mapping over to get the house names of other similar homes
         let mappedSimilarListings = this.state.similarHomes.map(home => {
             return (
@@ -160,7 +158,7 @@ class OneHome extends Component {
         let lngNum = parseFloat(long)
         const coords = { lat: latNum, lng: lngNum}
         const googleMap =
-        <div><Map google={this.props.google} zoom={14}
+        <div className="real-map-container"><Map google={this.props.google} zoom={14}
         onClick = { this.onMapClick }
         initialCenter={coords}
         center={coords}
@@ -241,7 +239,7 @@ class OneHome extends Component {
                     </div>
                     
                     <div className="oneHome-right-side-container">
-                        <BookingDetails houseId={this.props.match.params.id} homeInformation={this.state.homeInfo}/>
+                        <BookingDetails houseId={this.props.match.params.id}/>
                     </div>
                 </div>
                 
@@ -251,7 +249,7 @@ class OneHome extends Component {
 }
 
 const mapStateToProps = state => {
-    const { startDate, endDate, total, city, tripLength } = state;
+    const { startDate, endDate, total, city, tripLength, homeInformation } = state;
     // const {total, city } = state;
 
     return {
@@ -259,7 +257,8 @@ const mapStateToProps = state => {
         endDate,
         total,
         city,
-        tripLength
+        tripLength,
+        homeInformation
     }
 }
 // OneHome.propTypes = {
@@ -267,7 +266,7 @@ const mapStateToProps = state => {
 //   }
 
 export default compose(
-    connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength }),
+    connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength, getCurrHome }),
     GoogleApiWrapper({
         apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
     })

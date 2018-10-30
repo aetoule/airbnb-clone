@@ -20,6 +20,7 @@ class BookingDetails extends Component {
     }
 
     getHouse() {
+        console.log('fired')
         console.log(this.props.houseid)
         // axios.get(`/api/home/${this.props.match.params.id}`)
         //     .then(res => {
@@ -34,8 +35,9 @@ class BookingDetails extends Component {
         this.props.history.goBack();
     }
     render() { 
+        console.log(this.props.homeInformation)
         console.log('this.props.tripLength',this.props.tripLength)
-        const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.props.homeInformation;
+        const {price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address } = this.props.homeInformation;
 
         // let startDay = this.props.startDate._d.getDate()
         // let startMonth = this.props.startDate._d.getMonth() + 1
@@ -122,14 +124,15 @@ class BookingDetails extends Component {
 }
 
 const mapStateToProps = state => {
-    const { startDate, endDate, total, tripLength } = state;
+    const { startDate, endDate, total, tripLength, homeInformation } = state;
     // const {total, city } = state;
 
     return {
         startDate,
         endDate,
         total,
-        tripLength
+        tripLength,
+        homeInformation
     }
 }
 
