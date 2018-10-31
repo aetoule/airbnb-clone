@@ -75,7 +75,7 @@ class Results extends Component {
           )
         } else {
           return (
-            <div key={e.home_id}>
+            <div key={e.homeid}>
               <div>
                 <Link to={`/results/${e.homeid}`}>
                   <img className='results-images' src='https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' alt="homes main image" />

@@ -1,0 +1,19 @@
+@import '../../styles';
+@import '../../assets';
+
+.top-background-image {
+    background-image: url('../../media/becomehostimage.jpg');
+    height: 100vh;
+    width: 100vw;
+    // object-fit: cover;
+    background-repeat: no-repeat;
+    background-size: 1000px 500px;
+    // background-position: 10% 70%; 
+
+}
+
+.get-started-host {
+    // @include searchButton;
+    background: $pink;
+    width: 200px;
+}

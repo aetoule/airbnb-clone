@@ -1,3 +1,17 @@
+@import '../../styles';
+@import '../../assets';
+
+
+@media (max-width: 1127px) {  
 .x-box {
     font-size: 100px;
+}
+
+}
+
+@media (min-width: 1128px) {  
+    .x-box {
+        display: none;
+    }
+    
 }

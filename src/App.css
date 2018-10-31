@@ -1,7 +1,3 @@
-.results-images{
-  max-width: 100%;
-  max-height: 20%
-}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -9,7 +5,7 @@ del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
+fieldset, button, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
@@ -45,5 +41,12 @@ table {
 html {
   box-sizing: border-box; }
 
+button {
+  background-color: transparent; }
+
+hr {
+  margin: 0 auto;
+  text-align: center; }
+
 * {
-  box-sizing: inherit; }
+  box-sizing: border-box; }

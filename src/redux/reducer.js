@@ -1,5 +1,6 @@
 
 const initialState = {
+    homeInformation: [],
     hostNewHome: [],
     homesWithoutImgs: [],
     homes: [],
@@ -27,6 +28,7 @@ const initialState = {
     hostHomePrice: ''
 }
 
+const GET_CURR_HOME = "GET_CURR_HOME";
 const GET_ALL_HOMES = "GET_ALL_HOMES";
 const GET_CITY_HOMES = "GET_CITY_HOMES";
 const GET_START_DATE = "GET_START_DATE";
@@ -54,6 +56,9 @@ const GET_HOST_NEW_HOME = 'GET_HOST_NEW_HOME'
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case GET_CURR_HOME: {
+            return { ...state, homeInformation: action.payload}
+        }
         case GET_ALL_HOMES:
             return { ...state, homes: action.payload }
         case GET_CITY_HOMES:
@@ -103,6 +108,13 @@ export default function reducer(state = initialState, action) {
             return { ...state, hostNewHome: action.payload }
         default:
             return { ...state }
+    }
+}
+
+export function getCurrHome(homeInformation) {
+    return {
+        type: GET_CURR_HOME,
+        payload: homeInformation
     }
 }
 

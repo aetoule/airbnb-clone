@@ -174,8 +174,10 @@ module.exports = {
     getOneHome: (req, res) => {
         dbInstance = req.app.get('db');
         let { id } = req.params;
+        console.log('hi',id)
         dbInstance.get_one_home(id)
             .then(home => {
+                console.log('hi2',id)
                 res.status(200).send(home)
             })
 

@@ -4,18 +4,19 @@ import axios from 'axios';
 import './one-home.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getStartDate, getEndDate, getTotal, getTripLength, getAllHomes } from '../../redux/reducer';
+import { getStartDate, getEndDate, getTotal, getTripLength, getAllHomes, getCurrHome } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 import ImageGallery from 'react-image-gallery';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import Search from '../Search/Search';
 import { compose } from 'redux';
+import BookingDetails from '../BookingDetails/BookingDetails';
 
 class OneHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            homeInfo: {},
+            // homeInfo: {},
             allHomesInCity: [],
             similarHomes: [],
             currentHomeImgList: [],
@@ -34,24 +35,20 @@ class OneHome extends Component {
         })
     }
 
-
-    async getHouse() {
-
-        await axios.get(`/api/home/${this.props.match.params.id}`)
+    getHouse() {
+        axios.get(`/api/home/${this.props.match.params.id}`)
             .then(res => {
-                this.setState({
-                    homeInfo: res.data[0]
-                })
+                console.log('getHouse with params fired')
+                this.props.getCurrHome(res.data[0])
             })
-
-
     }
 
     getSimilarHomes() {
         axios.get('/api/homes')
             .then(res => {
                 let allHomesWithCurrentHome = res.data
-                console.log(res.data)
+                console.log(res.data[this.props.match.params.id])
+                console.log(this.props.match.params.id)
                 let allSimilarHomes = allHomesWithCurrentHome
                 const idNumber = allSimilarHomes.findIndex(e => {
                     return e.homeid == this.props.match.params.id
@@ -71,7 +68,6 @@ class OneHome extends Component {
                     currentHomeImgList: currentHomeImageArray
                 })
             })
-
     }
 
     getTripDuration() {
@@ -99,11 +95,11 @@ class OneHome extends Component {
         console.log(this.state.currentHomeImgList);
 
         const ToggleSearchButton = this.state.searchToggle === true ? <div>
-            <button onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
+            <button className="cancel-btn" onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
             <Search></Search>
         </div> :
             ''
-        const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address, lat, long } = this.state.homeInfo;
+        const { home_name, price, max_guests, describe_space, describe_other_things_to_note, describe_main, describe_interaction_with_guests, describe_guest_access, city, address, lat, long } = this.props.homeInformation;
         // mapping over to get the house names of other similar homes
         let mappedSimilarListings = this.state.similarHomes.map(home => {
             return (
@@ -141,7 +137,7 @@ class OneHome extends Component {
             // left: '0px',
             // top: '0px',
 
-            position: 'relative',
+            // position: 'relative',
             left: '-41px',
             /* right: 0px; */
             /* bottom: 0px; */
@@ -161,7 +157,7 @@ class OneHome extends Component {
         let lngNum = parseFloat(long)
         const coords = { lat: latNum, lng: lngNum }
         const googleMap =
-            <div><Map google={this.props.google} zoom={14}
+            <div className="real-map-container"><Map google={this.props.google} zoom={14}
                 onClick={this.onMapClick}
                 initialCenter={coords}
                 center={coords}
@@ -173,11 +169,10 @@ class OneHome extends Component {
                     position={coords}
                 />
             </Map></div>
-
+        console.log('currentHomeimgarry', this.state.currentHomeImgList)
+        console.log(this.props.match.params.id)
         return (
             <div className="one-home-entire-container">
-                <div className="search-bar-header">
-                </div>
                 <div className="oneHome-img-gallery">
                     <ImageGallery items={pushedWithText} />
                 </div>
@@ -185,86 +180,75 @@ class OneHome extends Component {
                     <div className="oneHome-left-side-container">
                         <h1>{home_name}</h1>
                         <p>{city}  ·  {max_guests} guests</p>
-                        <div className="small-space"></div>
+                        <div className="medium-space"></div>
+                        <div className="medium-space"></div>
                         <p>{describe_main}</p>
-                        <h3>The space</h3>
+                        <div className="medium-space"></div>
+                        <h2>The space</h2>
+                        <div className="medium-space"></div>
                         <p>{describe_space}</p>
-                        <h3>Guest access</h3>
+                        <div className="medium-space"></div>
+                        <h2>Guest access</h2>
+                        <div className="medium-space"></div>
                         <p>{describe_guest_access}</p>
-                        <h3>Interaction with guests</h3>
+                        <div className="medium-space"></div>
+                        <h2>Interaction with guests</h2>
+                        <div className="medium-space"></div>
                         <p>{describe_interaction_with_guests}</p>
-                        <h3>Other things to note</h3>
+                        <div className="medium-space"></div>
+                        <h2>Other things to note</h2>
+                        <div className="medium-space"></div>
                         <p>{describe_other_things_to_note}</p>
-                        <hr></hr>
+                        <hr className="booking-info-line"></hr>
                         {/* <h3>Amenities</h3>
 
                         <h5>Similar listings</h5>
                         {mappedSimilarListings} */}
                         {/* {mappedImagesOfCurrHouse} */}
-                    </div>
-                    <h5>The neighborhood</h5>
-                    <p>This home is located in <b>{city}</b></p>
-                    {/* <GoogleMap latitude={lat} longitude={long} /> */}
-                    <div className="outside-map-container">
-                        <div className="map-container">
-                            {googleMap}
+                        <div className="medium-space"></div>
+                        <div className="medium-space"></div>
+                        <h5>The neighborhood</h5>
+                        <div className="medium-space"></div>
+                        <p>This home is located in <b>{city}</b></p>
+                        <div className="medium-space"></div>
+                        <div className="medium-space"></div>
+                        <div className="outside-map-container">
+                            <div className="map-container">
+                                {googleMap}
+                            </div>
                         </div>
+                        {!this.props.endDate
+                            ?
+                            <div>
+                                <footer>
+                                    <button onClick={() => this.setState({ searchToggle: true })}>Select Dates</button>
+                                </footer>
+                                {ToggleSearchButton}
+                            </div>
+                            :
+                            <div>
+                                <footer>
+                                    <div>
+                                        <Link onClick={() => this.getTripDuration()} to={`/booking-details/${this.props.match.params.id}`}><button className="book-btn">Book</button></Link>
+                                    </div>
+
+                                </footer>
+                            </div>
+                        }
                     </div>
+
                     <div className="oneHome-right-side-container">
-                        <h5>${price} per night</h5>
-                        <hr></hr>
-                        <h6>{this.props.total}</h6>
-                        <div className="trip-dates-box">
-                            {/* <p>{startDateString} to {endDateString}</p> */}
-                        </div>
-
-                        <div className="trip-costs-list">
-                            {/* <div className="list-price-times-days">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-cleaning-fee">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-service-fee">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-tax-fee">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-total">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div> */}
-
-                            <TakeMoney />
-                        </div>
-
+                        <BookingDetails houseId={this.props.match.params.id} />
                     </div>
-                    {!this.props.endDate
-                        ?
-                        <div>
-                            <footer>
-                                <button onClick={() => this.setState({ searchToggle: true })}>Select Dates</button>
-                            </footer>
-                            {ToggleSearchButton}
-                        </div>
-                        :
-                        <div>
-                            <footer>
-                                <div>
-                                    <Link onClick={() => this.getTripDuration()} to={`/booking-details/${this.props.match.params.id}`}><button className="book-btn">Book</button></Link>
-                                </div>
-
-                            </footer>
-                        </div>
-                    }
                 </div>
+
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    const { startDate, endDate, total, city, tripLength } = state;
+    const { startDate, endDate, total, city, tripLength, homeInformation } = state;
     // const {total, city } = state;
 
     return {
@@ -272,7 +256,8 @@ const mapStateToProps = state => {
         endDate,
         total,
         city,
-        tripLength
+        tripLength,
+        homeInformation
     }
 }
 // OneHome.propTypes = {
@@ -280,7 +265,7 @@ const mapStateToProps = state => {
 //   }
 
 export default compose(
-    connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength }),
+    connect(mapStateToProps, { getStartDate, getEndDate, getTotal, getTripLength, getCurrHome }),
     GoogleApiWrapper({
         apiKey: ('AIzaSyALYkGo0Uzu_yMVAZ48LV4FzI47BnuTvn8')
     })
