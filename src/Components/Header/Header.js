@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { getCity } from '../../redux/reducer';
+import { connect } from 'react-redux';
 import AirbnbLogo from '../../media/AirbnbLogo.svg';
 import downarrow from '../../media/arrowdownblack.svg'
 import './Header.css';
@@ -11,6 +13,10 @@ class Header extends Component {
             toggle: false
         }
     }
+    handleChange(event) {
+        this.props.getCity(event.target.value)
+      }
+    
     render() { 
         return ( 
             <header>
@@ -26,7 +32,15 @@ class Header extends Component {
                         </div>
                         <div className='search-box'>
                             <div className="search-icon"></div>
-                            <p className="search-text">Search</p>
+                            {/* <p className="search-text">Search</p> */}
+                            <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
+                                <option value="">Search</option>
+                                <option value="Phoenix">Phoenix</option>
+                                <option value="Flagstaff">Flagstaff</option>
+                                <option value="Sedona">Sedona</option>
+                                <option value="Tucson">Tucson</option>
+                                <option value="Williams">Williams</option>
+                            </select>
                         </div>
                     </div>
                     <nav className={this.state.toggle ? 'show' : ''}>
@@ -55,4 +69,12 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    const { city } = state;
+    return {
+      city
+    }
+  }
+  
+  export default connect(mapStateToProps, { getCity })(Header);
+  

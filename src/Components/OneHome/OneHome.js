@@ -129,7 +129,7 @@ class OneHome extends Component {
             // top: '40%',
 
             // // z-index: 3;
-            // position: 'relative',
+            position: 'relative',
             // padding: '0px',
             // // border-width: '0px',
             // // margin: '50px',
@@ -138,8 +138,9 @@ class OneHome extends Component {
             // top: '0px',
 
             // position: 'relative',
-            left: '-41px',
-            /* right: 0px; */
+            left: '0px',
+            right: '0px',
+
             /* bottom: 0px; */
             // top: '20%',
             /* top: -9%; */

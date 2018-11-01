@@ -86,7 +86,7 @@ class BookingDetails extends Component {
             </div> :
             <div>
                 {this.state.dateToggle === false ?
-                    <div> <button onClick={() => this.setState({ dateToggle: true })}>Add Dates</button>
+                    <div> <button className="add-dates-button" onClick={() => this.setState({ dateToggle: true })}>Add Dates</button>
                     </div> :
                     <div>
                         <button onClick={() => this.setState({ dateToggle: false })}>X</button>

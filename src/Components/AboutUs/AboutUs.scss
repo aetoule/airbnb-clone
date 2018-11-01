@@ -1,0 +1,44 @@
+@import '../../styles';
+@import '../../assets';
+
+.about-us-container {
+    .get-to-know-us-text {
+        margin-left: 87px;
+        margin-top: 20px;
+        color: $black;
+        font-size: 44px;
+        text-align: left;
+        // padding-top: 40px;
+    }
+
+    .about-us-left-right-container {
+        display: flex;
+        flex-direction: row;
+        .picture-of-us {
+            background-image: url('../../media/aboutUs.jpeg');
+            height: 400px;
+            width: 100vw;
+            object-fit: cover;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: 0 auto;
+            margin-left: 87px;
+            border-radius: 5px;
+        }
+    
+        .bios {
+            .kaylin-bio{
+                margin: 50px;
+            }
+            .aisha-bio{
+                margin: 50px;
+            }
+            
+        }
+    }
+    
+    
+}
+
+
+

@@ -154,6 +154,14 @@ p {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center; }
+      .logo-and-search-container .search-box select {
+        width: 450px;
+        font-weight: 500;
+        color: #767676;
+        border: none;
+        background-color: white;
+        font-size: 19px;
+        font-family: 'Poppins', sans-serif; }
       .logo-and-search-container .search-box .search-icon {
         margin-left: 15px;
         background-image: url("../../media/search-icon.svg");
@@ -162,10 +170,6 @@ p {
         background-repeat: no-repeat;
         height: 20px;
         width: 20px; }
-      .logo-and-search-container .search-box .search-text {
-        font-weight: 700;
-        padding-left: 14px;
-        color: #767676; }
   .small-space {
     display: none; }
   .horizontal-nav-container {

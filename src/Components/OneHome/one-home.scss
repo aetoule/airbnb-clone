@@ -116,6 +116,7 @@
             border-image: initial;
             margin-top: 16px;
             margin-bottom: 24px;
+            height: 500px;
             .x-box {
                 display: none;
             }
@@ -155,6 +156,9 @@
                 width: 100%;
                 margin-bottom: 10px;
                 padding: 5px 0;
+                padding: 8px 10px;
+                margin: 0 auto;
+
             }
             .trip-costs-list {
                 display: flex;
@@ -206,7 +210,18 @@
         }
         
     }
-    .StripeCheckout{
-        background: pink;
+    // .StripeCheckout{
+    //     background: pink !important;
+    // }
+
+    .real-map-container {
+        position: absolute;
+    }
+
+    .add-dates-button {
+        @include searchButton;
+        height: 35px;
+        width: 100%;
+        margin-bottom: 15px;
     }
 }
