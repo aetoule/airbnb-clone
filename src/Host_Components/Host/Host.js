@@ -12,7 +12,7 @@ class Host extends Component {
             <div>
                 <div className="top-background-image">
                     <p>HOST ON AIRBNB</p>
-                    <h1>Earn money as an Airbnb host</h1>
+                    <h1 className="become-host-h1-text">Earn money as an Airbnb host</h1>
                     <Link to="/get-started">
                         <button className="get-started-host">Get started</button>
                     </Link>

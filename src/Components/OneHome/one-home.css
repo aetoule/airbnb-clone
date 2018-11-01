@@ -547,4 +547,4 @@ p {
       opacity: 0.2;
       width: 100%; }
   .StripeCheckout {
-    background: pink; } }
+    background: pink !important; } }

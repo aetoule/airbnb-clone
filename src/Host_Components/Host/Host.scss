@@ -2,12 +2,15 @@
 @import '../../assets';
 
 .top-background-image {
-    background-image: url('../../media/becomehostimage.jpg');
-    height: 100vh;
+    background-image: url('https://a0.muscache.com/pictures/66bad600-46b8-4b90-9911-867dd44d254b.jpg');
+    height: 50vh;
     width: 100vw;
-    // object-fit: cover;
+    object-fit: cover;
     background-repeat: no-repeat;
-    background-size: 1000px 500px;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    // background-size: 1000px 500px;
     // background-position: 10% 70%; 
 
 }
@@ -16,4 +19,9 @@
     // @include searchButton;
     background: $pink;
     width: 200px;
+}
+
+.become-host-h1-text {
+    color: white;
+    font-size: 34px;
 }
