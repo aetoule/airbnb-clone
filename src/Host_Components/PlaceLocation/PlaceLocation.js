@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {getHostAddress, getHostLat, getHostLong} from '../../redux/reducer';
-import Geocode from "react-geocode";
+import Geocode from 'react-geocode';
 
 export class PlaceLocation extends Component {
   constructor(props) {
