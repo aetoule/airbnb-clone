@@ -40,6 +40,10 @@ app.post("/charge", (req, res) => {
     .then(charge => res.render("charge.pug"));
 });
 
+// if (process.env.REQUIRE_LOGIN) {
+
+// }
+
 // Nodemailer
 // var transport = {
 //   host: 'smtp.gmail.com',

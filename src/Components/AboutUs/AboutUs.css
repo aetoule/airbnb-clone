@@ -61,3 +61,15 @@ p {
     margin: 50px; }
   .about-us-container .about-us-left-right-container .bios .aisha-bio {
     margin: 50px; }
+  .about-us-container .about-us-left-right-container .bios .portfolio-button {
+    margin-top: 10px;
+    background: #FF5A5F;
+    border-style: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    width: 315px;
+    height: 50px; }
+    .about-us-container .about-us-left-right-container .bios .portfolio-button a {
+      text-decoration: none;
+      color: white; }

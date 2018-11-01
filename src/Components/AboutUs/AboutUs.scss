@@ -34,6 +34,16 @@
                 margin: 50px;
             }
             
+            .portfolio-button {
+                margin-top: 10px;
+
+                @include searchButton;
+            
+               a {
+                   text-decoration: none;
+                   color: white;
+               }
+            }
         }
     }
     

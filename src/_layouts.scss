@@ -5,3 +5,17 @@
     width: 80vw;
     
 }
+
+@mixin row() {
+    font-size: 0;
+}
+@mixin col($col, $sum, $gap: 0.1em, $align: top, $first: false, $last: false) {
+    // percentage($col/$sum)
+    width: 50%;
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: $align;
+    box-sizing: border-box;
+    padding-left: if($first, 0, $gap);
+    padding-right: if($last, 0, $gap);
+}
