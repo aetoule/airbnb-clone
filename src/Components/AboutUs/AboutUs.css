@@ -1,0 +1,15 @@
+.picture-of-us {
+  background-image: url("../../media/aboutUs.jpeg");
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 24px; }
+  .picture-of-us .get-to-know-us-text {
+    color: white;
+    font-size: 100px;
+    padding-top: 40px; }
