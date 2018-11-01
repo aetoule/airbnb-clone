@@ -1,2 +1,46 @@
-.x-box {
-  font-size: 100px; }
+h1 {
+  font-size: 32px;
+  color: #484848;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 10px 0; }
+
+h2 {
+  font-size: 16px;
+  color: #484848;
+  font-weight: 600; }
+
+h3 {
+  font-size: 12px;
+  color: #484848;
+  font-weight: 600;
+  padding: 15px 0; }
+
+h4 {
+  color: #00A699; }
+
+h5 {
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif; }
+
+h6 {
+  font-size: 14px;
+  color: #484848;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif; }
+
+p {
+  font-size: 16px;
+  color: #484848;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+@media (max-width: 1127px) {
+  .x-box {
+    font-size: 100px; } }
+
+@media (min-width: 1128px) {
+  .x-box {
+    display: none; } }

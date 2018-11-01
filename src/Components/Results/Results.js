@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-// import './App.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getAllHomes, getCityHomes, getCity } from '../../redux/reducer';
 import { Link } from "react-router-dom";
-import Search from '../Search/Search'
+import Search from '../Search/Search';
 
 class Results extends Component {
+
   state = {
 
   }
@@ -44,65 +44,114 @@ class Results extends Component {
   }
 
   render() {
-    console.log(this.props.city);
 
     const home = !this.props.city ?
       this.props.homes.map(e => {
-        return (
-          <div key={e.home_id}>
-            <div>
-              {e.imgs.map(img => {
+        console.log(e);
 
-                return img.main ?
-                  <Link to={`/results/${e.home_id}`}>
-                    <img className='results-images' src={img.img_url} alt="homes main image" />
-                  </Link>
-                  : ""
-              })}
+        console.log(e.imgs.length);
+        if (e.imgs.length !== 0) {
+          return (
+            <div key={e.homeid}>
+              <div>
+                <Link to={`/results/${e.homeid}`}>
+                  <img className='results-images' src={e.imgs[0].img_url} alt="homes main image" />
+                </Link>
+
+
+              </div>
+              <div>
+                <h5>
+                  {e.max_guests} Guests
+              </h5>
+                <h4>
+                  {e.home_name}
+                </h4>
+                <h5>
+                  ${e.price} per night
+              </h5>
+              </div>
+            </div>
+          )
+        } else {
+          return (
+            <div key={e.homeid}>
+              <div>
+                <Link to={`/results/${e.homeid}`}>
+                  <img className='results-images' src='https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' alt="homes main image" />
+                </Link>
+
+
+              </div>
+              <div>
+                <h5>
+                  {e.max_guests} Guests
+              </h5>
+                <h4>
+                  {e.home_name}
+                </h4>
+                <h5>
+                  ${e.price} per night
+              </h5>
+              </div>
+            </div>
+          )
+        }
+      })
+      : ''
+    const { cityHomes } = this.props
+    const mappedHomes = cityHomes.map(e => {
+      if (e.imgs.length !== 0) {
+        console.log(e);
+
+        return (
+          <div key={e.homeid}>
+            <div>
+              <Link to={`/results/${e.homeid}`}>
+                <img className='results-images' src={e.imgs[0].img_url} alt="homes main image" />
+              </Link>
+
+
             </div>
             <div>
               <h5>
                 {e.max_guests} Guests
-              </h5>
+            </h5>
               <h4>
                 {e.home_name}
               </h4>
               <h5>
                 ${e.price} per night
-              </h5>
+            </h5>
             </div>
           </div>
         )
-      })
-      : ''
-    const { cityHomes } = this.props
-    const mappedHomes = cityHomes.map(home => {
+      } else {
+        return (
+          <div key={e.homeid}>
+            <div>
+              <Link to={`/results/${e.homeid}`}>
+                <img className='results-images' src='https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' alt="homes main image" />
+              </Link>
 
-      return (
-        <div key={home.home_id}>
-          <div>
-            {home.imgs.map(img => {
 
-              return img.main ?
-                <Link to={`/results/${home.home_id}`}>
-                  <img className='results-images' src={img.img_url} alt="homes main image" />
-                </Link>
-                : ""
-            })}
-          </div>
-          <div>
-            <h5>
-              {home.max_guests} Guests
+            </div>
+            <div>
+              <h5>
+                {e.max_guests} Guests
             </h5>
-            <h4>
-              {home.home_name}
-            </h4>
-            <h5>
-              ${home.price} per night
+              <h4>
+                {e.home_name}
+              </h4>
+              <h5>
+                ${e.price} per night
             </h5>
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
+
+
     })
 
 
@@ -111,9 +160,8 @@ class Results extends Component {
 
         <div className='users-dates'>
           <div>
-            <Search  > </Search>
-            start date-end date
-        </div>
+            <Search> </Search>
+          </div>
         </div>
         <div>
           200+ Homes...

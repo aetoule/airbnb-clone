@@ -39,40 +39,10 @@ class Home extends Component {
                 </div>
                 <div>
                     <Search />
+                    {/* <Link to="/get-started">
+                        <button>Host</button>
+                    </Link> */}
                 </div>
-                {/* <div className='home-filter-container'>
-                    <h6 className="home-box-titles">WHERE</h6>
-                    <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
-                        <option value="">Select a City</option>
-                        <option value="Phoenix">Phoenix</option>
-                        <option value="Flagstaff">Flagstaff</option>
-                        <option value="Sedona">Sedona</option>
-                        <option value="Tucson">Tucson</option>
-                        <option value="Williams">Williams</option>
-                    </select>
-                    <h6 className="home-box-titles">DATES</h6>
-                    <DateRangePicker
-                        startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                        startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-                        endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                        endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-                        onDatesChange={({ startDate, endDate }) => this.setState(() => {
-                            getStartDate(startDate)
-                            getEndDate(endDate)
-                            return {
-                                startDate,
-                                endDate
-                            }
-                        })}
-
-                        // PropTypes.func.isRequired,
-                        focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                        onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-                    />
-
-                    <Link to='/results/'><button className="search-btn">Search</button></Link>
-                </div> */}
-
             </div>
         );
     }

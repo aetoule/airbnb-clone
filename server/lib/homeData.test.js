@@ -16,7 +16,9 @@ describe('Unit Test', () => {
         describe_interaction_with_guests: 'home interations with guests',
         describe_other_things_to_note: 'home describe other things to note',
         address: 'home address',
-        city: 'home city'
+        city: 'home city',
+        lat: 34.7451,
+        long: -112.02168
       }
 
       const fakeDb = {
@@ -32,7 +34,9 @@ describe('Unit Test', () => {
             describe_interaction_with_guests: home.describe_interaction_with_guests,
             describe_other_things_to_note: home.describe_other_things_to_note,
             address: home.address,
-            city: home.city
+            city: home.city,
+            lat: home.lat,
+            long: home.long
           })
         )
       }
@@ -46,10 +50,38 @@ describe('Unit Test', () => {
         describe_interaction_with_guests: home.describe_interaction_with_guests,
         describe_other_things_to_note: home.describe_other_things_to_note,
         address: home.address,
-        city: home.city
+        city: home.city,
+        lat: home.lat,
+        long: home.long
       })
     })
   })
+
+  // describe('Create', () => {
+  //   it("Should pass in created user", () => {
+  //     const user = {
+  //       auth0_id: 'blah12eurh2',
+  //       name: 'bob ross', 
+  //       is_host: 'true'
+  //     }
+
+  //     const fakeDb = {
+  //       query: sinon.mock().withArgs(
+  //         sinon.match.string,
+  //         sinon.match({
+  //           auth0_id: user.auth0_id,
+  //           name: user.name, 
+  //           is_host: user.is_host
+  //         })
+  //       )
+  //     }
+  //     return homeData.createUser(fakeDb, {
+  //       auth0_id: user.auth0_id,
+  //       name: user.name, 
+  //       is_host: user.is_host
+  //     })
+  //   })
+  // })
 
 })
 
@@ -65,14 +97,19 @@ describe('Integration Test', () => {
 
   describe('read', () => {
     it('read homes', () => {
-      return toDoData.getHomes(db).then(homes => {
+      return homeData.getHomes(db).then(homes => {
         expect(homes.length).not.toEqual(0)
-
       })
-
     })
   })
 
+  // describe('read users', () => {
+  //   it('reads users', () => {
+  //     return homeData.getUsers(db).then(users => {
+  //       expect(users.length).not.toEqual(0)
+  //     })
+  //   })
+  // })
 })
 
 

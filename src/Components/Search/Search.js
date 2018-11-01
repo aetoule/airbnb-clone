@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getStartDate, getEndDate, getCity } from '../../redux/reducer';
 import axios from 'axios';
-// import './Home.css';
 
 class Search extends Component {
   constructor(props) {
@@ -18,10 +17,7 @@ class Search extends Component {
 
 
   handleChange(event) {
-    // console.log(this.refs.city.value)
-    // console.log(event.target.value)
     this.props.getCity(event.target.value)
-    // this.props.(event)
   }
 
   render() {
@@ -43,7 +39,7 @@ class Search extends Component {
             <option value="">Select a City</option>
             <option value="Phoenix">Phoenix</option>
             <option value="Flagstaff">Flagstaff</option>
-            {/* <option value="Sedona">Sedona</option> */}
+            <option value="Sedona">Sedona</option>
             <option value="Tucson">Tucson</option>
             <option value="Williams">Williams</option>
           </select>

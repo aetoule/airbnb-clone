@@ -1,0 +1,63 @@
+h1 {
+  font-size: 32px;
+  color: #484848;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 10px 0; }
+
+h2 {
+  font-size: 16px;
+  color: #484848;
+  font-weight: 600; }
+
+h3 {
+  font-size: 12px;
+  color: #484848;
+  font-weight: 600;
+  padding: 15px 0; }
+
+h4 {
+  color: #00A699; }
+
+h5 {
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif; }
+
+h6 {
+  font-size: 14px;
+  color: #484848;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif; }
+
+p {
+  font-size: 16px;
+  color: #484848;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.about-us-container .get-to-know-us-text {
+  margin-left: 87px;
+  margin-top: 20px;
+  color: #484848;
+  font-size: 44px;
+  text-align: left; }
+
+.about-us-container .about-us-left-right-container {
+  display: flex;
+  flex-direction: row; }
+  .about-us-container .about-us-left-right-container .picture-of-us {
+    background-image: url("../../media/aboutUs.jpeg");
+    height: 400px;
+    width: 100vw;
+    object-fit: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    margin-left: 87px;
+    border-radius: 5px; }
+  .about-us-container .about-us-left-right-container .bios .kaylin-bio {
+    margin: 50px; }
+  .about-us-container .about-us-left-right-container .bios .aisha-bio {
+    margin: 50px; }
