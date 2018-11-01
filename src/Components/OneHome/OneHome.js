@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import { getStartDate, getEndDate, getTotal, getTripLength, getAllHomes, getCurrHome } from '../../redux/reducer';
 import TakeMoney from '../StripeCheckout';
 import ImageGallery from 'react-image-gallery';
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import Search from '../Search/Search';
-import {compose} from 'redux';
+import { compose } from 'redux';
 import BookingDetails from '../BookingDetails/BookingDetails';
 
 class OneHome extends Component {
@@ -34,13 +34,13 @@ class OneHome extends Component {
             searchToggle: false
         })
     }
-    
+
     getHouse() {
-       axios.get(`/api/home/${this.props.match.params.id}`)
+        axios.get(`/api/home/${this.props.match.params.id}`)
             .then(res => {
                 console.log('getHouse with params fired')
                 this.props.getCurrHome(res.data[0])
-        })  
+            })
     }
 
     getSimilarHomes() {
@@ -51,22 +51,18 @@ class OneHome extends Component {
                 console.log(this.props.match.params.id)
                 let allSimilarHomes = allHomesWithCurrentHome
                 const idNumber = allSimilarHomes.findIndex(e => {
-                    console.log(e)
                     return e.homeid == this.props.match.params.id
                 })
-                // right now the get one home is not getting the image array. So I'm using this endpoint to get the home info for this house to get access to the image array
-                console.log(res.data[idNumber].imgs)
+                console.log(idNumber);
+
+                // right now the get one home is not getting the image array.So I'm using this endpoint to get the home info for this house to get access to the image array
                 let currentHomeImageArray;
                 if (res.data[idNumber].imgs.length !== 0) {
                     currentHomeImageArray = res.data[idNumber].imgs
                 } else {
-                    currentHomeImageArray = [{img_url: 'https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png'}]
+                    currentHomeImageArray = [{ img_url: 'https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' }]
                 }
-
-                console.log(currentHomeImageArray)
-
-                // currentHomeImageArray = res.data[idNumber].imgs
-                // allSimilarHomes.splice(idNumber, 1)
+                allSimilarHomes.splice(idNumber, 1)
                 this.setState({
                     // similarHomes: allSimilarHomes,
                     currentHomeImgList: currentHomeImageArray
@@ -82,19 +78,22 @@ class OneHome extends Component {
     }
     onMarkerClick = (props, marker, e) => {
         this.setState({
-          selectedPlace: props,
-          activeMarker: marker,
-        });
-      }
-    onMapClick = (props) => {
-    if (this.state.showingInfoWindow) {
-        this.setState({
-        activeMarker: null
+            selectedPlace: props,
+            activeMarker: marker,
         });
     }
+    onMapClick = (props) => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                activeMarker: null
+            });
+        }
     }
 
     render() {
+
+        console.log(this.state.currentHomeImgList);
+
         const ToggleSearchButton = this.state.searchToggle === true ? <div>
             <button className="cancel-btn" onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
             <Search></Search>
@@ -128,7 +127,7 @@ class OneHome extends Component {
             // height: '300px',
             // width: '300px',
             // top: '40%',
-    
+
             // // z-index: 3;
             // position: 'relative',
             // padding: '0px',
@@ -153,23 +152,23 @@ class OneHome extends Component {
             zIndex: 0,
             marginLeft: 'auto',
             marginRight: 'auto',
-        } 
+        }
         let latNum = parseFloat(lat)
         let lngNum = parseFloat(long)
-        const coords = { lat: latNum, lng: lngNum}
+        const coords = { lat: latNum, lng: lngNum }
         const googleMap =
-        <div className="real-map-container"><Map google={this.props.google} zoom={14}
-        onClick = { this.onMapClick }
-        initialCenter={coords}
-        center={coords}
-        style={style}
-        resetBoundsOnResize
-        >
-        <Marker onClick={this.onMarkerClick}
-        name={'Current location'}
-        position = {coords}
-        />
-        </Map></div>
+            <div className="real-map-container"><Map google={this.props.google} zoom={14}
+                onClick={this.onMapClick}
+                initialCenter={coords}
+                center={coords}
+                style={style}
+                resetBoundsOnResize
+            >
+                <Marker onClick={this.onMarkerClick}
+                    name={'Current location'}
+                    position={coords}
+                />
+            </Map></div>
         console.log('currentHomeimgarry', this.state.currentHomeImgList)
         console.log(this.props.match.params.id)
         return (
@@ -219,30 +218,30 @@ class OneHome extends Component {
                             </div>
                         </div>
                         {!this.props.endDate
-                        ?
-                        <div>
-                            <footer>
-                                <button onClick={() => this.setState({ searchToggle: true })}>Select Dates</button>
-                            </footer>
-                            {ToggleSearchButton}
-                        </div>
-                        :
-                        <div>
-                            <footer>
-                                <div>
-                                    <Link onClick={() => this.getTripDuration()} to={`/booking-details/${this.props.match.params.id}`}><button className="book-btn">Book</button></Link>
-                                </div>
+                            ?
+                            <div>
+                                <footer>
+                                    <button onClick={() => this.setState({ searchToggle: true })}>Select Dates</button>
+                                </footer>
+                                {ToggleSearchButton}
+                            </div>
+                            :
+                            <div>
+                                <footer>
+                                    <div>
+                                        <Link onClick={() => this.getTripDuration()} to={`/booking-details/${this.props.match.params.id}`}><button className="book-btn">Book</button></Link>
+                                    </div>
 
-                            </footer>
-                        </div>
-                    }
+                                </footer>
+                            </div>
+                        }
                     </div>
-                    
+
                     <div className="oneHome-right-side-container">
-                        <BookingDetails houseId={this.props.match.params.id}/>
+                        <BookingDetails houseId={this.props.match.params.id} />
                     </div>
                 </div>
-                
+
             </div>
         );
     }

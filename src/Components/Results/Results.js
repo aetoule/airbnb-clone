@@ -102,6 +102,8 @@ class Results extends Component {
     const { cityHomes } = this.props
     const mappedHomes = cityHomes.map(e => {
       if (e.imgs.length !== 0) {
+        console.log(e);
+
         return (
           <div key={e.homeid}>
             <div>
@@ -155,11 +157,11 @@ class Results extends Component {
 
     return (
       <div className="Results">
-        
+
         <div className='users-dates'>
           <div>
             <Search> </Search>
-        </div>
+          </div>
         </div>
         <div>
           200+ Homes...
