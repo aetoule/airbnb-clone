@@ -81,13 +81,14 @@ p {
     font-weight: 300; }
 
 .results-searchbar {
-  padding: 10px;
-  border-top: solid #858585 0.5px;
-  border-bottom: solid #bdbdbd 0.25px; }
+  padding: 10px 0;
+  border-top: 1px solid rgba(118, 118, 118, 0.2);
+  border-bottom: 0.6px solid rgba(118, 118, 118, 0.2); }
 
 .results-search-btn {
   color: #767676;
   font-size: 15px;
   padding: 5px;
-  border: solid #b6b6b6 0.5px;
+  margin-left: 25px;
+  border: 0.5px solid rgba(118, 118, 118, 0.3);
   border-radius: 5px; }

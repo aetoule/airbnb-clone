@@ -72,4 +72,5 @@ p {
     height: 50px; }
     .about-us-container .about-us-left-right-container .bios .portfolio-button a {
       text-decoration: none;
-      color: white; }
+      color: white;
+      font-family: 'Poppins', sans-serif; }

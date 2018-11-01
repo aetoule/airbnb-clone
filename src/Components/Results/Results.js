@@ -215,12 +215,14 @@ class Results extends Component {
       </div>
 
     return (
+      <div>
+      <div className='results-searchbar'>
+            {searchBar}
+          </div>
       <div className="Results">
 
         <div className='users-dates'>
-          <div className='results-searchbar'>
-            {searchBar}
-          </div>
+          
         </div>
         <div>
           {listingsTitle}
@@ -230,6 +232,7 @@ class Results extends Component {
           {home}
           {mappedHomes}
         </div>
+      </div>
       </div>
     );
   }

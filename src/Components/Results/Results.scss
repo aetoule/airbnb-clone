@@ -50,15 +50,16 @@ margin: 0;
 }
 
 .results-searchbar{
-  padding: 10px;
-  border-top: solid rgb(133, 133, 133) .5px;
-  border-bottom: solid rgb(189, 189, 189) .25px;
+  padding: 10px 0;
+  border-top: 1px solid  rgba(118, 118, 118, 0.2);
+  border-bottom: 0.6px solid  rgba(118, 118, 118, 0.2);
 }
 
 .results-search-btn{
   color: $gray;
   font-size: 15px;
   padding: 5px;
-  border: solid rgb(182, 182, 182) .5px;
+  margin-left: 25px;
+  border: .5px solid rgba(118, 118, 118, 0.3);
   border-radius: 5px;
 }
