@@ -39,7 +39,6 @@ export class UploadPhotos extends Component {
           this.setState({ gallery: myGallery })
           this.props.addHostImgs(this.state.gallery)
 
-
         }
       });
 
@@ -55,6 +54,7 @@ export class UploadPhotos extends Component {
       <div className="upload-photos-container">
         {/* <h1>Set the Scene</h1> */}
         <h5 className="upload-photos-title">Show guests what your space looks like</h5>
+        <h3 className="host-step-number-text">STEP 3</h3>
         <div className="dotted-box">
           <div className="main">
             <div className="upload">
@@ -69,7 +69,7 @@ export class UploadPhotos extends Component {
           <button className="host-goback-link" onClick={() => this.handleGoBack()}>Back</button>
         
         <Link to="/description">
-          <button className="host-continue-btn">Skip for now</button>
+          <button className="host-continue-btn">Continue</button>
         </Link>
         </div>
       </div>

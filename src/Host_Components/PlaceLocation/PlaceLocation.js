@@ -74,6 +74,7 @@ export class PlaceLocation extends Component {
       <div className="host-placelocation-container">
         <div className="host-placelocation-right-side-container">
           <h5 className="placelocation-header">Where's Your Place Located?</h5>
+          <h3 className="host-step-number-text">STEP 2</h3>
           <h2 className="placelocation-input-header">Country / Region</h2>
           <input className="gray-input-box" readOnly value={country}/>
           <h2 className="placelocation-input-header">Street Address</h2>

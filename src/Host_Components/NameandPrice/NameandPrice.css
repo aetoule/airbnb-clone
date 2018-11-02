@@ -46,6 +46,11 @@ p {
     margin-top: 50px;
     margin-bottom: 30px;
     color: #484848; }
+  .host-nameAndPrice-container .host-step-number-text {
+    color: #767676;
+    font-size: 14px;
+    opacity: 0.9;
+    font-family: 'Montserrat', sans-serif; }
   .host-nameAndPrice-container .nameandprice-input-box {
     border-radius: 3px;
     border: solid 1px #dce0e0;

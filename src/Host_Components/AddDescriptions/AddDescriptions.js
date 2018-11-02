@@ -41,6 +41,7 @@ export class AddDescriptions extends Component {
       <div className="add-descriptions-container">
         <div className="add-descriptions-left-side-container">
         <h1>Edit your description</h1>
+        <h3 className="host-step-number-text">STEP 4</h3>
         <h3 className="add-descriptions-box-titles">Summary</h3>
         <textarea className="input-box" value={hostDescribeMain} onChange={(e) => this.handleDescribeMain(e.target.value)} placeholder="Describe the decor, light, what's nearby, etc..."/>
         <h3 className="add-descriptions-box-titles">About your place (optional)</h3>

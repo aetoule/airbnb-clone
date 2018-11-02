@@ -48,6 +48,11 @@ p {
     padding-top: 30px;
     padding-right: 30px;
     padding-left: 30px; }
+    .host-placelocation-container .host-placelocation-right-side-container .host-step-number-text {
+      color: #767676;
+      font-size: 14px;
+      opacity: 0.9;
+      font-family: 'Montserrat', sans-serif; }
     .host-placelocation-container .host-placelocation-right-side-container .placelocation-header {
       font-weight: 400;
       font-size: 32px;

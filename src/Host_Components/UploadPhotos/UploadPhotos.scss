@@ -6,8 +6,15 @@
 .upload-photos-container{
     // margin: 0 auto;
     padding: 50px 300px 0 300px;
+    .host-step-number-text {
+        color: $gray;
+        font-size: 14px;
+        opacity: 0.9;
+        font-family: 'Montserrat', sans-serif;
+    }
     .upload-photos-title{
         padding-bottom: 30px;
+        color: $black;
     }
     .dotted-box{
         height: 400px;

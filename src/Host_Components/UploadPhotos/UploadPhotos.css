@@ -39,8 +39,14 @@ p {
 
 .upload-photos-container {
   padding: 50px 300px 0 300px; }
+  .upload-photos-container .host-step-number-text {
+    color: #767676;
+    font-size: 14px;
+    opacity: 0.9;
+    font-family: 'Montserrat', sans-serif; }
   .upload-photos-container .upload-photos-title {
-    padding-bottom: 30px; }
+    padding-bottom: 30px;
+    color: #484848; }
   .upload-photos-container .dotted-box {
     height: 400px;
     width: 800px;

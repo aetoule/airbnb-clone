@@ -7,6 +7,12 @@
     .add-descriptions-left-side-container{
         width: 544px;
         margin: 0 100px;
+        .host-step-number-text {
+            color: $gray;
+            font-size: 14px;
+            opacity: 0.9;
+            font-family: 'Montserrat', sans-serif;
+        }
     }
     .input-box{
         border-radius: 3px;

@@ -42,6 +42,11 @@ p {
   .add-descriptions-container .add-descriptions-left-side-container {
     width: 544px;
     margin: 0 100px; }
+    .add-descriptions-container .add-descriptions-left-side-container .host-step-number-text {
+      color: #767676;
+      font-size: 14px;
+      opacity: 0.9;
+      font-family: 'Montserrat', sans-serif; }
   .add-descriptions-container .input-box {
     border-radius: 3px;
     border: solid 1px #dce0e0;

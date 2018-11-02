@@ -13,6 +13,12 @@
         padding-top: 30px;
         padding-right: 30px;
         padding-left: 30px;
+        .host-step-number-text {
+            color: $gray;
+            font-size: 14px;
+            opacity: 0.9;
+            font-family: 'Montserrat', sans-serif;
+        }
         .placelocation-header {
             font-weight:400;
             font-size: 32px;

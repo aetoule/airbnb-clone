@@ -17,8 +17,6 @@ export class NameandPrice extends Component {
     this.setNewHome = this.setNewHome.bind(this)
   }
 
-
-
   getHomes() {
     axios.get('/api/getallhomes').then(res => {
       this.props.getAllHomesWithoutImgs(res.data)
@@ -28,8 +26,6 @@ export class NameandPrice extends Component {
         console.log('err', err)
       })
   }
-
-
 
   postHostsHome() {
     const { hostHomeName,
@@ -59,11 +55,8 @@ export class NameandPrice extends Component {
       long: hostLong
     }).then(res => {
       this.getHomes()
-
       console.log(res.data);
       console.log('hi');
-
-
     })
       .catch(error => {
         console.log(error);
@@ -71,13 +64,9 @@ export class NameandPrice extends Component {
   }
 
   addImgsToHostHome() {
-
-
     this.props.hostImgs.map(img => {
       console.log(img);
-
       console.log(this.props.hostNewHome);
-
       axios.post('/api/myimgs', {
         img_url: img,
         home_id: this.props.hostNewHome.homeid
@@ -88,35 +77,22 @@ export class NameandPrice extends Component {
 
       }).catch(error => {
         console.log(error);
-
       })
     })
-
-
-
   }
 
   setNewHome() {
-
     this.props.homesWithoutImgs.map(home => {
       console.log(home.lat);
       console.log(this.props.hostLat);
-
-
       if (home.lat == this.props.hostLat) {
         console.log(home);
         this.props.getHostNewHome(home)
-
-
       } else {
         console.log('blag');
-
       }
     })
-
     this.addImgsToHostHome()
-
-
   }
 
   handleHomeName = (event) => {
@@ -131,15 +107,13 @@ export class NameandPrice extends Component {
   }
 
   render() {
-
-
     const { hostHomeName, hostHomePrice } = this.props
     console.log(this.props.hostNewHome);
-
     return (
       <div className="host-nameAndPrice-container">
         <div className="host-nameAndPrice-left-side-container">
           <h5 className="name-your-place-title">Name Your Place</h5>
+          <h3 className="host-step-number-text">STEP 5</h3>
           <input className="nameandprice-input-box" type="text" value={hostHomeName} onChange={(e) => this.handleHomeName(e.target.value)} placeholder="Listing Title"/>
 
           <h5 className="name-your-place-title">Price Your Place</h5>
