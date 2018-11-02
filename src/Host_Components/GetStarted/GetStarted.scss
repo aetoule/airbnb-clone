@@ -1,0 +1,42 @@
+@import '../../styles';
+@import '../../assets';
+
+
+.getStarted-container {
+    display: flex;
+    flex-direction: row;
+    .getStarted-left-side-container{
+        display: flex;
+        flex-direction: column;
+        padding: 15px 85px;
+        .lets-get-started-text{
+            font-weight:400;
+            font-size: 32px;
+        }
+        .host-step-number-text {
+            color: $gray;
+            font-size: 14px;
+            opacity: 0.9;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .what-kind-of-place-text {
+            font-weight:400;
+            font-size: 24px;
+            font-family: 'Montserrat', sans-serif;
+
+        }
+        .getStarted-next-btn {
+            @include hostContinueButton;
+        }
+    }
+    
+    .getStarted-right-side-container {
+        background-image: url('https://a0.muscache.com/airbnb/static/b12a70f632d3d127a38a67afde7cc8ec.png');
+        object-fit: cover;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 40%;
+    }
+}

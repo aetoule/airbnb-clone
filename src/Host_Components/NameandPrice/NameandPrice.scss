@@ -1,0 +1,39 @@
+@import '../../styles';
+@import '../../assets';
+
+.host-nameAndPrice-container{
+    padding: 15px 85px;
+    .host-nameAndPrice-left-side-container{
+        width: 544px;
+        margin: 0 100px;
+    }
+    .name-your-place-title{
+        margin-top: 50px;
+        margin-bottom: 30px;
+        color: $black;
+    }
+    .nameandprice-input-box{
+        border-radius: 3px;
+        border: solid 1px #dce0e0;
+        padding: 20px;
+        resize: none;
+        outline: 0 solid transparent;
+        width: 100%;
+        font-size: 19px;
+    }
+    .back-and-next-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 10px;
+        .host-goback-link{
+            color: $darkGreen;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .host-continue-btn {
+            @include hostContinueButton
+        }
+    }
+}
+

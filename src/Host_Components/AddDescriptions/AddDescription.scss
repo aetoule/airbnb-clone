@@ -1,0 +1,41 @@
+@import '../../styles';
+@import '../../assets';
+@import '../../layouts';
+
+.add-descriptions-container{
+    padding: 15px 85px;
+    .add-descriptions-left-side-container{
+        width: 544px;
+        margin: 0 100px;
+    }
+    .input-box{
+        border-radius: 3px;
+        border: solid 1px #dce0e0;
+        padding: 20px;
+        outline: 0 solid transparent;
+        width: 100%;
+        font-size: 19px;
+    }
+    .add-descriptions-box-titles{
+        font-size: 19px;
+        color: $black;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .back-and-next-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 10px;
+        .host-goback-link{
+            color: $darkGreen;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .host-continue-btn {
+            @include hostContinueButton
+        }
+    }
+
+    
+}

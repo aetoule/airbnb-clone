@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { addHostImgs } from '../../redux/reducer'
-import { connect } from 'react-redux'
-
+import { addHostImgs } from '../../redux/reducer';
+import { connect } from 'react-redux';
+import './UploadPhotos.css';
 
 export class UploadPhotos extends Component {
   constructor(props) {
@@ -23,6 +23,9 @@ export class UploadPhotos extends Component {
 
   //     })
   // }
+  handleGoBack = () => {
+    this.props.history.goBack();
+  }
 
   uploadWidget = () => {
     window.cloudinary.openUploadWidget(
@@ -49,20 +52,26 @@ export class UploadPhotos extends Component {
 
 
     return (
-      <div>
-        <h1>Set the Scene</h1>
-        <h2>Show guests what it looks like</h2>
-        <div className="main">
-          <div className="upload">
-            <button onClick={this.uploadWidget} className="upload-button">
-              Add Images
-                    </button>
+      <div className="upload-photos-container">
+        {/* <h1>Set the Scene</h1> */}
+        <h5 className="upload-photos-title">Show guests what your space looks like</h5>
+        <div className="dotted-box">
+          <div className="main">
+            <div className="upload">
+              <button onClick={this.uploadWidget} className="upload-button">
+                Upload Photos
+              </button>
+            </div>
           </div>
-
         </div>
+
+        <div className="back-and-next-btns">
+          <button className="host-goback-link" onClick={() => this.handleGoBack()}>Back</button>
+        
         <Link to="/description">
-          <button>Next</button>
+          <button className="host-continue-btn">Skip for now</button>
         </Link>
+        </div>
       </div>
     )
   }

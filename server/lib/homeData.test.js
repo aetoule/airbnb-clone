@@ -12,7 +12,7 @@ describe('Unit Test', () => {
         max_guests: 2,
         describe_main: 'main description',
         describe_space: 'home space',
-        describe_guest_access: 'home guest acces',
+        describe_guest_access: 'home guest access',
         describe_interaction_with_guests: 'home interations with guests',
         describe_other_things_to_note: 'home describe other things to note',
         address: 'home address',
@@ -54,6 +54,26 @@ describe('Unit Test', () => {
         lat: home.lat,
         long: home.long
       })
+    }),
+    // unit test of img url is not empty
+    describe('Create', () => {
+      it('Should pass in an image url', () => {
+          const home = {
+              img_url: 'imgurl'
+          }
+          const fakeDb = {
+              query: sinon.mock().withArgs(
+                  sinon.match.string,
+                  sinon.match({
+                      
+                      img_url: home.img_url
+                  })
+              )
+          }
+          return homeData.createImage(fakeDb, {
+              img_url: home.img_url
+          })
+      })
     })
   })
 
@@ -82,18 +102,45 @@ describe('Unit Test', () => {
   //     })
   //   })
   // })
+  describe('Create', () => {
+    it("Should pass in created image", () => {
+      const image = {
+        img_url: 'blahurl'
+      }
+
+      const fakeDb = {
+        query: sinon.mock().withArgs(
+          sinon.match.string,
+          sinon.match({
+            img_url: image.img_url,
+          })
+        )
+      }
+      return homeData.createImage(fakeDb, {
+        img_url: image.img_url
+      })
+    })
+  })
+
 
 })
 
 
 describe('Integration Test', () => {
   let db
+
+  function clearDataBase() {
+    return db.query('DELETE from todos')
+  }
+
   beforeAll(() => {
     return testDb.initDb().then(dataBase => {
       db = dataBase
-
     })
   })
+  beforeEach(() => {
+    return clearDataBase();
+})
 
   describe('read', () => {
     it('read homes', () => {

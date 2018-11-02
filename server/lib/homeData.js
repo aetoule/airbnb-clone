@@ -18,7 +18,7 @@ module.exports = {
       lat: home.lat,
       long: home.long
     })
-  }
+  },
   // getUsers(db) {
   //   return db.query('SELECT * FROM users')
   // },
@@ -30,4 +30,9 @@ module.exports = {
   //   })
   // }
 
+  createImage(db, image) {
+    return db.query('INSERT INTO images(img_url, home_id) values (${img_url} returning *;', {
+      img_url: image.img_url,
+    })
+  }
 }

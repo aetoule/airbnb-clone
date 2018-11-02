@@ -1,0 +1,39 @@
+@import '../../styles';
+@import '../../assets';
+@import '../../layouts';
+
+
+.upload-photos-container{
+    // margin: 0 auto;
+    padding: 50px 300px 0 300px;
+    .upload-photos-title{
+        padding-bottom: 30px;
+    }
+    .dotted-box{
+        height: 400px;
+        width: 800px;
+        // border-image: url("http://i.stack.imgur.com/wLdVc.png") 2 round;
+        border: 2px dotted $gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .upload-button{
+            @include searchButton;
+       }
+    }
+    .back-and-next-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 10px;
+        .host-goback-link{
+            color: $darkGreen;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .host-continue-btn {
+            @include hostContinueButton;
+            margin-right: 40px;
+        }
+    }
+}

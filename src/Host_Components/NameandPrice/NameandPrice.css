@@ -1,0 +1,75 @@
+h1 {
+  font-size: 32px;
+  color: #484848;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 10px 0; }
+
+h2 {
+  font-size: 16px;
+  color: #484848;
+  font-weight: 600; }
+
+h3 {
+  font-size: 12px;
+  color: #484848;
+  font-weight: 600;
+  padding: 15px 0; }
+
+h4 {
+  color: #00A699; }
+
+h5 {
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif; }
+
+h6 {
+  font-size: 14px;
+  color: #484848;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif; }
+
+p {
+  font-size: 16px;
+  color: #484848;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-style: normal; }
+
+.host-nameAndPrice-container {
+  padding: 15px 85px; }
+  .host-nameAndPrice-container .host-nameAndPrice-left-side-container {
+    width: 544px;
+    margin: 0 100px; }
+  .host-nameAndPrice-container .name-your-place-title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #484848; }
+  .host-nameAndPrice-container .nameandprice-input-box {
+    border-radius: 3px;
+    border: solid 1px #dce0e0;
+    padding: 20px;
+    resize: none;
+    outline: 0 solid transparent;
+    width: 100%;
+    font-size: 19px; }
+  .host-nameAndPrice-container .back-and-next-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 10px; }
+    .host-nameAndPrice-container .back-and-next-btns .host-goback-link {
+      color: #378288;
+      font-size: 16px;
+      font-weight: 600; }
+    .host-nameAndPrice-container .back-and-next-btns .host-continue-btn {
+      background-color: #378288;
+      height: 50px;
+      width: 150px;
+      color: white;
+      padding: 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px; }

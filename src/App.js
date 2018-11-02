@@ -5,14 +5,19 @@ import routes from './routes';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import Header from './Components/Header/Header';
-
-
+import { withRouter } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        {/* {this.props.location.pathname !== '/get-started' */}
+        {/* ? */}
         <Header />
+        {/* : */}
+        {/* ÷<HostHeader/> */}
+       {/* } */}
+
         {/* <Results/> */}
         {routes}
       </div>
@@ -20,4 +25,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getHostHomeName, getHostHomePrice, getAllHomesWithoutImgs, getHostNewHome } from '../../redux/reducer';
-import axios from 'axios'
+import axios from 'axios';
+import './NameandPrice.css';
 
 export class NameandPrice extends Component {
   constructor() {
@@ -125,6 +126,9 @@ export class NameandPrice extends Component {
   handleHomePrice = (event) => {
     this.props.getHostHomePrice(event)
   }
+  handleGoBack = () => {
+    this.props.history.goBack();
+  }
 
   render() {
 
@@ -133,23 +137,29 @@ export class NameandPrice extends Component {
     console.log(this.props.hostNewHome);
 
     return (
-      <div>
+      <div className="host-nameAndPrice-container">
+        <div className="host-nameAndPrice-left-side-container">
+          <h5 className="name-your-place-title">Name Your Place</h5>
+          <input className="nameandprice-input-box" type="text" value={hostHomeName} onChange={(e) => this.handleHomeName(e.target.value)} placeholder="Listing Title"/>
 
-        <h1>Name Your Place</h1>
-        <input type="text" value={hostHomeName} onChange={(e) => this.handleHomeName(e.target.value)} />
+          <h5 className="name-your-place-title">Price Your Place</h5>
+          <input className="nameandprice-input-box" type="text" value={hostHomePrice} onChange={(e) => this.handleHomePrice(e.target.value)} placeholder="$" />
 
-        <h2>Price Your Place</h2>
-        <input type="text" value={hostHomePrice} onChange={(e) => this.handleHomePrice(e.target.value)} />
-        <button onClick={() => this.postHostsHome()}>Finish</button>
-        {/* {hostHomeName && hostHomePrice ?
-          <Link to="/">
-            <button onClick={() => this.postHostsHome()}>Finish</button>
-          </Link>
-          :
-          <Link to="/">
-            <button disabled>Finish</button>
-          </Link>
-        } */}
+          <div className="back-and-next-btns">
+            <button className="host-goback-link" onClick={() => this.handleGoBack()}>Back</button>
+
+          <button className= "host-continue-btn" onClick={() => this.postHostsHome()}>Finish</button>
+          </div>
+          {/* {hostHomeName && hostHomePrice ?
+            <Link to="/">
+              <button onClick={() => this.postHostsHome()}>Finish</button>
+            </Link>
+            :
+            <Link to="/">
+              <button disabled>Finish</button>
+            </Link>
+          } */}
+        </div>
       </div>
     )
   }
