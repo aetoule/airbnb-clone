@@ -35,7 +35,7 @@ class Search extends Component {
 
         <div className='home-filter-container'>
           <h6 className="home-box-titles">WHERE</h6>
-          <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
+          <select className="select-box" value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
             <option value="">Select a City</option>
             <option value="Phoenix">Phoenix</option>
             <option value="Flagstaff">Flagstaff</option>

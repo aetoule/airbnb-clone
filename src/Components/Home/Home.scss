@@ -34,9 +34,29 @@ select {
     // border: solid $black 1px;
     // border: 2px solid transparent;
     margin: 10px 0;
+    // change to 0px if u want to get rid of the box around search in smaller sizes
     border: 1px solid #dbdbdb;
     border-radius: 2px;
     background: white;
+}
+
+
+@media (max-width: 1127px) {  
+    select {
+        font-size: 19px;
+        font-weight: 200;
+        line-height: 24px;
+        color: $gray;
+        // background: lightpink;
+        padding: 11px 11px 9px;
+        // border: solid $black 1px;
+        // border: 2px solid transparent;
+        margin: 10px 0;
+        // change to 0px if u want to get rid of the box around search in smaller sizes
+        border: 0px solid #dbdbdb;
+        border-radius: 2px;
+        background: white;
+    }
 }
 
 .search-btn {

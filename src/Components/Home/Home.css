@@ -67,6 +67,18 @@ select {
   border-radius: 2px;
   background: white; }
 
+@media (max-width: 1127px) {
+  select {
+    font-size: 19px;
+    font-weight: 200;
+    line-height: 24px;
+    color: #767676;
+    padding: 11px 11px 9px;
+    margin: 10px 0;
+    border: 0px solid #dbdbdb;
+    border-radius: 2px;
+    background: white; } }
+
 .search-btn {
   background: #FF5A5F;
   border-style: none;

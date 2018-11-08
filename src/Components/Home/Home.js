@@ -38,6 +38,7 @@ class Home extends Component {
 
                 </div>
                 <div>
+                    
                     <Search />
                     {/* <Link to="/get-started">
                         <button>Host</button>

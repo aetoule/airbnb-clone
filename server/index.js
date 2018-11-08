@@ -3,6 +3,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const massive = require('massive');
+const session = require('express-session');
+const axios = require('axios');
+
+
 const controller = require('./controller');
 // const nodemailer = require('nodemailer');
 app.use(express.static(`${__dirname}/../build`));
@@ -40,62 +44,14 @@ app.post("/charge", (req, res) => {
     .then(charge => res.render("charge.pug"));
 });
 
-// if (process.env.REQUIRE_LOGIN) {
-
-// }
-
-// Nodemailer
-// var transport = {
-//   host: 'smtp.gmail.com',
-
-//   auth: {
-//     user: creds.USER,
-//     pass: creds.PASS
-//   }
-// }
-
-// var transporter = nodemailer.createTransport(transport)
-
-// transporter.verify((error, success) => {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Server is ready to take messages');
-//   }
-// });
-
-// app.post('/send', (req, res, next) => {
-//   console.log(req.body);
-//   var name = req.body.name
-//   var email = req.body.email
-//   var message = req.body.message
-//   var content = `<body style="background-color: #E4DDDE; border-radius: 10px; padding:10px;"><h1 style="background-color: #E4DDDE; color:#614B4E; font-family:'Muli', sans-serif">Name: ${name}</h1> \n <h2 style="background-color: #E4DDDE; font-family:'Muli', sans-serif;color:#614B4E">Email: ${email}</h2> \n <p style="font-family:'Muli', sans-serif; font-size:17px">Message: ${message}</p></body>`
-//   console.log('name', name);
-//   console.log('email', email);
-//   console.log('message', message);
-//   var mail = {
-//     from: name,
-//     to: creds.USER,  //Change to email address that you want to receive messages on
-//     subject: 'New Message from Contact Form',
-//     text: content,
-//     html: `${content}`
-//   }
-
-//   transporter.sendMail(mail, (err, data) => {
-//     if (err) {
-//       console.log('transporter.sendMail error',err)
-//       res.json({
-//         msg: 'fail'
-//       })
-//     } else {
-//       res.json({
-//         msg: 'success'
-//       })
-//     }
-//   })
-// })
-// End of Nodemailer
-
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  // cookie: {
+  //   maxAge: 1000 * 60 * 60 * 24 * 365
+  // }
+}));
 
 
 massive(process.env.CONNECTION_STRING).then(database => {
@@ -104,6 +60,67 @@ massive(process.env.CONNECTION_STRING).then(database => {
 }).catch(error => {
   console.log('-------------- database issue', error);
 });
+
+app.get(`/callback`, (req, res) => {
+  console.log('/callback fired');
+  
+  const payload = {
+    client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
+    client_secret: process.env.AUTH0_CLIENT_SECRET,
+    code: req.query.code,
+    grant_type: 'authorization_code',
+    redirect_uri: `http://${req.headers.host}/callback`
+  };
+
+  function tradeCodeForAccessToken() {
+    return axios.post(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/oauth/token`, payload);
+  }
+
+  function tradeAccessTokenForUserInfo(accessTokenResponse) {
+    const accessToken = accessTokenResponse.data.access_token;
+    return axios.get(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo?access_token=${accessToken}`);
+  }
+
+  function storeUserInfoInDatabase(response) {
+    const auth0_id = response.data.sub;
+    const db = req.app.get('db');
+    return db.get_user_info(auth0_id).then(users => {
+      const userArray = {
+        name: response.data.name,
+        email: response.data.email,
+        picture: response.data.picture
+      };
+      if (users.length) {
+        const user = users[0];
+        console.log(userArray);
+        req.session.user = userArray;
+        res.redirect('/');
+      } else {
+        return db.create_user(auth0_id).then(newUser => {
+          req.session.user = userArray;
+          res.redirect('/');
+        }).catch(error => {
+          console.log('error in db.create_user', error);
+          res.status(500).send('Unexpected error');
+        });
+      }
+    }).catch(error => {
+      console.log('error in db.get_user_info', error);
+      res.status(500).send('Unexpected error');
+    });
+  }
+
+  tradeCodeForAccessToken()
+  .then(tradeAccessTokenForUserInfo)
+  .then(storeUserInfoInDatabase)
+  .catch(error => {
+    console.log('error in /callback', error);
+    res.status(500).send('Unexpected error');
+  });
+});
+
+app.post('/api/register-user', controller.postUser);
+app.post('/api/logging-in-user', controller.postLogin);
 
 const path = require('path')
 app.get('*', (req, res) => {

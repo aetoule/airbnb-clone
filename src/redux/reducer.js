@@ -25,7 +25,8 @@ const initialState = {
     hostDescribeInteraction: '',
     hostDescribeOther: '',
     hostHomeName: '',
-    hostHomePrice: ''
+    hostHomePrice: '',
+    user: {}
 }
 
 const GET_CURR_HOME = "GET_CURR_HOME";
@@ -52,7 +53,9 @@ const GET_HOST_DESCRIBE_OTHER = 'GET_HOST_DESCRIBE_OTHER';
 const GET_HOST_HOME_NAME = 'GET_HOST_HOME_NAME';
 const GET_HOST_HOME_PRICE = 'GET_HOST_HOME_PRICE';
 const GET_ALL_HOMES_WITHOUT_IMGS = 'GET_ALL_HOMES_WITHOUT_IMGS';
-const GET_HOST_NEW_HOME = 'GET_HOST_NEW_HOME'
+const GET_HOST_NEW_HOME = 'GET_HOST_NEW_HOME';
+const LOGGED_IN = "LOGGED_IN";
+const LOGGED_OUT = "LOGGED_OUT";
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -106,6 +109,10 @@ export default function reducer(state = initialState, action) {
             return { ...state, homesWithoutImgs: action.payload }
         case GET_HOST_NEW_HOME:
             return { ...state, hostNewHome: action.payload }
+        case LOGGED_IN:
+            return {...state, user: action.payload}
+        case LOGGED_OUT:
+            return {...state, user: null}
         default:
             return { ...state }
     }
@@ -280,5 +287,18 @@ export function getHostHomePrice(hostHomePrice) {
     return {
         type: GET_HOST_HOME_PRICE,
         payload: hostHomePrice
+    }
+}
+
+export function login(user) {
+    return {
+        type: LOGGED_IN,
+        payload: user
+    }
+}
+
+export function logout() {
+    return {
+        type: LOGGED_OUT
     }
 }

@@ -31,6 +31,7 @@ export class UploadPhotos extends Component {
     window.cloudinary.openUploadWidget(
       { cloud_name: 'dclawygaw', upload_preset: 'xaeobcax', folder: 'airbb', tags: ['xmas'] },
       (error, result) => {
+        console.log(result.info.secure_url)
         if (result.info.secure_url) {
           // Update gallery state with newly uploaded image
           let myGallery = [...this.state.gallery].concat(result.info.secure_url)
