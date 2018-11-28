@@ -19,7 +19,7 @@ class AboutUs extends Component {
                         <div className="kaylin-bio">
                             <h2>Kaylin</h2>
                             <p>Hi! My name is Kaylin Anderson and I am a Web Developer with a passion for learning new, exciting technologies. I have recently graduated from a fully immersive, Web Development boot-camp and am excited to hit the ground running!</p>
-                            <button className="portfolio-button"><a href="https://kaylinann.squarespace.com/" target="_blank">Check out my Portfolio!</a></button>
+                            <button className="portfolio-button"><a href="http://kaylinann.com/" target="_blank">Check out my Portfolio!</a></button>
                         </div>
                         <div className="aisha-bio">
                             <h2>Aisha</h2>
