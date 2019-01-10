@@ -8,12 +8,10 @@ export class GetStarted extends Component {
 
   handleChangeGuests(event) {
     this.props.getHostMaxGuests(event.target.value)
-    console.log(event.target.value)
   }
 
   handleChangeCity(event) {
     this.props.getHostCity(event.target.value)
-    console.log(event.target.value)
   }
   render() {
     return (

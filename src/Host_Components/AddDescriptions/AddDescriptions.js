@@ -53,10 +53,6 @@ export class AddDescriptions extends Component {
         <h3 className="add-descriptions-box-titles">Other things to note (optional)</h3>
         <textarea className="input-box" value={hostDescribeOther} onChange={(e) => this.handleDescribeOther(e.target.value)} />
 
-        {/* <div className="lightbulb-blurb">
-          <h3>Your summary description is meant to be a brief overview of your place that guests read before they get into the details.</h3>
-        </div> */}
-        
         <div className="back-and-next-btns">
             <button className="host-goback-link" onClick={() => this.handleGoBack()}>Back</button>
           <Link to="/name-price">

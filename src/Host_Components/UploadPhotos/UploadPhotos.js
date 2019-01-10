@@ -12,17 +12,6 @@ export class UploadPhotos extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   // Request for images tagged xmas       
-  //   axios.get(`https://${process.env.REACT_APP_CLOUDINARY_API_KEY}:${process.env.REACT_APP_CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/dclawygaw/resources/image`)
-  //     .then(res => {
-  //       console.log(res.data.resources);
-  //       // this.setState({ gallery: res.data.resources });
-  //     }).catch(error => {
-  //       console.log(error);
-
-  //     })
-  // }
   handleGoBack = () => {
     this.props.history.goBack();
   }
@@ -43,17 +32,12 @@ export class UploadPhotos extends Component {
         }
       });
 
-    console.log(this.props.hostImgs);
 
   }
 
   render() {
-    console.log(this.props.hostImgs);
-
-
     return (
       <div className="upload-photos-container">
-        {/* <h1>Set the Scene</h1> */}
         <h5 className="upload-photos-title">Show guests what your space looks like</h5>
         <h3 className="host-step-number-text">STEP 3</h3>
         <div className="dotted-box">
@@ -80,7 +64,6 @@ export class UploadPhotos extends Component {
 
 const mapStateToProps = state => {
   const { hostImgs } = state;
-  // const {total, city } = state;
 
   return {
     hostImgs

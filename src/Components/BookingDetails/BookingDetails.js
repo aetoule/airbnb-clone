@@ -13,11 +13,9 @@ class BookingDetails extends Component {
             serviceFee: 20,
             tax: 23,
             dateToggle: false
-            // homeInfo: {},
         }
     }
     componentDidMount() {
-        console.log('fired')
         this.getHouse();
     }
 
@@ -32,13 +30,6 @@ class BookingDetails extends Component {
     getHouse() {
         console.log('fired')
         console.log(this.props.houseid)
-        // axios.get(`/api/home/${this.props.match.params.id}`)
-        //     .then(res => {
-        //         this.setState({
-        //             homeInfo: res.data[0]
-        //         })
-        //     })
-
     }
 
     handleGoBack = () => {
@@ -53,35 +44,17 @@ class BookingDetails extends Component {
         let startDateString;
         let endDateString;
 
-        // const startDay = this.props.startDate._d.getDate()
-        // const startMonth = this.props.startDate._d.getMonth() + 1
-        // const startYear = this.props.startDate._d.getFullYear()
-        // let startDateString = startMonth + '/' + startDay + '/' + startYear;
-
-        // // get end date 
-        // const endDay = this.props.endDate._d.getDate()
-        // const endMonth = this.props.endDate._d.getMonth() + 1
-        // const endYear = this.props.endDate._d.getFullYear()
-        // let endDateString = endMonth + '/' + endDay + '/' + endYear;
-
-
         let totalPrice = this.state.serviceFee + this.state.tax + (this.props.tripLength * price);
         let totalCents = totalPrice * 100
-        console.log(totalPrice)
-        // this.props.getTotal(totalCents);
-        console.log(totalCents)
         this.props.getTotal(totalCents)
         let totalAmountDollars = totalCents / 100
         let nightsTimesPrice = this.props.tripLength * price
-
-
 
         const dateBox = this.props.endDate ?
 
             <div className="trip-dates-box">
 
                 <p>{this.props.startDate._d.getMonth() + 1}/{this.props.startDate._d.getDate()}/{this.props.startDate._d.getFullYear()} to {this.props.endDate._d.getMonth() + 1}/{this.props.endDate._d.getDate()}/{this.props.endDate._d.getFullYear()}</p>
-                {console.log(this.props.endDate)}
 
             </div> :
             <div>
@@ -95,11 +68,6 @@ class BookingDetails extends Component {
                 }
 
             </div>
-
-
-
-
-
 
         return (
             <div>
@@ -122,9 +90,6 @@ class BookingDetails extends Component {
                     <div>
                         {dateBox}
                     </div>
-                    {/* <div className="trip-dates-box">
-                            <p>{startDateString} to {endDateString}</p>
-                        </div> */}
                     <div className="small-space"></div>
                     <div className="small-space"></div>
 
@@ -152,13 +117,6 @@ class BookingDetails extends Component {
 
                         <TakeMoney />
                         <p className="wont-be-charged-text">You won't be charged yet</p>
-                        {/* <div className="list-tax-fee">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div>
-                            <div className="list-total">
-                                <p>${price} x {this.state.tripLength} nights</p>
-                            </div> */}
-
                     </div>
                 </div>
 
@@ -170,7 +128,6 @@ class BookingDetails extends Component {
 
 const mapStateToProps = state => {
     const { startDate, endDate, total, tripLength, homeInformation } = state;
-    // const {total, city } = state;
 
     return {
         startDate,

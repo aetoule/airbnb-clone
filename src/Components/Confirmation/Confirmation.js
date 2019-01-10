@@ -8,8 +8,6 @@ class Confirmation extends Component {
         this.state = {}
     }
     render() {
-        console.log(this.props.userEmail);
-
         return (
             <div>Have a great trip!
             <Link to='/results/'><button className="search-btn">Back to results</button></Link>

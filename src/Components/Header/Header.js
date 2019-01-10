@@ -27,8 +27,6 @@ class Header extends Component {
     }
 
     testLogout = () => {
-        console.log('fired');
-        
         axios.post('/api/logout')
             .then(res => {
                 window.location.href = '/'
@@ -52,7 +50,6 @@ class Header extends Component {
                         </div>
                         <div className='search-box'>
                             <div className="search-icon"></div>
-                            {/* <p className="search-text">Search</p> */}
                             <select value={this.props.city} ref='city' onChange={(e) => this.handleChange(e)} placeholder="select a city">
                                 <option value="">Search</option>
                                 <option value="Phoenix">Phoenix</option>

@@ -20,15 +20,10 @@ class Home extends Component {
 
     handleChange(event) {
         // console.log(this.refs.city.value)
-        // console.log(event.target.value)
         this.props.getCity(event.target.value)
-        // this.props.(event)
     }
 
     render() {
-        console.log(this.props.city)
-        console.log('this.state.startDate', this.state.startDate)
-        console.log('this.state.endDate', this.state.endDate)
         const { getEndDate, getStartDate, endDate, startDate } = this.props;
         return (
             <div>
@@ -40,9 +35,6 @@ class Home extends Component {
                 <div>
                     
                     <Search />
-                    {/* <Link to="/get-started">
-                        <button>Host</button>
-                    </Link> */}
                 </div>
             </div>
         );

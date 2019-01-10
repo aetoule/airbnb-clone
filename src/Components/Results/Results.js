@@ -30,9 +30,6 @@ class Results extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps) {
-
-  // }
 
   getHomes() {
     axios.get('/api/homes').then(res => {
@@ -57,7 +54,6 @@ class Results extends Component {
 
     const home = !this.props.city ?
       this.props.homes.map(e => {
-        console.log(e);
 
         console.log(e.imgs.length);
         if (e.imgs.length !== 0) {
@@ -99,9 +95,6 @@ class Results extends Component {
                   <img className='results-images' src='https://files.slack.com/files-pri/T039C2PUY-FDQFY86A3/defaultimage.png' alt="homes main image" />
                 </Link>
 
-
-
-
                 <h5>
                   {e.max_guests} Guests
               </h5>
@@ -128,8 +121,6 @@ class Results extends Component {
     const { cityHomes } = this.props
     const mappedHomes = cityHomes.map(e => {
       if (e.imgs.length !== 0) {
-        console.log(e);
-
         return (
           <div className='mappedList' key={e.homeid}>
             <div>

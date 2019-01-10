@@ -1,4 +1,3 @@
-
 const initialState = {
     homeInformation: [],
     hostNewHome: [],
@@ -12,8 +11,6 @@ const initialState = {
     userEmail: [],
     tripLength: 0,
     hostImgs: [],
-    // homeInfo:{}
-    // guests: 0
     hostMaxGuests: 0,
     hostCity: '',
     hostAddress: '',
@@ -39,7 +36,6 @@ const GET_CITY = "GET_CITY";
 const GET_USERS_EMAIL = 'GET_USERS_EMAIL';
 const GET_TRIP_LENGTH = 'GET_TRIP_LENGTH';
 const ADD_HOST_IMGS = 'ADD_HOST_IMGS'
-// const GET_ONE_HOME = 'GET_ONE_HOME';
 const GET_HOST_MAX_GUESTS = 'GET_HOST_MAX_GUESTS';
 const GET_HOST_CITY = 'GET_HOST_CITY';
 const GET_HOST_ADDRESS = 'GET_HOST_ADDRESS';

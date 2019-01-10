@@ -16,7 +16,6 @@ class OneHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // homeInfo: {},
             allHomesInCity: [],
             similarHomes: [],
             currentHomeImgList: [],
@@ -53,9 +52,6 @@ class OneHome extends Component {
                 const idNumber = allSimilarHomes.findIndex(e => {
                     return e.homeid == this.props.match.params.id
                 })
-                console.log(idNumber);
-
-                // right now the get one home is not getting the image array.So I'm using this endpoint to get the home info for this house to get access to the image array
                 let currentHomeImageArray;
                 if (res.data[idNumber].imgs.length !== 0) {
                     currentHomeImageArray = res.data[idNumber].imgs
@@ -64,7 +60,6 @@ class OneHome extends Component {
                 }
                 allSimilarHomes.splice(idNumber, 1)
                 this.setState({
-                    // similarHomes: allSimilarHomes,
                     currentHomeImgList: currentHomeImageArray
                 })
             })
@@ -92,8 +87,6 @@ class OneHome extends Component {
 
     render() {
 
-        console.log(this.state.currentHomeImgList);
-
         const ToggleSearchButton = this.state.searchToggle === true ? <div>
             <button className="cancel-btn" onClick={() => this.setState({ searchToggle: false })}>Cancel</button>
             <Search></Search>
@@ -107,47 +100,21 @@ class OneHome extends Component {
             )
         })
 
-        // let totalPrice = this.state.serviceFee + this.state.tax + (this.props.tripLength * this.state.homeInfo.price);
-        // let totalCents = totalPrice * 100
-        // // this.props.getTotal(totalCents);
-        // console.log(totalCents)
-        // this.props.getTotal(totalCents)
-
         let pushedImgs = this.state.currentHomeImgList.map(img => {
             return img.img_url;
         })
         let pushedWithText = [];
         for (let i = 0; i < pushedImgs.length; i++) {
-            // let obj = {src: pushedImgs[i]}
             let obj = { original: pushedImgs[i] }
             pushedWithText.push(obj)
         }
 
         const style = {
-            // height: '300px',
-            // width: '300px',
-            // top: '40%',
-
-            // // z-index: 3;
             position: 'relative',
-            // padding: '0px',
-            // // border-width: '0px',
-            // // margin: '50px',
-            // margin: '0 auto',
-            // left: '0px',
-            // top: '0px',
-
-            // position: 'relative',
             left: '0px',
             right: '0px',
-
-            /* bottom: 0px; */
-            // top: '20%',
-            /* top: -9%; */
             height: '310px',
             width: '310px',
-            /* padding: 0px; */
-            /* margin: 0px auto; */
             display: 'inherit',
             overflow: 'hidden',
             zIndex: 0,
@@ -170,8 +137,6 @@ class OneHome extends Component {
                     position={coords}
                 />
             </Map></div>
-        console.log('currentHomeimgarry', this.state.currentHomeImgList)
-        console.log(this.props.match.params.id)
         return (
             <div className="one-home-entire-container">
                 <div className="oneHome-img-gallery">
@@ -201,11 +166,7 @@ class OneHome extends Component {
                         <div className="medium-space"></div>
                         <p>{describe_other_things_to_note}</p>
                         <hr className="booking-info-line"></hr>
-                        {/* <h3>Amenities</h3>
-
-                        <h5>Similar listings</h5>
-                        {mappedSimilarListings} */}
-                        {/* {mappedImagesOfCurrHouse} */}
+          
                         <div className="medium-space"></div>
                         <div className="medium-space"></div>
                         <h5>The neighborhood</h5>
@@ -250,7 +211,6 @@ class OneHome extends Component {
 
 const mapStateToProps = state => {
     const { startDate, endDate, total, city, tripLength, homeInformation } = state;
-    // const {total, city } = state;
 
     return {
         startDate,
